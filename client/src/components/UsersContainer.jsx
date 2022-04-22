@@ -1,13 +1,14 @@
 import React from 'react'
 import {CardGroup, Container} from 'react-bootstrap'
 import Users from './Users'
+import { useAuth } from '../context/AuthContext'
 
 export default function UsersContainer(props) {
+
+  const { currentUser } = useAuth();
   return (
-    <CardGroup className='d-inline-flex justify-content-between align-items-center '>
-      {props.list.map(prop => (
-        <Users key={prop} user={prop}></Users>
-      ))}
+    <CardGroup >
+      {props.list.map(prop => (prop.uid === currentUser.uid ? null : (<Users key={prop.name} user={prop}></Users>)))}
     </CardGroup>
   )
 }

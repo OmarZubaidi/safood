@@ -1,13 +1,13 @@
 import React from 'react'
-import {Container} from 'react-bootstrap'
-
+import {Container, CardGroup} from 'react-bootstrap'
+import Events from "./Events"
 
 export default function EventsContainer(props) {
   return (
-    <Container className='d-inline-flex justify-content-around '>
-      {props.list.map(prop => (
-        <li key={prop}>{prop.name}</li>
-      ))}
-    </Container>
+    <CardGroup className='d-inline-flex justify-content-between align-items-center mt-xl-4'>
+      {/* {props.list.map(prop => (
+        <Events key={prop.id} user={prop}></Events>
+      ))} */}
+    </CardGroup>
   )
 }

@@ -3,13 +3,16 @@ import React, { useState, useRef } from 'react'
 import { Card, Button, Form, Alert } from 'react-bootstrap'
 import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from "react-router-dom"
+import { postUser } from '../service'
 
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const {signup} = useAuth(); 
-  const [error, setError] = useState()
+  const nameRef = useRef();
+
+  const {signup, currentUser} = useAuth(); 
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -18,12 +21,13 @@ export default function Signup() {
 
     if(passwordRef.current.value !== passwordConfirmRef.current.value){
       return setError('passwords dont match');
-
     }
+
     try {
       setError('')
       setLoading(true)
-      await  signup(emailRef.current.value, passwordRef.current.value)
+      const auth = await  signup(emailRef.current.value, passwordRef.current.value);
+    await postUser({name: nameRef.current.value, events: [], allergens: [], uid: auth.user.uid})
       navigate("/")
     } catch (error) {
       console.log(error)
@@ -40,6 +44,10 @@ export default function Signup() {
         <h2 className='text-center mb-4'>Sign Up</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
+          <Form.Group id='name'>
+            <Form.Label >Name</Form.Label>
+            <Form.Control type='text' ref={nameRef} required></Form.Control>
+          </Form.Group>
           <Form.Group id='email'>
             <Form.Label >E-mail</Form.Label>
             <Form.Control type='email' ref={emailRef} required></Form.Control>

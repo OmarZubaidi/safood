@@ -8,6 +8,7 @@ import Profile from './Profile'
 import Login from  './Authentication/Login'
 import PrivateRoute from './PrivateRoute'
 import MainPage from './MainPage'
+import { ProfileProvider } from '../context/ProfileContext'
 
 function App() {
 
@@ -16,15 +17,14 @@ function App() {
         
 
         <Container 
-        className='d-flex align-items-center justify-content-center' 
+        className='d-flex align-items-center justify-content-center ' 
         style={{minHeight: "100vh"}}>
             <div className='w-100' style={{minWidth: "400px"}}>
                 <Router>
                 <AuthProvider>
                     <Routes>
-                        <Route exact path="/" element={<PrivateRoute/>}>
-                        <Route exact path="/" element={<MainPage/>}/>  
-                        </Route>
+                        <Route exact path="/" element={<PrivateRoute/>}></Route>
+                        <Route path="/main" element={<MainPage/>} />
                         <Route path="/signup" element={<Signup/>} />
                         <Route path="/login" element={<Login/>} />
                         <Route path="/profile" element={<Profile/>} />
