@@ -34,20 +34,6 @@ async function postEvent (req, res) {
 }
 
 
-
-async function addUserToEvent (req, res) {
-  try {
-    const user = await model.findOneAndUpdate({_id: req.body._id}, {members: req.body.members}, {
-      new: true
-    });
-    res.status(200);
-    res.send(user);
-  } catch (error) {
-    console.log('error', error)
-    res.sendStatus(500)
-  }
-}
-
 async function addRecipesToEvent (req, res) {
   try {
     const user = await model.findOneAndUpdate({_id: req.body._id}, {recipes: req.body.recipes}, {
@@ -62,4 +48,4 @@ async function addRecipesToEvent (req, res) {
 }
 
 
-module.exports = { getEvent, getEvents, postEvent, addUserToEvent, addRecipesToEvent }
+module.exports = { getEvent, getEvents, postEvent, addRecipesToEvent }

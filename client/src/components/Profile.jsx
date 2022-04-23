@@ -1,20 +1,33 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useState, useRef} from 'react'
 import { Card, Button, Alert, ListGroup, Form, CardGroup, Navbar, Container, Nav } from "react-bootstrap"
 import {useNavigate } from "react-router-dom"
 import {useAuth} from "../context/AuthContext"
-import {updateUserAllergens } from './service';
+import {getUser, updateUserAllergens } from './service';
+import {useQuery, useMutation, useQueryClient} from "react-query"
 
 export default function Profile() {
-  const {logout, profile, updateProfile} = useAuth();
+  const {logout, updateProfile, currentUser} = useAuth();
   const [error, setError] = useState('')
   const navigate = useNavigate();
-  //const [profile, setProfile] = useState(null);
   const allergenRef = useRef();
-  const eventRef = useRef();
 
-  useEffect(()=>{
- /*    fetchUser(); */
-  },[])
+  
+  async function fetchUser(){
+    const res = await getUser(currentUser)
+    return res.json()
+  }
+
+  const queryClient = useQueryClient();
+  
+  const {data: profile, status} = useQuery("user", fetchUser)
+
+  const mutation = useMutation((params) => {
+    return updateUserAllergens(params)},
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("user")
+      }
+    })
 
   async function handleLogout( ){
     setError('');
@@ -32,29 +45,22 @@ export default function Profile() {
     e.preventDefault();
     try {
       if(allergenRef.current.value.length > 1){
-      updateUserAllergens({uid: profile.uid, allergens: [...profile.allergens, allergenRef.current.value]})
-      .then(response => response.json())
-      .then(data => {
-        updateProfile(data);});}
+      mutation.mutate({uid: profile.uid, allergens: [...profile.allergens, allergenRef.current.value]})
+
+      }
+    
     } catch (error) {
       console.log(error)
     }
 
   }
 
-  
-  async function handleEvSubmit (e) {
-    e.preventDefault();
-    try {
-      if(allergenRef.current.value.length > 1){
-      updateUserAllergens({uid: profile.uid, allergens: [...profile.allergens, allergenRef.current.value]})
-      .then(response => response.json())
-      .then(data => {
-        updateProfile(data);});}
-    } catch (error) {
-      console.log(error)
-    }
+  if(status === "loading"){
+    return <div>loading...</div>
+  }
 
+  if(status === "error"){
+    return <div>error</div>
   }
 
 
@@ -76,18 +82,19 @@ export default function Profile() {
       <h2 className='text-center mb-4'>Profile</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       <Card.Title>
-      {profile && profile.name}
+      {profile.name}
       </Card.Title>
         <ListGroup variant="flush">
           <ListGroup.Item>
             <CardGroup>
-            {profile && profile.allergens.map(all => (<Card key={all}><Card.Body>{all}</Card.Body></Card>))}
+            {profile.allergens.map(all => (<Card key={all}><Card.Body>{all}</Card.Body></Card>))}
             </CardGroup>
             <Form onSubmit={handleAllSubmit} >
             <Form.Control type='text' ref={allergenRef} required style={{maxWidth: 'fit-content'}} placeholder="new allergen"></Form.Control>
             <Button className='mt-2' type='submit'>Save</Button> 
             </Form>
             </ListGroup.Item>
+            
           <Nav>
           <Nav.Link href='/events'> Create a new Event </Nav.Link>
           </Nav>

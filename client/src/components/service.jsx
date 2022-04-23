@@ -72,4 +72,15 @@ function recipeRandom (allergens){
   return fetch(db + "/recipe/random", getOptions)
 }
 
-export { getUser, getUsers, postUser, updateUserAllergens, recipeQuery, recipeRandom }
+function addEvent (event) {
+  const postOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(event)
+  }
+  return fetch(db + "/event", postOptions)
+}
+
+export { getUser, getUsers, postUser, updateUserAllergens, recipeQuery, recipeRandom, addEvent }

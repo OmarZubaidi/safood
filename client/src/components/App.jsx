@@ -9,6 +9,9 @@ import Login from  './Authentication/Login'
 import PrivateRoute from './PrivateRoute'
 import MainPage from './MainPage'
 import Events from './Events'
+import { QueryClientProvider, QueryClient } from "react-query"
+
+const queryClient = new QueryClient()
 
 function App() {
 
@@ -21,6 +24,8 @@ function App() {
         style={{minHeight: "100vh"}}>
             <div className='w-100' style={{minWidth: "400px"}}>
                 <Router>
+                <QueryClientProvider client={queryClient}>
+
                 <AuthProvider>
                     <Routes>
                         <Route exact path="/" element={<PrivateRoute/>}></Route>
@@ -32,6 +37,7 @@ function App() {
 
                     </Routes>
                 </AuthProvider>
+                </QueryClientProvider>
                 </Router>
             </div>
         </Container>

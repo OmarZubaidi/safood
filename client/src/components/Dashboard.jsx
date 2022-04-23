@@ -5,28 +5,40 @@ import RecipeContainer from './RecipeContainer'
 import {recipeRandom} from './service'
 import { useAuth } from '../context/AuthContext'
 
+
+import {getUser} from './service';
+import {useQuery, useMutation, useQueryClient} from "react-query"
+
 export default function Dashboard(props) {
-  const [recipes, setRecipes] = useState();
-  const  {users, profile} = useAuth();
+ // const [recipes, setRecipes] = useState();
+  const  {users, currentUser} = useAuth();
 
-  useEffect(() => {
-    getRandom()
-  },[profile])
-
+  async function fetchUser(){
+    const res = await getUser(currentUser)
+    return res.json()
+  }
   async function getRandom() {
-    try { 
-      if(props.profile){
-      recipeRandom(profile.allergens)
-      .then(response => response.json())
-      .then(data => setRecipes(data));}
-    } catch (error) {
-      console.log(error)
-    }
-
+    const res = await recipeRandom(profile.allergens)
+    return res.json()
   }
 
+  const {data: profile, status} = useQuery("user", fetchUser)
+
+  const { isIdle, isLoading , data: recipes} = useQuery(['random', profile], getRandom, {
+    enabled: !!profile
+  })
+
+
   const mockEvents = [{name:'dinner', time:'tomorrow', guests:['paul','mary']}, {name:'dinner', time:'tomorrow', guests:['paul','mary']}]
-  const mockUsers= [{name:'Omar'},{name:'Alia'}]
+
+  
+  if(status === "loading" || isIdle || isLoading){
+    return <div>loading</div>
+  }
+
+  if(status === "error"){
+    return <div>error</div>
+  }
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import {auth} from '../firebase'
-import { getUser, getUsers } from '../components/service'
+import { getUsers } from '../components/service'
 
 const AuthContext = React.createContext()
 
@@ -32,17 +32,11 @@ export function AuthProvider({children}) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user =>{
-      setCurrentUser(user);
-
-      getUser(user)
-      .then(response => response.json())
-      .then(data => {setProfile(data)
-      });
-
+      setCurrentUser(user); 
       getUsers()
       .then(response => response.json())
       .then(data => {setUsers(data)
-      });
+      });    
       setLoading(false)
     });
     return unsubscribe
@@ -54,7 +48,6 @@ export function AuthProvider({children}) {
     signup,
     logout,
     updateProfile,
-    profile,
     users
   }
   return (

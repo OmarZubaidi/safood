@@ -5,29 +5,46 @@ import RecipeContainer from './RecipeContainer';
 import { getUsers, recipeQuery } from './service';
 import { useAuth } from '../context/AuthContext';
 
+import {getUser, updateUserAllergens } from './service';
+import {useQuery, useMutation, useQueryClient} from "react-query"
+
 export default function MainPage() {
 
   const target = useRef(null);
   const stringRef = useRef('');
+  const {currentUser} = useAuth();
   const [search, setSearch] = useState(false)
   const [recipes, setRecipes] = useState()
-  const {profile} = useAuth()
 
+  async function fetchUser(){
+    const res = await getUser(currentUser)
+    return res.json()
+  }
+
+  const {data: profile, status} = useQuery("user", fetchUser)
 
   async function handleSubmit(e) {
     e.preventDefault();
     setSearch(true)
     try {
-      console.log(profile)
       recipeQuery(profile.allergens, stringRef.current.value)
       .then(response => response.json())
-      .then(data => {setRecipes(data)
-      console.log('inside')});
+      .then(data => {setRecipes(data)}
+      );
     } catch (error) {
       console.log(error)
     }
 
   }
+
+  if(status === "loading"){
+    return <div>loading</div>
+  }
+
+  if(status === "error"){
+    return <div>error</div>
+  }
+
   return (
   <>
     <Navbar  fixed="top" expand="sm" bg='success' variant="dark" style={{height: '200px' }} ref={target} >
