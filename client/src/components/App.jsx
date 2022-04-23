@@ -8,7 +8,7 @@ import Profile from './Profile'
 import Login from  './Authentication/Login'
 import PrivateRoute from './PrivateRoute'
 import MainPage from './MainPage'
-import { ProfileProvider } from '../context/ProfileContext'
+import Events from './Events'
 
 function App() {
 
@@ -28,6 +28,7 @@ function App() {
                         <Route path="/signup" element={<Signup/>} />
                         <Route path="/login" element={<Login/>} />
                         <Route path="/profile" element={<Profile/>} />
+                        <Route path="/events" element={<Events/>} />
 
                     </Routes>
                 </AuthProvider>

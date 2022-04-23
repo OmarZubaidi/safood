@@ -8,7 +8,7 @@ export default function UsersContainer(props) {
   const { currentUser } = useAuth();
   return (
     <CardGroup >
-      {props.list.map(prop => (prop.uid === currentUser.uid ? null : (<Users key={prop.name} user={prop}></Users>)))}
+      {props.users && props.users.map(prop => (prop.uid === currentUser.uid ? null : (<Users key={prop.name} user={prop}></Users>)))}
     </CardGroup>
   )
 }

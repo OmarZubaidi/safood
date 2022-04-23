@@ -5,13 +5,20 @@ const recipeController = require('./controller/recipe.controller')
 
 const router = require('express').Router();
 
+////User routes
 router.get('/user', userController.getUser);
 router.get('/users', userController.getUsers);
 router.post('/user', userController.postUser);
 router.put('/user/allergens',userController.updateUserAllergens);
 //router.put('/user/events',userController.updateUserEvents)
+
+////Recipe routes
 router.get('/recipe', recipeController.getRecipe);
 router.get('/recipe/random', recipeController.getRandomRecipe);
+
+///Event routes
+router.get('/event/:id', eventController.getEvent);
+router.post('/event', eventController.postEvent)
 
 
 module.exports = router;

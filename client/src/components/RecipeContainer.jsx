@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, Card, CardGroup} from 'react-bootstrap'
+import {Card, CardGroup} from 'react-bootstrap'
 
 export default function RecipeContainer(props) {
 

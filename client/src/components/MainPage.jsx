@@ -1,15 +1,12 @@
 import React, { useRef, useState,useEffect } from 'react'
 import { Container, Navbar, Nav, Form, Button } from 'react-bootstrap'
-import { Route, Routes, Router } from 'react-router-dom';
 import Dashboard from './Dashboard'
-import Profile from './Profile';
 import RecipeContainer from './RecipeContainer';
-import { recipeQuery } from './service';
+import { getUsers, recipeQuery } from './service';
 import { useAuth } from '../context/AuthContext';
 
 export default function MainPage() {
 
-  const mockAll = ['potato','milk','egg','pepper']
   const target = useRef(null);
   const stringRef = useRef('');
   const [search, setSearch] = useState(false)
