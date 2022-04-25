@@ -1,4 +1,4 @@
-import React, { useRef, useState,useEffect } from 'react'
+import React from "react"
 import Signup from './Authentication/Signup'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container, Navbar, Nav, Form, Button} from "react-bootstrap"
@@ -11,54 +11,11 @@ import MainPage from './MainPage'
 import Events from './Events'
 import { QueryClientProvider, QueryClient } from "react-query"
 
-import Dashboard from './Dashboard'
-import RecipeContainer from './RecipeContainer';
-import { useAuth } from '../context/AuthContext';
-
-import {getUser, recipeQuery } from './service';
-import {useQuery, useMutation, useQueryClient} from "react-query"
-
 const queryClient = new QueryClient()
 
 function App() {
 
     
-  const target = useRef(null);
-  const stringRef = useRef('');
-  const {currentUser} = useAuth();
-  const [search, setSearch] = useState(false)
-  const [recipes, setRecipes] = useState()
-
-  async function fetchUser(){
-    const res = await getUser(currentUser)
-    return res.json()
-  }
-
-  const {data: profile, status} = useQuery("user", fetchUser)
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setSearch(true)
-    try {
-      recipeQuery(profile.allergens, stringRef.current.value)
-      .then(response => response.json())
-      .then(data => {setRecipes(data)}
-      );
-    } catch (error) {
-      console.log(error)
-    }
-
-  }
-
-  if(status === "loading"){
-    return <div>loading</div>
-  }
-
-  if(status === "error"){
-    return <div>error</div>
-  }
-
-
     return (
         
 
