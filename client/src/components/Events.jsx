@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react'
 import { Card, Form, Button, Dropdown, Navbar, Container, Nav } from 'react-bootstrap'
 import { useAuth } from '../context/AuthContext';
 import omar from '../img/omar.jpeg'
-import { addEvent, getUser, getUsers } from './service';
+import { addEvent, getMenu, getUser, getUsers } from './service';
 import {useQuery, useMutation, useQueryClient} from "react-query"
 
 
@@ -26,20 +26,31 @@ export default function Events(props) {
     return res.json()
   }
 
+/*   async function menu(allergens){
+    const res = await getMenu(allergens);
+    return res.json()
+  } */
+
   const {data: profile, status: profileStatus} = useQuery("user", fetchUser);
   const {data: users, status: userStatus} = useQuery("users", fetchUsers);
 
 
+  const mutation = useMutation(event => {
+    return  addEvent(event)
+  })
 
-  function handleAllSubmit(e){
+  async function handleAllSubmit(e){
     e.preventDefault();
     const newAllergens = [...new Set([...allergens, ...profile.allergens])]
-    console.log(type, members, dateRef.current.value, newAllergens)
-    addEvent({type, allergens: newAllergens, members, date: dateRef.current.value})
+    let res = await getMenu(newAllergens);
+    const menu = await res.json();
+    mutation.mutate({type, allergens: newAllergens, members, date: dateRef.current.value, menu})
+
+    /* addEvent({type, allergens: newAllergens, members, date: dateRef.current.value})
         .then(response => response.json())
         .then(data => {setEvent(data)
         });
-
+ */
   }
 
   //react query
@@ -117,6 +128,6 @@ export default function Events(props) {
       </Card.Text>
       </Card.ImgOverlay>
     </Card>}
-    </>
+    </> 
   )
 }

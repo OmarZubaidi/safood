@@ -23,8 +23,8 @@ async function getEvent (req, res) {
 
 async function postEvent (req, res) {
   try {
-    const { type, allergens, members, date } = req.body
-    const user = await model.create({ type, allergens, members, date });
+    const { type, allergens, members, date, menu } = req.body
+    const user = await model.create({ type, allergens, members, date, menu });
     res.status(200);
     res.send(user);
   } catch (error) {

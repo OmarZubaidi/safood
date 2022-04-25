@@ -17,8 +17,6 @@ res.send(db.filter(recipe => {
 
 
 
-
-
 function getRandomRecipe (req, res) {
 
   let allergens = JSON.parse(req.headers.allergens)
@@ -35,4 +33,21 @@ res.send([result[randomI[0]], result[randomI[1]], result[randomI[2]]])
 
 }
 
-module.exports = { getRecipe, getRandomRecipe }
+
+
+function getMenu (req, res) {
+  const allergens = JSON.parse(req.headers.allergens)
+  const courses = ['starter', 'main', 'side']
+  const menu = [];
+  courses.forEach(course =>
+    {
+      let result = db.filter(recipe => {
+        if(!allergens.some(allergen => recipe.ingredients?.includes(allergen.toLowerCase())) && recipe.dishTypes?.includes(course)) return true;
+         return false;
+       });
+      menu.push(result[Math.floor(Math.random() * result.length)])
+    })
+    res.send(menu)
+}
+
+module.exports = { getRecipe, getRandomRecipe, getMenu }

@@ -19,6 +19,8 @@ router.get('/recipe/random', recipeController.getRandomRecipe);
 ///Event routes
 router.get('/event/:id', eventController.getEvent);
 router.post('/event', eventController.postEvent)
+//menu
 
+router.get('/menu', recipeController.getMenu)
 
 module.exports = router;
