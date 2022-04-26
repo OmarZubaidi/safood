@@ -1,28 +1,20 @@
 import React from 'react'
-import {Card, CardGroup} from 'react-bootstrap'
+import {Card, CardGroup, Row, Col} from 'react-bootstrap'
+import Recipe from './Recipe'
 
 export default function RecipeContainer(props) {
 
 
   return (<>
-    <CardGroup className="mt-4 p-2">
-    {props.recipes && props.recipes.map(prop => (
+    <Row xs={1} md={2} className="g-4">
+  
+    {props.recipes && props.recipes.map(recipe => (
+    <Col>
 
-      <Card key={prop.title}>
-        <Card.Img variant="top" src="" />
-        <Card.Body>
-          <Card.Title>{prop.title}</Card.Title>
-          <Card.Text>
-              {prop.ingredients}
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Prep-time: {prop.readyInMinutes} minutes</small>
-        </Card.Footer>
-      </Card>
+     <Recipe recipe={recipe}></Recipe>
+    </Col>
     ))}
-  </CardGroup>
-      
+  </Row>
   </>
   )
 }

@@ -7,7 +7,7 @@ export default function UsersContainer(props) {
 
   const { currentUser } = useAuth();
   return (
-    <CardGroup >
+    <CardGroup className='d-inline-flex  mt-xl-4'>
       {props.users && props.users.map(prop => (prop.uid === currentUser.uid ? null : (<Users key={prop.name} user={prop}></Users>)))}
     </CardGroup>
   )
