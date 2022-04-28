@@ -13,8 +13,8 @@ async function getUsers (req, res) {
 
 async function postUser (req, res) {
   try {
-    const { name, allergens, uid } = req.body;
-    const user = await model.create({ name, allergens, uid });
+    const { name, allergens, uid, aboutMe, img } = req.body;
+    const user = await model.create({ name, allergens, uid, aboutMe, img });
     res.status(200);
     res.send(user);
   } catch (error) {

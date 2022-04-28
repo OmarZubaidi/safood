@@ -1,13 +1,15 @@
 import React from 'react';
-import { Container, CardGroup } from 'react-bootstrap';
+import { Container, CardGroup, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Events from "./Events";
 
 export default function EventsContainer (props) {
   return (
-    <CardGroup className='d-inline-flex  mt-xl-4'>
+    <Row xs={1} md={2} className="g-4 mt-auto" >
       {props.list && props.list.map(prop => (
-        <Events key={prop.id} user={prop}></Events>
+        <Col><Events key={prop._id} event={prop}>
+        </Events></Col>
       ))}
-    </CardGroup>
+    </Row>
   );
 }
