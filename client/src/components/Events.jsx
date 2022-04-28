@@ -2,7 +2,7 @@
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export default function Events ({ event, profile }) {
+export default function Events ({ event }) {
   return (
     <>
       {event && <Card>
@@ -11,7 +11,11 @@ export default function Events ({ event, profile }) {
           style={{ textDecoration: 'none', color: 'black' }}
         >
           <Card.Title className='text-center mb-4 bg-warning p-2'>
-            {event.type} With {event.members.map((member, i) => i === event.members.length - 1 ? member : `${member}, `)}
+            {event.type} With {event.members.map((member, i) =>
+              i === event.members.length - 1
+                ? member
+                : `${member}, `
+            )}
           </Card.Title>
           <Card.Text className='d-flex p-3'>
             <div className='me-4'>
@@ -22,7 +26,9 @@ export default function Events ({ event, profile }) {
             </div>
             <div className='d-flex flex-column'>
               <div className='fs-5'>Menu:</div>
-              {event.menu.map(meal => <div>{meal.title}</div>)}
+              {event.menu.map(meal => <div>
+                {meal.title}
+              </div>)}
             </div>
           </Card.Text>
         </Link>

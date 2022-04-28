@@ -1,6 +1,6 @@
 // Package imports
-import React, { useState, useRef, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Container, Navbar, Nav, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,9 +33,11 @@ function App () {
   }
 
   // Get the user data
-  const { data: profile, status } = useQuery('user', fetchUser, {
-    enabled: !!currentUser
-  });
+  const { data: profile, status } = useQuery(
+    'user',
+    fetchUser,
+    { enabled: !!currentUser }
+  );
 
   // Submit function
   async function handleSubmit (e) {
@@ -63,7 +65,10 @@ function App () {
     <Container
       className='d-flex align-items-center justify-content-center '
       style={{ minHeight: '100vh' }}>
-      <div className='w-100' style={{ minWidth: '400px' }}>
+      <div
+        className='w-100'
+        style={{ minWidth: '400px' }}
+      >
         <Navbar
           fixed='top'
           expand='sm'
@@ -121,8 +126,8 @@ function App () {
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/events/:id' element={<EventDetails />} />
             <Route path='/events' element={<Events />} />
+            <Route path='/events/:id' element={<EventDetails />} />
           </Routes>
         </Container>
       </div>

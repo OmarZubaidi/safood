@@ -10,7 +10,9 @@ export default function Recipe ({ recipe }) {
         src={recipe.image}
       />
       <Card.Body>
-        <Card.Title>{recipe.title}</Card.Title>
+        <Card.Title>
+          {recipe.title}
+        </Card.Title>
         <Card.Text style={{ minHeight: '50px' }}>
           {recipe.ingredients}
         </Card.Text>
@@ -19,7 +21,7 @@ export default function Recipe ({ recipe }) {
         <small className='text-muted'>
           Prep-time: {recipe.readyInMinutes} minutes
         </small>
-        {Object.keys(recipe).map((key, index) => {
+        {Object.keys(recipe).map(key => {
           if (recipe[key] === 'True')
             return <Badge
               bg='success'

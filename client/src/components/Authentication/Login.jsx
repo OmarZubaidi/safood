@@ -21,7 +21,10 @@ export default function Login () {
     try {
       setError('');
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      await login(
+        emailRef.current.value,
+        passwordRef.current.value
+      );
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -34,11 +37,17 @@ export default function Login () {
     <>
       <Card>
         <Card.Body>
-          <h2 className='text-center mb-4'>Log in</h2>
-          {error && <Alert variant='danger'>{error}</Alert>}
+          <h2 className='text-center mb-4'>
+            Log in
+          </h2>
+          {error && <Alert variant='danger'>
+            {error}
+          </Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
-              <Form.Label>E-mail</Form.Label>
+              <Form.Label>
+                E-mail
+              </Form.Label>
               <Form.Control
                 type='email'
                 ref={emailRef}
@@ -46,7 +55,9 @@ export default function Login () {
               />
             </Form.Group>
             <Form.Group id='password'>
-              <Form.Label>Password</Form.Label>
+              <Form.Label>
+                Password
+              </Form.Label>
               <Form.Control
                 type='password'
                 ref={passwordRef}
@@ -64,7 +75,9 @@ export default function Login () {
         </Card.Body>
       </Card>
       <div className='w-100 text-center mt-2'>
-        Need an account? <Link to='/signup'>Sign up</Link>
+        Need an account? <Link to='/signup'>
+          Sign up
+        </Link>
       </div>
     </>
   );

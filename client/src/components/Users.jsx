@@ -11,7 +11,7 @@ export default function Users ({ user }) {
       className='text-center mb-4'
       style={{ width: '18rem' }}
     >
-      {<Card.Img src={omar} alt={user.img} />}
+      <Card.Img src={omar} alt={user.img} />
       <Card.Header className='text-center mb-4 fs-3'>
         {user.name}
       </Card.Header>
@@ -19,7 +19,7 @@ export default function Users ({ user }) {
         About me
       </Card.Title>
       <Card.Body>
-        {user.aboutMe || `Hi my name is ${user.name}`}
+        {user.aboutMe || `Hi, my name is ${user.name}`}
       </Card.Body>
     </Card>
   );

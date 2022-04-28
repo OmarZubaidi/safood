@@ -1,12 +1,26 @@
 // Package imports
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Button, Alert, Form, Badge, Dropdown, Spinner } from 'react-bootstrap';
+import {
+  Card,
+  Button,
+  Alert,
+  Form,
+  Badge,
+  Dropdown,
+  Spinner
+} from 'react-bootstrap';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 // Local imports
 import { useAuth } from '../context/AuthContext';
-import { addEvent, getMenu, getUser, getUsers, updateUserAllergens } from './service';
+import {
+  addEvent,
+  getMenu,
+  getUser,
+  getUsers,
+  updateUserAllergens
+} from './service';
 
 export default function Profile () {
   // Navigation and authentication
@@ -41,11 +55,10 @@ export default function Profile () {
 
   // Mutations
   const eventMutation = useMutation(event => addEvent(event));
-  const mutation = useMutation((params) => {
-    return updateUserAllergens(params);
-  }, {
-    onSuccess: () => { queryClient.invalidateQueries('user'); }
-  });
+  const mutation = useMutation(
+    params => updateUserAllergens(params),
+    { onSuccess: () => { queryClient.invalidateQueries('user'); } }
+  );
 
   // Handlers
   async function handleLogout () {
@@ -114,13 +127,17 @@ export default function Profile () {
     <>
       <Card style={{ marginTop: '150px' }}>
         <Card.Title>
-          <h1 className='text-center mb-4'>{profile.name}'s Profile</h1>
+          <h1 className='text-center mb-4'>
+            {profile.name}'s Profile
+          </h1>
         </Card.Title>
-        {error && <Alert variant='danger'>{error}</Alert>}
+        {error && <Alert variant='danger'>
+          {error}
+        </Alert>}
         <Card.Body>
           <div className='d-flex flex-column'>
             <h3>About me</h3>
-            {profile.aboutMe || `Hi my name is ${profile.name}`}
+            {profile.aboutMe || `Hi, my name is ${profile.name}`}
           </div>
           <hr />
           <h3>My allergens</h3>

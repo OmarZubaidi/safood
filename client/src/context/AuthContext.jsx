@@ -40,9 +40,7 @@ export function AuthProvider ({ children }) {
       setCurrentUser(user);
       getUsers()
         .then(response => response.json())
-        .then(data => {
-          setUsers(data);
-        });
+        .then(data => { setUsers(data); });
       setLoading(false);
     });
     return unsubscribe;

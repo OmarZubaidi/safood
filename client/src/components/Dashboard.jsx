@@ -39,7 +39,18 @@ export default function Dashboard () {
     enabled: !!profile
   });
 
-  const mockEvents = [{ name: 'dinner', time: 'tomorrow', guests: ['paul', 'mary'] }, { name: 'dinner', time: 'tomorrow', guests: ['paul', 'mary'] }];
+  const mockEvents = [
+    {
+      name: 'dinner',
+      time: 'tomorrow',
+      guests: ['paul', 'mary']
+    },
+    {
+      name: 'dinner',
+      time: 'tomorrow',
+      guests: ['paul', 'mary']
+    }
+  ];
 
   // Loading and error handling
   if (

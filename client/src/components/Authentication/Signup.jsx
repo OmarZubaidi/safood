@@ -30,7 +30,10 @@ export default function Signup () {
     try {
       setError('');
       setLoading(true);
-      const auth = await signup(emailRef.current.value, passwordRef.current.value);
+      const auth = await signup(
+        emailRef.current.value,
+        passwordRef.current.value
+      );
       await postUser({
         name: nameRef.current.value,
         events: [],
@@ -51,11 +54,17 @@ export default function Signup () {
     <>
       <Card>
         <Card.Body>
-          <h2 className='text-center mb-4'>Sign Up</h2>
-          {error && <Alert variant='danger'>{error}</Alert>}
+          <h2 className='text-center mb-4'>
+            Sign Up
+          </h2>
+          {error && <Alert variant='danger'>
+            {error}
+          </Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='name'>
-              <Form.Label>Name</Form.Label>
+              <Form.Label>
+                Name
+              </Form.Label>
               <Form.Control
                 type='text'
                 ref={nameRef}
@@ -63,7 +72,9 @@ export default function Signup () {
               />
             </Form.Group>
             <Form.Group id='email'>
-              <Form.Label>E-mail</Form.Label>
+              <Form.Label>
+                E-mail
+              </Form.Label>
               <Form.Control
                 type='email'
                 ref={emailRef}
@@ -71,7 +82,9 @@ export default function Signup () {
               />
             </Form.Group>
             <Form.Group id='password'>
-              <Form.Label>Password</Form.Label>
+              <Form.Label>
+                Password
+              </Form.Label>
               <Form.Control
                 type='password'
                 ref={passwordRef}
@@ -79,7 +92,9 @@ export default function Signup () {
               />
             </Form.Group>
             <Form.Group id='passwordconfirm'>
-              <Form.Label>Confirm password</Form.Label>
+              <Form.Label>
+                Confirm password
+              </Form.Label>
               <Form.Control
                 type='password'
                 ref={passwordConfirmRef}
@@ -87,7 +102,9 @@ export default function Signup () {
               />
             </Form.Group>
             <Form.Group id='aboutme'>
-              <Form.Label>Tell us something about yourself</Form.Label>
+              <Form.Label>
+                Tell us something about yourself
+              </Form.Label>
               <Form.Control
                 type='text'
                 ref={aboutMeRef}
@@ -104,7 +121,9 @@ export default function Signup () {
         </Card.Body>
       </Card>
       <div className='w-100 text-center mt-2'>
-        Already have an account? <Link to='/login'>Sign in</Link>
+        Already have an account? <Link to='/login'>
+          Sign in
+        </Link>
       </div>
     </>
   );

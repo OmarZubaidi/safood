@@ -10,9 +10,11 @@ import RecipeContainer from './RecipeContainer';
 
 export default function EventDetails () {
   let { id } = useParams();
-  const { data: event, status } = useQuery('event', fetchEvent, {
-    enabled: !!id
-  });
+  const { data: event, status } = useQuery(
+    'event',
+    fetchEvent,
+    { enabled: !!id }
+  );
 
   // Get event function
   async function fetchEvent () {
@@ -29,9 +31,10 @@ export default function EventDetails () {
     <Container>
       <h1 className='bg-warning rounded'>
         {event.type} With {
-          event.members.map((member, i) => i === event.members.length - 1
-            ? member
-            : `${member}, `
+          event.members.map((member, i) =>
+            i === event.members.length - 1
+              ? member
+              : `${member}, `
           )
         }
       </h1>
