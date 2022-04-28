@@ -1,6 +1,9 @@
+// Package imports
 import React, { useContext, useState, useEffect } from 'react';
+
+// Local imports
 import { auth } from '../firebase';
-import { getUser, getUsers } from '../components/service';
+import { getUsers } from '../components/service';
 
 const AuthContext = React.createContext();
 
@@ -9,10 +12,12 @@ export function useAuth () {
 }
 
 export function AuthProvider ({ children }) {
+  // States
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState();
 
+  // Auth functions
   function signup (email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
@@ -25,6 +30,7 @@ export function AuthProvider ({ children }) {
     return auth.signOut();
   }
 
+  // Update profile function
   function updateProfile (user) {
     setCurrentUser(user);
   }
