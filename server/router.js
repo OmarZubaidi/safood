@@ -1,27 +1,27 @@
 'user strict';
-const userController = require('./controller/user.controller')
-const eventController = require('./controller/event.controller')
-const recipeController = require('./controller/recipe.controller')
+const userController = require('./controller/user.controller');
+const eventController = require('./controller/event.controller');
+const recipeController = require('./controller/recipe.controller');
 
 const router = require('express').Router();
 
-////User routes
+// User routes
 router.get('/user', userController.getUser);
 router.get('/users', userController.getUsers);
 router.post('/user', userController.postUser);
-router.put('/user/allergens',userController.updateUserAllergens);
-//router.put('/user/events',userController.updateUserEvents)
+router.put('/user/allergens', userController.updateUserAllergens);
+// router.put('/user/events',userController.updateUserEvents)
 
-////Recipe routes
+// Recipe routes
 router.get('/recipe', recipeController.getRecipe);
 router.get('/recipe/random', recipeController.getRandomRecipe);
 
-///Event routes
+// Event routes
 router.get('/event/:id', eventController.getEvent);
 router.get('/events', eventController.getEvents);
-router.post('/event', eventController.postEvent)
-//menu
+router.post('/event', eventController.postEvent);
+// Menu
 
-router.get('/menu', recipeController.getMenu)
+router.get('/menu', recipeController.getMenu);
 
 module.exports = router;

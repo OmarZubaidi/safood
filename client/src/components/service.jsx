@@ -1,7 +1,4 @@
-const db = "http://localhost:3001"
-
-
-
+const db = "http://localhost:3001";
 
 function getUsers () {
   const getOptions = {
@@ -9,10 +6,9 @@ function getUsers () {
     headers: {
       'Content-Type': 'application/json'
     }
-  }
-  return fetch(db + "/users", getOptions)
+  };
+  return fetch(db + "/users", getOptions);
 }
-
 
 function getUser (user) {
   const getOptions = {
@@ -21,8 +17,8 @@ function getUser (user) {
       'Content-Type': 'application/json',
       uid: user.uid
     }
-  }
-  return fetch(db + "/user", getOptions)
+  };
+  return fetch(db + "/user", getOptions);
 }
 
 function postUser (user) {
@@ -32,8 +28,8 @@ function postUser (user) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
-  }
-  return fetch(db + "/user", postOptions)
+  };
+  return fetch(db + "/user", postOptions);
 }
 
 function updateUserAllergens (user) {
@@ -43,24 +39,24 @@ function updateUserAllergens (user) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
-  }
-  return fetch(db + "/user/allergens", postOptions)
+  };
+  return fetch(db + "/user/allergens", postOptions);
 }
 
-function recipeQuery (allergens, string){
-    const getOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        string: string,
-        allergens: JSON.stringify(allergens)
-      }
+function recipeQuery (allergens, string) {
+  const getOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Origin": "*",
+      string: string,
+      allergens: JSON.stringify(allergens)
     }
-    return fetch(db + "/recipe", getOptions)
+  };
+  return fetch(db + "/recipe", getOptions);
 }
 
-function recipeRandom (allergens){
+function recipeRandom (allergens) {
   const getOptions = {
     method: 'GET',
     headers: {
@@ -68,8 +64,8 @@ function recipeRandom (allergens){
       "Access-Control-Allow-Origin": "*",
       allergens: JSON.stringify(allergens)
     }
-  }
-  return fetch(db + "/recipe/random", getOptions)
+  };
+  return fetch(db + "/recipe/random", getOptions);
 }
 
 function getMenu (allergens) {
@@ -79,8 +75,8 @@ function getMenu (allergens) {
       'Content-Type': 'application/json',
       allergens: JSON.stringify(allergens)
     },
-  }
-  return fetch(db + "/menu", getOptions)
+  };
+  return fetch(db + "/menu", getOptions);
 }
 
 function addEvent (event) {
@@ -90,8 +86,8 @@ function addEvent (event) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(event)
-  }
-  return fetch(db + "/event", postOptions)
+  };
+  return fetch(db + "/event", postOptions);
 }
 
 function getEvents (name) {
@@ -100,8 +96,8 @@ function getEvents (name) {
     headers: {
       'Content-Type': 'application/json'
     }
-  }
-  return fetch(db + "/events", getOptions)
+  };
+  return fetch(db + "/events", getOptions);
 }
 
-export { getUser, getUsers, postUser, updateUserAllergens, recipeQuery, recipeRandom, addEvent, getEvents, getMenu }
+export { getUser, getUsers, postUser, updateUserAllergens, recipeQuery, recipeRandom, addEvent, getEvents, getMenu };
