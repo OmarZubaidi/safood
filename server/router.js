@@ -17,7 +17,7 @@ router.get('/recipe', recipeController.getRecipe);
 router.get('/recipe/random', recipeController.getRandomRecipe);
 
 ///Event routes
-router.get('/event/:id', eventController.getEvent);
+router.get('/event/:_id', eventController.getEvent);
 router.get('/events', eventController.getEvents);
 router.post('/event', eventController.postEvent)
 //menu

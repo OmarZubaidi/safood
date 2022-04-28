@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardGroup, Container} from 'react-bootstrap'
+import {CardGroup, Container, Row, Col} from 'react-bootstrap'
 import Users from './Users'
 import { useAuth } from '../context/AuthContext'
 
@@ -7,8 +7,8 @@ export default function UsersContainer(props) {
 
   const { currentUser } = useAuth();
   return (
-    <CardGroup className='d-inline-flex  mt-xl-4'>
-      {props.users && props.users.map(prop => (prop.uid === currentUser.uid ? null : (<Users key={prop.name} user={prop}></Users>)))}
-    </CardGroup>
+    <Row xs={1} md={2} className="g-4 mt-auto">
+      {props.users && props.users.map(prop => (prop.uid === currentUser.uid ? null : (<Col><Users key={prop.name} user={prop}></Users></Col>)))}
+    </Row>
   )
 }

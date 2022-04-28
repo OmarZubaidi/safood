@@ -2,15 +2,14 @@ import React from 'react'
 import {Card, CardGroup, Row, Col} from 'react-bootstrap'
 import Recipe from './Recipe'
 
-export default function RecipeContainer(props) {
+export default function RecipeContainer({recipes}) {
 
 
   return (<>
-    <Row xs={1} md={2} className="g-4">
-  
-    {props.recipes && props.recipes.map(recipe => (
+    <Row xs={1} md={2} className="g-4 mt-auto">
+    
+    {recipes && recipes.map(recipe => (
     <Col>
-
      <Recipe recipe={recipe}></Recipe>
     </Col>
     ))}

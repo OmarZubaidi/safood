@@ -27,9 +27,9 @@ function getRandomRecipe (req, res) {
     if(!allergens.some(allergen => recipe.ingredients?.includes(allergen.toLowerCase()))) return true;
      return false;
    });
-   let randomI = [Math.floor(Math.random() * result.length), Math.floor(Math.random() * result.length), Math.floor(Math.random() * result.length)]
+   let randomI = [Math.floor(Math.random() * result.length), Math.floor(Math.random() * result.length), Math.floor(Math.random() * result.length),Math.floor(Math.random() * result.length)]
 
-res.send([result[randomI[0]], result[randomI[1]], result[randomI[2]]])
+res.send([result[randomI[0]], result[randomI[1]], result[randomI[2]], result[randomI[3]]])
 
 }
 

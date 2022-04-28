@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react"
+import React, {useState, useRef, useEffect} from "react"
 import Signup from './Authentication/Signup'
 import "bootstrap/dist/css/bootstrap.min.css"
 import {Container, Navbar, Nav, Form, Button} from "react-bootstrap"
@@ -14,10 +14,15 @@ import { useAuth } from '../context/AuthContext';
 import RecipeContainer from './RecipeContainer'
 import Dashboard from './Dashboard'
 import {useNavigate } from "react-router-dom"
-
-
+import logo from "../img/Safe_2_-removebg-preview.png"
+import EventDetails from "./EventDetails"
 function App() {
     
+
+    useEffect(() => {
+        document.title = "SAFOOD"
+      }, [])
+
     const {currentUser} = useAuth();    
     const target = useRef(null);
     const navigate = useNavigate();
@@ -64,21 +69,24 @@ function App() {
         className='d-flex align-items-center justify-content-center ' 
         style={{minHeight: "100vh"}}>
             <div className='w-100' style={{minWidth: "400px"}}>
-            <Navbar  fixed="top" expand="sm" bg='success' variant="dark" style={{height: '200px' }} ref={target} >
+            <Navbar  fixed="top" expand="sm" bg='dark' variant="dark" style={{height: '200px' }} ref={target} >
                 <Container>
-                    <Link to='/'>SAFOOD</Link>
-                    <Form onSubmit={handleSubmit} className='d-flex'>
-                        <Form.Control type="text" placeholder='Search a recipe!' ref={stringRef}>
+                    <div style={{paddingTop: "40px"}}><Link to='/'>
+                        <img src={logo} alt="" style={{height: '200px' }}/>
+                    </Link></div>
+                    <Form onSubmit={handleSubmit} className='d-flex '>
+                        <Form.Control type="text" placeholder='Search a recipe!' ref={stringRef} style={{borderRadius: "15px 0 0 15px" }}>
                         </Form.Control>
-                        <Button type='submit' > Search!</Button> 
+                        <Button type='submit' style={{borderRadius: "0 10px   10px 0" }} > Search!</Button> 
                     </Form>
                     <Nav>
-                        <Link to='/profile'> Profile </Link>
-                        <Link to='/'> Notifications </Link>
+                        
+                        <Link to='/profile' style={{ textDecoration: 'none', color: "white", fontSize: "25px"}}> Profile </Link>
+                        {/* <Link to='/' style={{ textDecoration: 'none' }}> Notifications </Link> */}
                     </Nav>
                 </Container>
             </Navbar>
-            <Container style={{marginTop: '250px'}} >
+            <Container style={{marginTop: '200px'}} >
                     <Routes>
                         <Route exact path="/" element={<PrivateRoute/>}></Route>
                         <Route path="/main" element={<Dashboard />} />
@@ -86,6 +94,7 @@ function App() {
                         <Route path="/signup" element={<Signup/>} />
                         <Route path="/login" element={<Login/>} />
                         <Route path="/profile" element={<Profile/>} />
+                        <Route path="/events/:id" element={<EventDetails/>}></Route>
                         <Route path="/events" element={<Events/>} />
                     </Routes>
             </Container>    

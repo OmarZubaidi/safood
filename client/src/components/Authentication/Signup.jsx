@@ -10,7 +10,7 @@ export default function Signup() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const nameRef = useRef();
-
+  const aboutMeRef = useRef();
   const {signup, currentUser} = useAuth(); 
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function Signup() {
       setError('')
       setLoading(true)
       const auth = await  signup(emailRef.current.value, passwordRef.current.value);
-    await postUser({name: nameRef.current.value, events: [], allergens: [], uid: auth.user.uid})
+    await postUser({name: nameRef.current.value, events: [], allergens: [], uid: auth.user.uid, aboutMe: aboutMeRef.current.value, img: ""})
       navigate("/")
     } catch (error) {
       console.log(error)
@@ -59,6 +59,10 @@ export default function Signup() {
           <Form.Group id='passwordconfirm'>
             <Form.Label >Confirm password</Form.Label>
             <Form.Control type='password' ref={passwordConfirmRef} required></Form.Control>
+          </Form.Group>
+          <Form.Group id='aboutme'>
+            <Form.Label >Tell us something about you:</Form.Label>
+            <Form.Control type='text' ref={aboutMeRef} ></Form.Control>
           </Form.Group>
         <Button disabled={loading} className='w-100' type='submit'>Sign Up</Button> 
         </Form>

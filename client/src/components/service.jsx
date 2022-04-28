@@ -104,4 +104,14 @@ function getEvents (name) {
   return fetch(db + "/events", getOptions)
 }
 
-export { getUser, getUsers, postUser, updateUserAllergens, recipeQuery, recipeRandom, addEvent, getEvents, getMenu }
+function getEvent (id) {
+  const getOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  return fetch(db + `/event/${id}`, getOptions)
+}
+
+export { getUser, getUsers, postUser, updateUserAllergens, recipeQuery, recipeRandom, addEvent, getEvents, getEvent, getMenu }

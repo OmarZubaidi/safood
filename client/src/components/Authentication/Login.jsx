@@ -42,7 +42,7 @@ export default function Login() {
             <Form.Label >password</Form.Label>
             <Form.Control type='password' ref={passwordRef} required></Form.Control>
           </Form.Group>
-        <Button disabled={loading} className='w-100' type='submit'>Log in</Button> 
+        <Button disabled={loading} className='w-100 mt-4' type='submit'>Log in</Button> 
         </Form>
       </Card.Body>
     </Card>

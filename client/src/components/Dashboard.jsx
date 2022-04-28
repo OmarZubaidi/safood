@@ -4,7 +4,7 @@ import UsersContainer from './UsersContainer'
 import RecipeContainer from './RecipeContainer'
 import {getEvents, recipeRandom} from './service'
 import { useAuth } from '../context/AuthContext'
-
+import { Spinner } from 'react-bootstrap'
 
 import {getUser} from './service';
 import {useQuery, useMutation, useQueryClient} from "react-query"
@@ -40,7 +40,7 @@ export default function Dashboard() {
 
   
   if(status === "loading" || eventStatus === "loading" || isIdle || isLoading){
-    return <div>loading</div>
+    return <Spinner animation="border" />
   }
 
   if(status === "error" || eventStatus === "error" ){
@@ -50,9 +50,10 @@ export default function Dashboard() {
   return (
     <>
     <RecipeContainer recipes={recipes}></RecipeContainer>
-    <EventsContainer list={events.filter(event => event.members.includes(profile.name))}></EventsContainer>
-    <UsersContainer users={users}></UsersContainer>
-   
+    <hr/>
+    <EventsContainer user={profile} list={events.filter(event => event.members.includes(profile.name))} ></EventsContainer>
+    <hr/>
+    <UsersContainer users={users} ></UsersContainer>
     </>
   )
 }
