@@ -45,8 +45,8 @@ async function updateUserAllergens (req, res) {
     console.log('error', error);
     res.sendStatus(500);
   }
-
 }
+
 /*
 async function updateUserEvents (req, res) {
   try {
