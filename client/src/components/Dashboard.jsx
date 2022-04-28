@@ -1,12 +1,11 @@
+import { useQuery } from "react-query";
 import React, { useEffect, useState } from 'react';
 import EventsContainer from './EventsContainer';
 import UsersContainer from './UsersContainer';
 import RecipeContainer from './RecipeContainer';
-import { getEvents, recipeRandom } from './service';
+import { getEvents, getUser, recipeRandom } from './service';
 import { useAuth } from '../context/AuthContext';
-
-import { getUser } from './service';
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { Spinner } from 'react-bootstrap';
 
 export default function Dashboard () {
 
@@ -37,7 +36,7 @@ export default function Dashboard () {
   const mockEvents = [{ name: 'dinner', time: 'tomorrow', guests: ['paul', 'mary'] }, { name: 'dinner', time: 'tomorrow', guests: ['paul', 'mary'] }];
 
   if (status === "loading" || eventStatus === "loading" || isIdle || isLoading) {
-    return <div>loading</div>;
+    return <Spinner animation="border" />;
   }
 
   if (status === "error" || eventStatus === "error") {
@@ -47,8 +46,10 @@ export default function Dashboard () {
   return (
     <>
       <RecipeContainer recipes={recipes}></RecipeContainer>
-      <EventsContainer list={events.filter(event => event.members.includes(profile.name))}></EventsContainer>
-      <UsersContainer users={users}></UsersContainer>
+      <hr />
+      <EventsContainer user={profile} list={events.filter(event => event.members.includes(profile.name))} ></EventsContainer>
+      <hr />
+      <UsersContainer users={users} ></UsersContainer>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Card, Button, Alert, ListGroup, Form, CardGroup, Navbar, Container, Nav, Dropdown } from "react-bootstrap";
+import { Card, Button, Alert, ListGroup, Form, CardGroup, Badge, Navbar, Container, Nav, Dropdown, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { addEvent, getMenu, getUser, getUsers, updateUserAllergens } from './service';
@@ -75,7 +75,9 @@ export default function Profile () {
     const newAllergens = [...new Set([...allergens, ...profile.allergens])];
     let res = await getMenu(newAllergens);
     const menu = await res.json();
-    mutation.mutate({ type, allergens: newAllergens, members, date: dateRef.current.value, menu });
+    eventMutation.mutate({ type, allergens: newAllergens, members, date: dateRef.current.value, menu });
+    navigate("/");
+
   }
 
   function handleMembers (user) {
@@ -93,8 +95,9 @@ export default function Profile () {
     }
   }
 
+
   if (status === "loading" || userStatus === "loading") {
-    return <div>loading...</div>;
+    return <Spinner animation="border" />;
   }
 
   if (status === "error" || userStatus === "error") {
@@ -104,25 +107,30 @@ export default function Profile () {
   return (
     <>
       <Card style={{ marginTop: '150px' }}>
-        <Card.Body>
-          <h2 className='text-center mb-4'>Profile</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Card.Title>
-            {profile.name}
-          </Card.Title>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <CardGroup>
-                {profile.allergens.map(all => (<Card key={all}><Card.Body>{all}</Card.Body></Card>))}
-              </CardGroup>
-              <Form onSubmit={handleAllSubmit} >
-                <Form.Control type='text' ref={allergenRef} required style={{ maxWidth: 'fit-content' }} placeholder="new allergen"></Form.Control>
-                <Button className='mt-2' type='submit'>Save</Button>
-              </Form>
-            </ListGroup.Item>
-            <Form onSubmit={handleEventSubmit}  >
+        <h1 className='text-center mb-4'> {profile.name}'s Profile</h1>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Card.Title>
+        </Card.Title>
+        <Card.Body >
+          <div className='d-flex flex-column'>
+            <h3 >About me:</h3>
+            {profile.aboutMe || `Hi my name is ${profile.name}`}
+          </div>
+          <hr />
+          <h3>My allergens:</h3>
+          <h2>
+            {profile.allergens.map(all => (<Badge pill bg="success" className='me-2 p-3 fs-5' >{all}</Badge>))}
+          </h2>
+          <Form onSubmit={handleAllSubmit} >
+            <Form.Control type='text' ref={allergenRef} required style={{ maxWidth: 'fit-content' }} placeholder="new allergen"></Form.Control>
+            <Button className='mt-2' type='submit'>Save</Button>
+          </Form>
+          <hr />
+          <h3>Plan a new Party! :</h3>
+          <Form onSubmit={handleEventSubmit} className="mt-4" >
+            <div className='d-flex'>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-type">
+                <Dropdown.Toggle variant="warning" id="dropdown-type" className='me-2'>
                   {type || 'Type'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -131,7 +139,7 @@ export default function Profile () {
                 </Dropdown.Menu>
               </Dropdown>
               <Dropdown autoClose={false}>
-                <Dropdown.Toggle variant="dark" className="mt-2" id="dropdown-users" >
+                <Dropdown.Toggle variant="warning" id="dropdown-users" >
                   {'Users'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu >
@@ -140,13 +148,13 @@ export default function Profile () {
                   })}
                 </Dropdown.Menu>
               </Dropdown>
-              <Form.Label>
-                Select a Date!
-              </Form.Label>
-              <Form.Control type='datetime-local' ref={dateRef}></Form.Control>
-              <Button className='mt-2' type='submit'>Save</Button>
-            </Form>
-          </ListGroup>
+            </div>
+            <Form.Label className="mt-4">
+              Select a Date!
+            </Form.Label>
+            <Form.Control type='datetime-local' ref={dateRef} style={{ maxWidth: 'fit-content' }}></Form.Control>
+            <Button className='mt-2' type='submit'>Save</Button>
+          </Form>
         </Card.Body>
       </Card>
       <div className='w-100 text-center mt-2'>
