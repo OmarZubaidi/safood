@@ -1,4 +1,4 @@
-const db = "http://localhost:3001";
+const db = "http://127.0.0.1:3001";
 
 function getUsers () {
   const getOptions = {

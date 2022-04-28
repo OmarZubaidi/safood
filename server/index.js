@@ -11,9 +11,9 @@ app.use(router);
 
 async function bootstrap () {
   try {
-    await mongoose.connect('mongodb://localhost/safood');
+    await mongoose.connect('mongodb://127.0.0.1/safood');
     app.listen(PORT, () => {
-      console.log(`Server is listening at http://localhost:${PORT}`);
+      console.log(`Server is listening at http://127.0.0.1:${PORT}`);
     });
   } catch (err) {
     console.log(err);
