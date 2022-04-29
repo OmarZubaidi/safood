@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 
 // Local imports
 import { auth } from '../firebase';
-import { getUsers } from '../components/service';
+import { getUsers } from '../services';
 
 const AuthContext = React.createContext();
 

@@ -1,5 +1,6 @@
 // Local imports
 const db = require('../db');
+const sample = require('../utils/sampleFromArray');
 
 function getRecipe (req, res) {
   const words = req.headers.string.split(' ');
@@ -26,27 +27,15 @@ function getRecipe (req, res) {
 function getRandomRecipe (req, res) {
   const allergens = JSON.parse(req.headers.allergens);
 
-  const recipes = db.filter(recipe => {
+  let recipes = db.filter(recipe => {
     if (!allergens.some(allergen => recipe
       .ingredients
       ?.includes(allergen.toLowerCase())
     )) return true;
     return false;
   });
-  // TODO refactor to just choose from the array instead of calling Math.random()
-  const randomI = [
-    Math.floor(Math.random() * recipes.length),
-    Math.floor(Math.random() * recipes.length),
-    Math.floor(Math.random() * recipes.length),
-    Math.floor(Math.random() * recipes.length)
-  ];
 
-  res.send([
-    recipes[randomI[0]],
-    recipes[randomI[1]],
-    recipes[randomI[2]],
-    recipes[randomI[3]]
-  ]);
+  res.send(sample(recipes, 4));
 }
 
 function getMenu (req, res) {
@@ -63,8 +52,7 @@ function getMenu (req, res) {
       ) return true;
       return false;
     });
-    // TODO refactor to just choose from the array instead of calling Math.random()
-    menu.push(recipe[Math.floor(Math.random() * recipe.length)]);
+    menu.push(...sample(recipe, 1));
   });
   res.send(menu);
 }

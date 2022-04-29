@@ -10,14 +10,14 @@ export default function Events ({ event }) {
           to={`/events/${event._id}`}
           style={{ textDecoration: 'none', color: 'black' }}
         >
-          <Card.Title className='text-center mb-4 bg-warning p-2'>
+          <Card.Header className='text-center mb-4 bg-warning p-2'>
             {event.type} With {event.members.map((member, i) =>
               i === event.members.length - 1
                 ? member
                 : `${member}, `
             )}
-          </Card.Title>
-          <Card.Text className='d-flex p-3'>
+          </Card.Header>
+          <Card.Body className='d-flex p-3'>
             <div className='me-4'>
               <div className='fs-5 '>
                 When:
@@ -26,11 +26,11 @@ export default function Events ({ event }) {
             </div>
             <div className='d-flex flex-column'>
               <div className='fs-5'>Menu:</div>
-              {event.menu.map(meal => <div>
+              {event.menu.map(meal => <div key={meal.title}>
                 {meal.title}
               </div>)}
             </div>
-          </Card.Text>
+          </Card.Body>
         </Link>
       </Card>}
     </>
