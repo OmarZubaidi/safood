@@ -1,3 +1,4 @@
+// Local imports
 const model = require('../models/event.model.js');
 
 async function getEvents (req, res) {
