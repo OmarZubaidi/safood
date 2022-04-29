@@ -1,11 +1,11 @@
 // Package imports
-import React, { useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 // Local imports
 import { auth } from '../firebase';
 import { getUsers } from '../services';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth () {
   return useContext(AuthContext);

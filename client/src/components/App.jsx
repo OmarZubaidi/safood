@@ -1,5 +1,5 @@
 // Package imports
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Container, Navbar, Nav, Form, Button } from 'react-bootstrap';

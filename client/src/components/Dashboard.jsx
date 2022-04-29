@@ -1,5 +1,4 @@
 // Package import
-import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Spinner } from 'react-bootstrap';
 

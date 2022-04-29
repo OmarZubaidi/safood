@@ -1,5 +1,4 @@
 // Package imports
-import React from 'react';
 import { Card } from 'react-bootstrap';
 
 // Local imports

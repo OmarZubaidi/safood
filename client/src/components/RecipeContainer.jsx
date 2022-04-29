@@ -1,5 +1,7 @@
-import React from 'react';
+// Package imports
 import { Row, Col } from 'react-bootstrap';
+
+// Local imports
 import Recipe from './Recipe';
 
 export default function RecipeContainer ({ recipes }) {
