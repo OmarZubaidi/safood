@@ -9,7 +9,7 @@ import { Container, Spinner } from 'react-bootstrap';
 import RecipeContainer from './RecipeContainer';
 
 export default function EventDetails () {
-  let { id } = useParams();
+  const { id } = useParams();
   const { data: event, status } = useQuery(
     'event',
     fetchEvent,

@@ -7,7 +7,11 @@ import Events from './Events';
 
 export default function EventsContainer (props) {
   return (
-    <Row xs={1} md={2} className='g-4 mt-auto'>
+    <Row
+      xs={1}
+      md={2}
+      className='g-4 mt-auto'
+    >
       {props.list && props.list.map(prop => (
         <Col>
           <Events

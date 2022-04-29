@@ -11,18 +11,18 @@ const mockUser = {
   events: [],
   allergens: [],
   uid: '12345',
-  aboutMe: 'test user about',
+  about: 'test user about',
   img: ''
-}
+};
 
 const mockUser2 = {
   name: 'test user 2',
   events: [],
   allergens: [],
   uid: '23456',
-  aboutMe: 'test user about 2',
+  about: 'test user about 2',
   img: ''
-}
+};
 
 describe('Unit Tests - Unit Controller', () => {
   const app = express();
@@ -36,13 +36,13 @@ describe('Unit Tests - Unit Controller', () => {
   });
 
   afterEach(async () => {
-    
+
   });
 
   afterAll(async () => {
     await User.deleteMany();
     await mongoose.disconnect();
-  })
+  });
 
   it('should add a user to the database', async () => {
 
@@ -60,17 +60,17 @@ describe('Unit Tests - Unit Controller', () => {
     const updates = {
       uid: '12345',
       allergens: ['wheat', 'dairy']
-    }
+    };
 
     await request.put('/user/allergens').send(updates);
-    const user = await User.findOne({name: mockUser.name})
+    const user = await User.findOne({ name: mockUser.name });
     expect(user.allergens).toStrictEqual(["wheat", "dairy"]);
   });
 
   it('should get a user', async () => {
     const user = await request.get('/user').set('uid', mockUser.uid);
-    expect(user.body.name).toBe(mockUser.name)
-    expect(user.body.aboutMe).toBe(mockUser.aboutMe)
+    expect(user.body.name).toBe(mockUser.name);
+    expect(user.body.about).toBe(mockUser.about);
     expect(user.body.allergens).toStrictEqual(["wheat", "dairy"]);
   });
 
