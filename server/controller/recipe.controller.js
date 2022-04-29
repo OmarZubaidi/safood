@@ -38,23 +38,4 @@ function getRandomRecipe (req, res) {
   res.send(sample(recipes, 4));
 }
 
-function getMenu (req, res) {
-  const allergens = JSON.parse(req.headers.allergens);
-  const courses = ['starter', 'main', 'side'];
-  const menu = [];
-  courses.forEach(course => {
-    const recipe = db.filter(recipe => {
-      if (
-        !allergens.some(allergen => recipe
-          .ingredients
-          ?.includes(allergen.toLowerCase()))
-        && recipe.dishTypes?.includes(course)
-      ) return true;
-      return false;
-    });
-    menu.push(...sample(recipe, 1));
-  });
-  res.send(menu);
-}
-
-module.exports = { getRecipe, getRandomRecipe, getMenu };
+module.exports = { getRecipe, getRandomRecipe };
