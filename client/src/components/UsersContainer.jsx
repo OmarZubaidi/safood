@@ -1,7 +1,9 @@
-import React from 'react';
+// Package imports
 import { Row, Col } from 'react-bootstrap';
-import Users from './Users';
+
+// Local imports
 import { useAuth } from '../context/AuthContext';
+import Users from './Users';
 
 export default function UsersContainer ({ users }) {
   const { currentUser } = useAuth();
