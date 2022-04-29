@@ -13,7 +13,7 @@ export default function Signup () {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const nameRef = useRef();
-  const aboutMeRef = useRef();
+  const aboutRef = useRef();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -39,7 +39,8 @@ export default function Signup () {
         events: [],
         allergens: [],
         uid: auth.user.uid,
-        aboutMe: aboutMeRef.current.value,
+        about: aboutRef.current.value
+          || `Hi, my name is ${nameRef.current.value}`,
         img: ''
       });
       navigate('/');
@@ -101,13 +102,13 @@ export default function Signup () {
                 required
               />
             </Form.Group>
-            <Form.Group id='aboutme'>
+            <Form.Group id='about'>
               <Form.Label>
                 Tell us something about yourself
               </Form.Label>
               <Form.Control
                 type='text'
-                ref={aboutMeRef}
+                ref={aboutRef}
               />
             </Form.Group>
             <Button

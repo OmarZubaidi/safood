@@ -2,9 +2,8 @@
 const db = require('../db');
 
 function getRecipe (req, res) {
-  let words = req.headers.string.split(' ');
-  let allergens = JSON.parse(req.headers.allergens);
-  //let words = ['egg','mayo','tomato','pepper']
+  const words = req.headers.string.split(' ');
+  const allergens = JSON.parse(req.headers.allergens);
 
   res.send(db
     .filter(recipe => {
@@ -25,10 +24,9 @@ function getRecipe (req, res) {
 }
 
 function getRandomRecipe (req, res) {
-  let allergens = JSON.parse(req.headers.allergens);
-  //let words = ['egg','mayo','tomato','pepper']
+  const allergens = JSON.parse(req.headers.allergens);
 
-  let result = db.filter(recipe => {
+  const recipes = db.filter(recipe => {
     if (!allergens.some(allergen => recipe
       .ingredients
       ?.includes(allergen.toLowerCase())
@@ -36,18 +34,18 @@ function getRandomRecipe (req, res) {
     return false;
   });
   // TODO refactor to just choose from the array instead of calling Math.random()
-  let randomI = [
-    Math.floor(Math.random() * result.length),
-    Math.floor(Math.random() * result.length),
-    Math.floor(Math.random() * result.length),
-    Math.floor(Math.random() * result.length)
+  const randomI = [
+    Math.floor(Math.random() * recipes.length),
+    Math.floor(Math.random() * recipes.length),
+    Math.floor(Math.random() * recipes.length),
+    Math.floor(Math.random() * recipes.length)
   ];
 
   res.send([
-    result[randomI[0]],
-    result[randomI[1]],
-    result[randomI[2]],
-    result[randomI[3]]
+    recipes[randomI[0]],
+    recipes[randomI[1]],
+    recipes[randomI[2]],
+    recipes[randomI[3]]
   ]);
 }
 
@@ -56,7 +54,7 @@ function getMenu (req, res) {
   const courses = ['starter', 'main', 'side'];
   const menu = [];
   courses.forEach(course => {
-    let result = db.filter(recipe => {
+    const recipe = db.filter(recipe => {
       if (
         !allergens.some(allergen => recipe
           .ingredients
@@ -66,7 +64,7 @@ function getMenu (req, res) {
       return false;
     });
     // TODO refactor to just choose from the array instead of calling Math.random()
-    menu.push(result[Math.floor(Math.random() * result.length)]);
+    menu.push(recipe[Math.floor(Math.random() * recipe.length)]);
   });
   res.send(menu);
 }

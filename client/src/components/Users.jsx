@@ -19,7 +19,7 @@ export default function Users ({ user }) {
         About me
       </Card.Title>
       <Card.Body>
-        {user.aboutMe || `Hi, my name is ${user.name}`}
+        {user.about}
       </Card.Body>
     </Card>
   );

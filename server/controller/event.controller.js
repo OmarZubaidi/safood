@@ -3,9 +3,9 @@ const model = require('../models/event.model.js');
 
 async function getEvents (req, res) {
   try {
-    const users = await model.find();
+    const events = await model.find();
     res.status(200);
-    res.send(users);
+    res.send(events);
   } catch (error) {
     console.log('error', error);
     res.sendStatus(500);
@@ -14,9 +14,9 @@ async function getEvents (req, res) {
 
 async function getEvent (req, res) {
   try {
-    const user = await model.findOne({ _id: req.params._id });
+    const event = await model.findOne({ _id: req.params._id });
     res.status(200);
-    res.send(user);
+    res.send(event);
   } catch (error) {
     console.log('error', error);
     res.sendStatus(500);
@@ -26,9 +26,15 @@ async function getEvent (req, res) {
 async function postEvent (req, res) {
   try {
     const { type, allergens, members, date, menu } = req.body;
-    const user = await model.create({ type, allergens, members, date, menu });
+    const event = await model.create({
+      type,
+      allergens,
+      members,
+      date,
+      menu
+    });
     res.status(200);
-    res.send(user);
+    res.send(event);
   } catch (error) {
     console.log('error', error);
     res.sendStatus(500);
@@ -37,11 +43,13 @@ async function postEvent (req, res) {
 
 async function addRecipesToEvent (req, res) {
   try {
-    const user = await model.findOneAndUpdate({ _id: req.body._id }, { recipes: req.body.recipes }, {
-      new: true
-    });
+    const event = await model.findOneAndUpdate(
+      { _id: req.body._id },
+      { recipes: req.body.recipes },
+      { new: true }
+    );
     res.status(200);
-    res.send(user);
+    res.send(event);
   } catch (error) {
     console.log('error', error);
     res.sendStatus(500);

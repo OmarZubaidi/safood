@@ -14,12 +14,12 @@ async function getUsers (req, res) {
 
 async function postUser (req, res) {
   try {
-    const { name, allergens, uid, aboutMe, img } = req.body;
+    const { name, allergens, uid, about, img } = req.body;
     const user = await model.create({
       name,
       allergens,
       uid,
-      aboutMe,
+      about,
       img
     });
     res.status(200);

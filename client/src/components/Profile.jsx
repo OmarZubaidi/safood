@@ -89,7 +89,7 @@ export default function Profile () {
   async function handleEventSubmit (e) {
     e.preventDefault();
     const newAllergens = [...new Set([...allergens, ...profile.allergens])];
-    let res = await getMenu(newAllergens);
+    const res = await getMenu(newAllergens);
     const menu = await res.json();
     eventMutation.mutate({
       type,
@@ -137,7 +137,7 @@ export default function Profile () {
         <Card.Body>
           <div className='d-flex flex-column'>
             <h3>About me</h3>
-            {profile.aboutMe || `Hi, my name is ${profile.name}`}
+            {profile.about}
           </div>
           <hr />
           <h3>My allergens</h3>

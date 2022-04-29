@@ -2,11 +2,17 @@
 const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: {
+    type: String,
+    required: true
+  },
   allergens: [String],
   events: [String],
-  uid: { type: String, required: true },
-  aboutMe: String,
+  uid: {
+    type: String,
+    required: true
+  },
+  about: String,
   img: String
 }, { timestamps: false });
 

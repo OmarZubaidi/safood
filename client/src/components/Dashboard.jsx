@@ -35,22 +35,11 @@ export default function Dashboard () {
   // Queries
   const { data: profile, status } = useQuery('user', fetchUser);
   const { data: events, status: eventStatus } = useQuery('events', fetchEvents);
-  const { data: recipes, status: recipeStatus } = useQuery(['random', profile], getRandom, {
-    enabled: !!profile
-  });
-
-  const mockEvents = [
-    {
-      name: 'dinner',
-      time: 'tomorrow',
-      guests: ['paul', 'mary']
-    },
-    {
-      name: 'dinner',
-      time: 'tomorrow',
-      guests: ['paul', 'mary']
-    }
-  ];
+  const { data: recipes, status: recipeStatus } = useQuery(
+    ['random', profile],
+    getRandom,
+    { enabled: !!profile }
+  );
 
   // Loading and error handling
   if (
