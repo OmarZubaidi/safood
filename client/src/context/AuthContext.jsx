@@ -39,7 +39,7 @@ export function AuthProvider ({ children }) {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
       getUsers()
-        .then(response => response.json())
+        // .then(response => response.json())
         .then(data => { setUsers(data); });
       setLoading(false);
     });

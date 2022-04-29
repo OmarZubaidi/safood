@@ -12,15 +12,9 @@ export default function EventDetails () {
   const { id } = useParams();
   const { data: event, status } = useQuery(
     'event',
-    fetchEvent,
+    () => getEvent(id),
     { enabled: !!id }
   );
-
-  // Get event function
-  async function fetchEvent () {
-    const res = await getEvent(id);
-    return res.json();
-  }
 
   // Loading handling
   if (status === 'loading') {

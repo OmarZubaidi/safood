@@ -14,30 +14,18 @@ export default function Dashboard () {
   // Authentication
   const { users, currentUser } = useAuth();
 
-  // Get user function
-  async function fetchUser () {
-    const res = await getUser(currentUser);
-    return res.json();
-  }
-
-  // Get random recipes function
-  async function getRandom () {
-    const res = await recipeRandom(profile.allergens);
-    return res.json();
-  }
-
-  // Get events function
-  async function fetchEvents () {
-    const res = await getEvents();
-    return res.json();
-  }
-
   // Queries
-  const { data: profile, status } = useQuery('user', fetchUser);
-  const { data: events, status: eventStatus } = useQuery('events', fetchEvents);
+  const { data: profile, status } = useQuery(
+    'user',
+    () => getUser(currentUser)
+  );
+  const { data: events, status: eventStatus } = useQuery(
+    'events',
+    getEvents
+  );
   const { data: recipes, status: recipeStatus } = useQuery(
     ['random', profile],
-    getRandom,
+    () => recipeRandom(profile.allergens),
     { enabled: !!profile }
   );
 

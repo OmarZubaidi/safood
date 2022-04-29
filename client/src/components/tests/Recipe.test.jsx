@@ -14,7 +14,6 @@ describe('Recipe component', () => {
 
   test('should match the snapshot', () => {
     const { container } = render(<Recipe recipe={mockRecipe} />);
-    // es
     expect(container).toMatchSnapshot();
   });
 

@@ -26,16 +26,10 @@ function App () {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-  // Get user function
-  async function fetchUser () {
-    const res = await getUser(currentUser);
-    return res.json();
-  }
-
   // Get the user data
   const { data: profile, status } = useQuery(
     'user',
-    fetchUser,
+    () => getUser(currentUser),
     { enabled: !!currentUser }
   );
 
@@ -44,7 +38,6 @@ function App () {
     e.preventDefault();
     try {
       recipeQuery(profile.allergens, stringRef.current.value)
-        .then(response => response.json())
         .then(data => { setRecipes(data); });
     } catch (error) {
       console.log(error);
