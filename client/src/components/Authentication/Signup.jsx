@@ -5,7 +5,7 @@ import { Card, Button, Form, Alert } from 'react-bootstrap';
 
 // Package imports
 import { useAuth } from '../../context/AuthContext';
-import { postUser } from '../service';
+import { postUser } from '../../services';
 
 export default function Signup () {
   // Refs, states, navigation, and authentication

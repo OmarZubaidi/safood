@@ -20,7 +20,7 @@ import {
   getUser,
   getUsers,
   updateUserAllergens
-} from './service';
+} from '../services';
 
 export default function Profile () {
   // Navigation and authentication
@@ -72,14 +72,16 @@ export default function Profile () {
     }
   }
 
-  async function handleAllSubmit (e) {
+  async function handleAllergenSubmit (e) {
     e.preventDefault();
     try {
-      if (allergenRef.current.value.length > 1) {
-        mutation.mutate({
+      const newAllergen = allergenRef.current.value;
+      if (newAllergen.length > 1) {
+        if (!profile.allergens.includes(newAllergen)) mutation.mutate({
           uid: profile.uid,
-          allergens: [...profile.allergens, allergenRef.current.value]
+          allergens: [...profile.allergens, newAllergen]
         });
+        allergenRef.current.value = '';
       }
     } catch (error) {
       console.log(error);
@@ -142,17 +144,18 @@ export default function Profile () {
           <hr />
           <h3>My allergens</h3>
           <h2>
-            {profile.allergens.map(all => (
+            {profile.allergens.map(allergen => (
               <Badge
+                key={allergen}
                 pill
                 bg='success'
                 className='me-2 p-3 fs-5'
               >
-                {all}
+                {allergen}
               </Badge>
             ))}
           </h2>
-          <Form onSubmit={handleAllSubmit}>
+          <Form onSubmit={handleAllergenSubmit}>
             <Form.Control
               type='text'
               ref={allergenRef}
@@ -164,7 +167,7 @@ export default function Profile () {
               className='mt-2'
               type='submit'
             >
-              Save
+              Add Allergen
             </Button>
           </Form>
           <hr />
@@ -191,7 +194,7 @@ export default function Profile () {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <Dropdown autoClose={false}>
+              <Dropdown>
                 <Dropdown.Toggle
                   variant='warning'
                   id='dropdown-users'

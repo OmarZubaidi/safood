@@ -8,7 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import EventsContainer from './EventsContainer';
 import RecipeContainer from './RecipeContainer';
 import UsersContainer from './UsersContainer';
-import { getEvents, getUser, recipeRandom } from './service';
+import { getEvents, getUser, recipeRandom } from '../services';
 
 export default function Dashboard () {
   // Authentication

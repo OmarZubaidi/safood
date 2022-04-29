@@ -16,7 +16,7 @@ import EventDetails from './EventDetails';
 import PrivateRoute from './PrivateRoute';
 import Profile from './Profile';
 import RecipeContainer from './RecipeContainer';
-import { getUser, recipeQuery } from './service';
+import { getUser, recipeQuery } from '../services';
 
 function App () {
   // Refs, states, navigation, and authentication
