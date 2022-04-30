@@ -1,5 +1,5 @@
 // Local imports
-const db = require('../db');
+const db = require('../db.json');
 const sample = require('../utils/sampleFromArray');
 const recipeHasNoAllergens = require('../utils/recipeHasNoAllergens');
 const recipeHasKeywords = require('../utils/recipeHasKeywords');
@@ -13,7 +13,7 @@ function getRecipe (req, res) {
     && recipeHasNoAllergens(recipe, allergens)
   );
 
-  res.send(sample(recipes, 10));
+  res.status(200).send(sample(recipes, 10));
 }
 
 function getRandomRecipe (req, res) {
@@ -23,7 +23,7 @@ function getRandomRecipe (req, res) {
     recipeHasNoAllergens(recipe, allergens)
   );
 
-  res.send(sample(recipes, 4));
+  res.status(200).send(sample(recipes, 4));
 }
 
 module.exports = { getRecipe, getRandomRecipe };
