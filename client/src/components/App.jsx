@@ -8,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Local imports
 import { useAuth } from '../context/AuthContext';
 import logo from '../img/Safe_2_-removebg-preview.png';
-import Login from './Authentication/Login';
-import Signup from './Authentication/Signup';
+import Login from './Authentication/Login.tsx';
+import Signup from './Authentication/Signup.tsx';
 import Dashboard from './Dashboard';
 import Events from './Events';
 import EventDetails from './EventDetails';

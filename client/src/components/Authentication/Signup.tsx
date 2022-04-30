@@ -9,18 +9,18 @@ import { postUser } from '../../services';
 
 export default function Signup () {
   // Refs, states, navigation, and authentication
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const nameRef = useRef();
-  const aboutRef = useRef();
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const emailRef = useRef<HTMLInputElement>();
+  const passwordRef = useRef<HTMLInputElement>();
+  const passwordConfirmRef = useRef<HTMLInputElement>();
+  const nameRef = useRef<HTMLInputElement>();
+  const aboutRef = useRef<HTMLInputElement>();
+  const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const { signup } = useAuth();
 
   // Submit function
-  async function handleSubmit (e) {
+  async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {

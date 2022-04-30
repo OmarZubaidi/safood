@@ -8,15 +8,15 @@ import { useAuth } from '../../context/AuthContext';
 
 export default function Login () {
   // Refs, states, and navigation
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const emailRef = useRef<HTMLInputElement>();
+  const passwordRef = useRef<HTMLInputElement>();
   const { login } = useAuth();
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // Submit function
-  async function handleSubmit (e) {
+  async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
       setError('');
