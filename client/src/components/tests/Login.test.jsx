@@ -5,11 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 // Local imports
 import Login from '../Authentication/Login';
 
-const mockLogin = {
-  email: "n@1.com",
-  password: '123456'
-};
-
 jest.mock('../../context/AuthContext.js', () => ({
   useAuth: () => {
     return {
@@ -39,6 +34,7 @@ describe('Login component', () => {
     );
     screen.getByText('E-mail');
     screen.getByText('Password');
+    screen.getByRole('button');
   });
 
 

@@ -63,52 +63,64 @@ export default function Signup () {
           </Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='name'>
-              <Form.Label>
+              <Form.Label
+                htmlFor="name-input"
+              >
                 Name
               </Form.Label>
               <Form.Control
                 type='text'
                 ref={nameRef}
+                id="name-input"
                 required
               />
             </Form.Group>
             <Form.Group id='email'>
-              <Form.Label>
+              <Form.Label
+              htmlFor="email-input">
                 E-mail
               </Form.Label>
               <Form.Control
                 type='email'
                 ref={emailRef}
+                id="email-input"
                 required
               />
             </Form.Group>
             <Form.Group id='password'>
-              <Form.Label>
+              <Form.Label
+              htmlFor="password-input">
                 Password
               </Form.Label>
               <Form.Control
                 type='password'
                 ref={passwordRef}
+                id="password-input"
                 required
               />
             </Form.Group>
             <Form.Group id='passwordconfirm'>
-              <Form.Label>
+              <Form.Label
+                htmlFor="passwordconfirm-input"
+              >
                 Confirm password
               </Form.Label>
               <Form.Control
                 type='password'
+                id="passwordconfirm-input"
                 ref={passwordConfirmRef}
                 required
               />
             </Form.Group>
             <Form.Group id='about'>
-              <Form.Label>
+              <Form.Label
+              htmlFor="about-input">
                 Tell us something about yourself
               </Form.Label>
               <Form.Control
                 type='text'
                 ref={aboutRef}
+                id="about-input"
               />
             </Form.Group>
             <Button
