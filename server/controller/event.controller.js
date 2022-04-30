@@ -1,51 +1,39 @@
 // Local imports
 const model = require('../models/event.model.js');
+const asyncErrorHandler = require('../utils/asyncErrorHandler');
 
 async function getEvents (req, res) {
   try {
-    const users = await model.find();
-    res.status(200);
-    res.send(users);
+    const events = await model.find();
+    res.status(200).send(events);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
 async function getEvent (req, res) {
   try {
-    const user = await model.findOne({ _id: req.params._id });
-    res.status(200);
-    res.send(user);
+    const event = await model.findOne({ _id: req.params._id });
+    res.status(200).send(event);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
 async function postEvent (req, res) {
   try {
     const { type, allergens, members, date, menu } = req.body;
-    const user = await model.create({ type, allergens, members, date, menu });
-    res.status(200);
-    res.send(user);
-  } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
-  }
-}
-
-async function addRecipesToEvent (req, res) {
-  try {
-    const user = await model.findOneAndUpdate({ _id: req.body._id }, { recipes: req.body.recipes }, {
-      new: true
+    const event = await model.create({
+      type,
+      allergens,
+      members,
+      date,
+      menu
     });
-    res.status(200);
-    res.send(user);
+    res.status(201).send(event);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
-module.exports = { getEvent, getEvents, postEvent, addRecipesToEvent };
+module.exports = { getEvent, getEvents, postEvent };

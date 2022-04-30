@@ -1,11 +1,11 @@
 // Package imports
-import React, { useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 // Local imports
 import { auth } from '../firebase';
-import { getUsers } from '../components/service';
+import { getUsers } from '../services';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth () {
   return useContext(AuthContext);
@@ -35,12 +35,15 @@ export function AuthProvider ({ children }) {
     setCurrentUser(user);
   }
 
+  async function fetchUsers () {
+    const res = await getUsers();
+    setUsers(res);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
-      getUsers()
-        .then(response => response.json())
-        .then(data => { setUsers(data); });
+      fetchUsers();
       setLoading(false);
     });
     return unsubscribe;

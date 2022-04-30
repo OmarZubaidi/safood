@@ -1,9 +1,11 @@
-import React from 'react';
+// Package imports
 import { Row, Col } from 'react-bootstrap';
-import Users from './Users';
-import { useAuth } from '../context/AuthContext';
 
-export default function UsersContainer (props) {
+// Local imports
+import { useAuth } from '../context/AuthContext';
+import Users from './Users';
+
+export default function UsersContainer ({ users }) {
   const { currentUser } = useAuth();
   return (
     <Row
@@ -11,14 +13,11 @@ export default function UsersContainer (props) {
       md={2}
       className='g-4 mt-auto'
     >
-      {props.users && props.users.map(prop => (
-        prop.uid === currentUser.uid
+      {users.map(user => (
+        user.uid === currentUser.uid
           ? null
-          : (<Col>
-            <Users
-              key={prop.name}
-              user={prop}
-            />
+          : (<Col key={user.name}>
+            <Users user={user} />
           </Col>)
       ))}
     </Row>

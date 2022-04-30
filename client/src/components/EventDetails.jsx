@@ -1,26 +1,19 @@
 // Package imports
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 // Local imports
-import { getEvent } from './service';
+import { getEvent } from '../services';
 import { Container, Spinner } from 'react-bootstrap';
 import RecipeContainer from './RecipeContainer';
 
 export default function EventDetails () {
-  let { id } = useParams();
+  const { id } = useParams();
   const { data: event, status } = useQuery(
     'event',
-    fetchEvent,
+    () => getEvent(id),
     { enabled: !!id }
   );
-
-  // Get event function
-  async function fetchEvent () {
-    const res = await getEvent(id);
-    return res.json();
-  }
 
   // Loading handling
   if (status === 'loading') {

@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup component should match the snapshot 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <div
+      class="card-body"
+    >
+      <h2
+        class="text-center mb-4"
+      >
+        Sign Up
+      </h2>
+      <form
+        class=""
+      >
+        <div
+          id="name"
+        >
+          <label
+            class="form-label"
+            for="name-input"
+          >
+            Name
+          </label>
+          <input
+            class="form-control"
+            id="name-input"
+            required=""
+            type="text"
+          />
+        </div>
+        <div
+          id="email"
+        >
+          <label
+            class="form-label"
+            for="email-input"
+          >
+            E-mail
+          </label>
+          <input
+            class="form-control"
+            id="email-input"
+            required=""
+            type="email"
+          />
+        </div>
+        <div
+          id="password"
+        >
+          <label
+            class="form-label"
+            for="password-input"
+          >
+            Password
+          </label>
+          <input
+            class="form-control"
+            id="password-input"
+            required=""
+            type="password"
+          />
+        </div>
+        <div
+          id="passwordconfirm"
+        >
+          <label
+            class="form-label"
+            for="passwordconfirm-input"
+          >
+            Confirm password
+          </label>
+          <input
+            class="form-control"
+            id="passwordconfirm-input"
+            required=""
+            type="password"
+          />
+        </div>
+        <div
+          id="about"
+        >
+          <label
+            class="form-label"
+            for="about-input"
+          >
+            Tell us something about yourself
+          </label>
+          <input
+            class="form-control"
+            id="about-input"
+            type="text"
+          />
+        </div>
+        <button
+          class="w-100 btn btn-primary"
+          type="submit"
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </div>
+  <div
+    class="w-100 text-center mt-2"
+  >
+    Already have an account? 
+    <a
+      href="/login"
+    >
+      Sign in
+    </a>
+  </div>
+</div>
+`;

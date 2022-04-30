@@ -8,14 +8,14 @@ const router = require('../router');
 
 const databaseName = 'safood-test';
 
-describe('Unit Tests - Recipe Controller', () => {
+describe('Unit Tests - Menu Controller', () => {
   const app = express();
   app.use(express.json());
   app.use(router);
   const request = supertest(app);
 
   // Search string and allergens
-  const string = '';
+  const string = 'curry lime';
   const allergens = JSON.stringify(['tomato', 'cheese']);
 
   beforeAll(async () => {
@@ -27,8 +27,8 @@ describe('Unit Tests - Recipe Controller', () => {
     await mongoose.disconnect();
   });
 
-  it('should get all recipes from the database', async () => {
-    const res = await request.get('/recipe')
+  it('should get filtered recipes from the database', async () => {
+    const res = await request.get('/menu')
       .set('string', string)
       .set('allergens', allergens);
 
@@ -36,16 +36,6 @@ describe('Unit Tests - Recipe Controller', () => {
     res.body.every(({ ingredients }) => {
       expect(ingredients).not.toContain(...allergens);
     });
-  });
-
-  it('should get random recipes from the database', async () => {
-    const res = await request.get('/recipe/random')
-      .set('string', string)
-      .set('allergens', allergens);
-
-    // Assertion
-    res.body.every(({ ingredients }) => {
-      expect(ingredients).not.toContain(...allergens);
-    });
+    expect(res.body).toHaveLength(3);
   });
 });

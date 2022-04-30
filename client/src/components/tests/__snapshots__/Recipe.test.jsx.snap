@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe component should match the snapshot 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <img
+      class="card-img-top"
+      src="https://spoonacular.com/recipeImages/1-556x370.jpg"
+    />
+    <div
+      class="card-body"
+    >
+      <div
+        class="card-title h5"
+      >
+        Fried Anchovies with Sage
+      </div>
+      <p
+        class="card-text"
+        style="min-height: 50px;"
+      >
+        <span>
+          Anchovies, 
+        </span>
+        <span>
+          baking powder, 
+        </span>
+        <span>
+          egg, 
+        </span>
+        <span>
+          flour, 
+        </span>
+        <span>
+          sage leaves, 
+        </span>
+        <span>
+          salt, 
+        </span>
+        <span>
+          seltzer water, 
+        </span>
+        <span>
+          vegetable oil.
+        </span>
+      </p>
+    </div>
+    <div
+      class="card-footer"
+    >
+      <small
+        class="text-muted"
+      >
+        Prep-time: 
+        45
+         minutes
+      </small>
+    </div>
+  </div>
+</div>
+`;

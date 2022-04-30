@@ -1,19 +1,19 @@
 // Package imports
-import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Local imports
 import Events from './Events';
 
-export default function EventsContainer (props) {
+export default function EventsContainer ({ list }) {
   return (
-    <Row xs={1} md={2} className='g-4 mt-auto'>
-      {props.list && props.list.map(prop => (
-        <Col>
-          <Events
-            key={prop._id}
-            event={prop}
-          />
+    <Row
+      xs={1}
+      md={2}
+      className='g-4 mt-auto'
+    >
+      {list.map(event => (
+        <Col key={event._id}>
+          <Events event={event} />
         </Col>
       ))}
     </Row>

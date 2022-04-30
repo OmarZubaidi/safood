@@ -1,5 +1,5 @@
 // Package imports
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -20,7 +20,7 @@ import {
   getUser,
   getUsers,
   updateUserAllergens
-} from './service';
+} from '../services';
 
 export default function Profile () {
   // Navigation and authentication
@@ -37,21 +37,16 @@ export default function Profile () {
   const allergenRef = useRef();
   const dateRef = useRef();
 
-  // Functions
-  async function fetchUser () {
-    const res = await getUser(currentUser);
-    return res.json();
-  }
-
-  async function fetchUsers () {
-    const res = await getUsers();
-    return res.json();
-  }
-
   // Queries
   const queryClient = useQueryClient();
-  const { data: profile, status } = useQuery('user', fetchUser);
-  const { data: users, status: userStatus } = useQuery('users', fetchUsers);
+  const { data: profile, status } = useQuery(
+    'user',
+    () => getUser(currentUser)
+  );
+  const { data: users, status: userStatus } = useQuery(
+    'users',
+    getUsers
+  );
 
   // Mutations
   const eventMutation = useMutation(event => addEvent(event));
@@ -72,14 +67,16 @@ export default function Profile () {
     }
   }
 
-  async function handleAllSubmit (e) {
+  async function handleAllergenSubmit (e) {
     e.preventDefault();
     try {
-      if (allergenRef.current.value.length > 1) {
-        mutation.mutate({
+      const newAllergen = allergenRef.current.value;
+      if (newAllergen.length > 1) {
+        if (!profile.allergens.includes(newAllergen)) mutation.mutate({
           uid: profile.uid,
-          allergens: [...profile.allergens, allergenRef.current.value]
+          allergens: [...profile.allergens, newAllergen]
         });
+        allergenRef.current.value = '';
       }
     } catch (error) {
       console.log(error);
@@ -89,8 +86,7 @@ export default function Profile () {
   async function handleEventSubmit (e) {
     e.preventDefault();
     const newAllergens = [...new Set([...allergens, ...profile.allergens])];
-    let res = await getMenu(newAllergens);
-    const menu = await res.json();
+    const menu = await getMenu(newAllergens);
     eventMutation.mutate({
       type,
       allergens: newAllergens,
@@ -137,22 +133,23 @@ export default function Profile () {
         <Card.Body>
           <div className='d-flex flex-column'>
             <h3>About me</h3>
-            {profile.aboutMe || `Hi, my name is ${profile.name}`}
+            {profile.about}
           </div>
           <hr />
           <h3>My allergens</h3>
           <h2>
-            {profile.allergens.map(all => (
+            {profile.allergens.map(allergen => (
               <Badge
+                key={allergen}
                 pill
                 bg='success'
                 className='me-2 p-3 fs-5'
               >
-                {all}
+                {allergen}
               </Badge>
             ))}
           </h2>
-          <Form onSubmit={handleAllSubmit}>
+          <Form onSubmit={handleAllergenSubmit}>
             <Form.Control
               type='text'
               ref={allergenRef}
@@ -164,7 +161,7 @@ export default function Profile () {
               className='mt-2'
               type='submit'
             >
-              Save
+              Add Allergen
             </Button>
           </Form>
           <hr />
@@ -191,7 +188,7 @@ export default function Profile () {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <Dropdown autoClose={false}>
+              <Dropdown>
                 <Dropdown.Toggle
                   variant='warning'
                   id='dropdown-users'

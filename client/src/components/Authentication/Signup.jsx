@@ -1,11 +1,11 @@
 // Package imports
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Alert } from 'react-bootstrap';
 
 // Package imports
 import { useAuth } from '../../context/AuthContext';
-import { postUser } from '../service';
+import { postUser } from '../../services';
 
 export default function Signup () {
   // Refs, states, navigation, and authentication
@@ -13,7 +13,7 @@ export default function Signup () {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const nameRef = useRef();
-  const aboutMeRef = useRef();
+  const aboutRef = useRef();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -39,7 +39,8 @@ export default function Signup () {
         events: [],
         allergens: [],
         uid: auth.user.uid,
-        aboutMe: aboutMeRef.current.value,
+        about: aboutRef.current.value
+          || `Hi, my name is ${nameRef.current.value}`,
         img: ''
       });
       navigate('/');
@@ -62,52 +63,64 @@ export default function Signup () {
           </Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='name'>
-              <Form.Label>
+              <Form.Label
+                htmlFor="name-input"
+              >
                 Name
               </Form.Label>
               <Form.Control
                 type='text'
                 ref={nameRef}
+                id="name-input"
                 required
               />
             </Form.Group>
             <Form.Group id='email'>
-              <Form.Label>
+              <Form.Label
+              htmlFor="email-input">
                 E-mail
               </Form.Label>
               <Form.Control
                 type='email'
                 ref={emailRef}
+                id="email-input"
                 required
               />
             </Form.Group>
             <Form.Group id='password'>
-              <Form.Label>
+              <Form.Label
+              htmlFor="password-input">
                 Password
               </Form.Label>
               <Form.Control
                 type='password'
                 ref={passwordRef}
+                id="password-input"
                 required
               />
             </Form.Group>
             <Form.Group id='passwordconfirm'>
-              <Form.Label>
+              <Form.Label
+                htmlFor="passwordconfirm-input"
+              >
                 Confirm password
               </Form.Label>
               <Form.Control
                 type='password'
+                id="passwordconfirm-input"
                 ref={passwordConfirmRef}
                 required
               />
             </Form.Group>
-            <Form.Group id='aboutme'>
-              <Form.Label>
+            <Form.Group id='about'>
+              <Form.Label
+              htmlFor="about-input">
                 Tell us something about yourself
               </Form.Label>
               <Form.Control
                 type='text'
-                ref={aboutMeRef}
+                ref={aboutRef}
+                id="about-input"
               />
             </Form.Group>
             <Button

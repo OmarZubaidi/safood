@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login component should match the snapshot 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <div
+      class="card-body"
+    >
+      <h2
+        class="text-center mb-4"
+      >
+        Log in
+      </h2>
+      <form
+        class=""
+      >
+        <div
+          id="email"
+        >
+          <label
+            class="form-label"
+          >
+            E-mail
+          </label>
+          <input
+            class="form-control"
+            required=""
+            type="email"
+          />
+        </div>
+        <div
+          id="password"
+        >
+          <label
+            class="form-label"
+          >
+            Password
+          </label>
+          <input
+            class="form-control"
+            required=""
+            type="password"
+          />
+        </div>
+        <button
+          class="w-100 mt-4 btn btn-primary"
+          type="submit"
+        >
+          Log in
+        </button>
+      </form>
+    </div>
+  </div>
+  <div
+    class="w-100 text-center mt-2"
+  >
+    Need an account? 
+    <a
+      href="/signup"
+    >
+      Sign up
+    </a>
+  </div>
+</div>
+`;

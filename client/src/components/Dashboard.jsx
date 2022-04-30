@@ -1,5 +1,4 @@
 // Package import
-import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Spinner } from 'react-bootstrap';
 
@@ -8,49 +7,26 @@ import { useAuth } from '../context/AuthContext';
 import EventsContainer from './EventsContainer';
 import RecipeContainer from './RecipeContainer';
 import UsersContainer from './UsersContainer';
-import { getEvents, getUser, recipeRandom } from './service';
+import { getEvents, getUser, recipeRandom } from '../services';
 
 export default function Dashboard () {
   // Authentication
   const { users, currentUser } = useAuth();
 
-  // Get user function
-  async function fetchUser () {
-    const res = await getUser(currentUser);
-    return res.json();
-  }
-
-  // Get random recipes function
-  async function getRandom () {
-    const res = await recipeRandom(profile.allergens);
-    return res.json();
-  }
-
-  // Get events function
-  async function fetchEvents () {
-    const res = await getEvents();
-    return res.json();
-  }
-
   // Queries
-  const { data: profile, status } = useQuery('user', fetchUser);
-  const { data: events, status: eventStatus } = useQuery('events', fetchEvents);
-  const { data: recipes, status: recipeStatus } = useQuery(['random', profile], getRandom, {
-    enabled: !!profile
-  });
-
-  const mockEvents = [
-    {
-      name: 'dinner',
-      time: 'tomorrow',
-      guests: ['paul', 'mary']
-    },
-    {
-      name: 'dinner',
-      time: 'tomorrow',
-      guests: ['paul', 'mary']
-    }
-  ];
+  const { data: profile, status } = useQuery(
+    'user',
+    () => getUser(currentUser)
+  );
+  const { data: events, status: eventStatus } = useQuery(
+    'events',
+    getEvents
+  );
+  const { data: recipes, status: recipeStatus } = useQuery(
+    ['random', profile],
+    () => recipeRandom(profile.allergens),
+    { enabled: !!profile }
+  );
 
   // Loading and error handling
   if (
