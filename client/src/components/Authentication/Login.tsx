@@ -1,10 +1,11 @@
 // Package imports
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Alert } from 'react-bootstrap';
 
 // Local imports
 import { useAuth } from '../../context/AuthContext';
+// import { LoginUser } from '../../interfaces/Authentication/Login.interface';
 
 export default function Login () {
   // Refs, states, and navigation
@@ -21,6 +22,7 @@ export default function Login () {
     try {
       setError('');
       setLoading(true);
+
       await login(
         emailRef.current.value,
         passwordRef.current.value
