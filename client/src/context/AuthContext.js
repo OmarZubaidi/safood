@@ -35,12 +35,15 @@ export function AuthProvider ({ children }) {
     setCurrentUser(user);
   }
 
+  async function fetchUsers () {
+    const res = await getUsers();
+    setUsers(res);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user);
-      getUsers()
-        // .then(response => response.json())
-        .then(data => { setUsers(data); });
+      fetchUsers();
       setLoading(false);
     });
     return unsubscribe;

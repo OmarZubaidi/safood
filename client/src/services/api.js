@@ -1,22 +1,47 @@
 const rootUrl = 'http://127.0.0.1:3001';
 
-export async function api ({
-  method,
-  url,
-  headers,
-  body,
-}) {
+const applicationJson = {
+  'Content-Type': 'application/json',
+};
+
+export async function apiGetter ({ url, headers }) {
   const options = {
-    method,
+    method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
+      ...applicationJson,
+      ...headers
+    }
+  };
+  try {
+    const res = await fetch(`${rootUrl}/${url}`, options);
+    return await res.json();
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+export async function apiPoster ({ url, headers, body }) {
+  const options = {
+    method: 'POST',
+    headers: {
+      ...applicationJson,
       ...headers
     },
     body
   };
-  if (method === 'GET') {
-    const res = await fetch(`${rootUrl}/${url}`, options);
-    return res.json();
-  }
+
+  return fetch(`${rootUrl}/${url}`, options);
+}
+
+export async function apiPutter ({ url, headers, body }) {
+  const options = {
+    method: 'PUT',
+    headers: {
+      ...applicationJson,
+      ...headers
+    },
+    body
+  };
+
   return fetch(`${rootUrl}/${url}`, options);
 }
