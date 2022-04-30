@@ -1,40 +1,33 @@
 // Local imports
-import { api } from './api';
+import { apiGetter, apiPoster, apiPutter } from './api';
 
 function getUsers () {
-  return api({
-    method: 'GET',
-    url: 'users',
-  });
+  return apiGetter({ url: 'users' });
 }
 
 function getUser (user) {
-  return api({
-    method: 'GET',
+  return apiGetter({
     url: 'user',
     headers: { uid: user.uid },
   });
 }
 
 function postUser (user) {
-  return api({
-    method: 'POST',
+  return apiPoster({
     url: 'user',
     body: JSON.stringify(user),
   });
 }
 
 function updateUserAllergens (user) {
-  return api({
-    method: 'PUT',
+  return apiPutter({
     url: 'user/allergens',
     body: JSON.stringify(user),
   });
 }
 
 function recipeQuery (allergens, string) {
-  return api({
-    method: 'GET',
+  return apiGetter({
     url: 'recipe',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -45,8 +38,7 @@ function recipeQuery (allergens, string) {
 }
 
 function recipeRandom (allergens) {
-  return api({
-    method: 'GET',
+  return apiGetter({
     url: 'recipe/random',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -56,8 +48,7 @@ function recipeRandom (allergens) {
 }
 
 function getMenu (allergens) {
-  return api({
-    method: 'GET',
+  return apiGetter({
     url: 'menu',
     headers: {
       allergens: JSON.stringify(allergens),
@@ -66,25 +57,18 @@ function getMenu (allergens) {
 }
 
 function addEvent (event) {
-  return api({
-    method: 'POST',
+  return apiPoster({
     url: 'event',
     body: JSON.stringify(event),
   });
 }
 
 function getEvents (name) {
-  return api({
-    method: 'GET',
-    url: 'events',
-  });
+  return apiGetter({ url: 'events' });
 }
 
 function getEvent (id) {
-  return api({
-    method: 'GET',
-    url: `event/${id}`,
-  });
+  return apiGetter({ url: `event/${id}` });
 }
 
 export {
