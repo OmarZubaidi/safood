@@ -1,5 +1,5 @@
 // Package imports
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -37,21 +37,16 @@ export default function Profile () {
   const allergenRef = useRef();
   const dateRef = useRef();
 
-  // Functions
-  async function fetchUser () {
-    const res = await getUser(currentUser);
-    return res.json();
-  }
-
-  async function fetchUsers () {
-    const res = await getUsers();
-    return res.json();
-  }
-
   // Queries
   const queryClient = useQueryClient();
-  const { data: profile, status } = useQuery('user', fetchUser);
-  const { data: users, status: userStatus } = useQuery('users', fetchUsers);
+  const { data: profile, status } = useQuery(
+    'user',
+    () => getUser(currentUser)
+  );
+  const { data: users, status: userStatus } = useQuery(
+    'users',
+    getUsers
+  );
 
   // Mutations
   const eventMutation = useMutation(event => addEvent(event));
@@ -91,8 +86,7 @@ export default function Profile () {
   async function handleEventSubmit (e) {
     e.preventDefault();
     const newAllergens = [...new Set([...allergens, ...profile.allergens])];
-    const res = await getMenu(newAllergens);
-    const menu = await res.json();
+    const menu = await getMenu(newAllergens);
     eventMutation.mutate({
       type,
       allergens: newAllergens,

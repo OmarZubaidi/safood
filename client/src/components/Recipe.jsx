@@ -1,5 +1,4 @@
 // Package imports
-import React from 'react';
 import { Card, Badge } from 'react-bootstrap';
 
 export default function Recipe ({ recipe }) {

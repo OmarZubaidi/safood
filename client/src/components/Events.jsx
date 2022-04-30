@@ -8,7 +8,10 @@ export default function Events ({ event }) {
       {event && <Card>
         <Link
           to={`/events/${event._id}`}
-          style={{ textDecoration: 'none', color: 'black' }}
+          style={{
+            textDecoration: 'none',
+            color: 'black'
+          }}
         >
           <Card.Header className='text-center mb-4 bg-warning p-2'>
             {event.type} With {event.members.map((member, i) =>
@@ -25,7 +28,9 @@ export default function Events ({ event }) {
               {event.date.slice(0, 10)} at {event.date.slice(11)}
             </div>
             <div className='d-flex flex-column'>
-              <div className='fs-5'>Menu:</div>
+              <div className='fs-5'>
+                Menu:
+              </div>
               {event.menu.map(meal => <div key={meal.title}>
                 {meal.title}
               </div>)}

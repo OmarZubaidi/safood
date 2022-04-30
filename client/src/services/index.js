@@ -1,113 +1,90 @@
-const db = 'http://127.0.0.1:3001';
+// Local imports
+import { api } from './api';
 
 function getUsers () {
-  const getOptions = {
+  return api({
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-  return fetch(db + '/users', getOptions);
+    url: 'users',
+  });
 }
 
 function getUser (user) {
-  const getOptions = {
+  return api({
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      uid: user.uid
-    }
-  };
-  return fetch(db + '/user', getOptions);
+    url: 'user',
+    headers: { uid: user.uid },
+  });
 }
 
 function postUser (user) {
-  const postOptions = {
+  return api({
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  };
-  return fetch(db + '/user', postOptions);
+    url: 'user',
+    body: JSON.stringify(user),
+  });
 }
 
 function updateUserAllergens (user) {
-  const postOptions = {
+  return api({
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  };
-  return fetch(db + '/user/allergens', postOptions);
+    url: 'user/allergens',
+    body: JSON.stringify(user),
+  });
 }
 
 function recipeQuery (allergens, string) {
-  const getOptions = {
+  return api({
     method: 'GET',
+    url: 'recipe',
     headers: {
-      'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      string: string,
-      allergens: JSON.stringify(allergens)
-    }
-  };
-  return fetch(db + '/recipe', getOptions);
+      string,
+      allergens: JSON.stringify(allergens),
+    },
+  });
 }
 
 function recipeRandom (allergens) {
-  const getOptions = {
+  return api({
     method: 'GET',
+    url: 'recipe/random',
     headers: {
-      'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      allergens: JSON.stringify(allergens)
+      allergens: JSON.stringify(allergens),
     }
-  };
-  return fetch(db + '/recipe/random', getOptions);
+  });
 }
 
 function getMenu (allergens) {
-  const getOptions = {
-    method: 'get',
+  return api({
+    method: 'GET',
+    url: 'menu',
     headers: {
-      'Content-Type': 'application/json',
-      allergens: JSON.stringify(allergens)
-    },
-  };
-  return fetch(db + '/menu', getOptions);
+      allergens: JSON.stringify(allergens),
+    }
+  });
 }
 
 function addEvent (event) {
-  const postOptions = {
+  return api({
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(event)
-  };
-  return fetch(db + '/event', postOptions);
+    url: 'event',
+    body: JSON.stringify(event),
+  });
 }
 
 function getEvents (name) {
-  const getOptions = {
+  return api({
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-  return fetch(db + '/events', getOptions);
+    url: 'events',
+  });
 }
 
 function getEvent (id) {
-  const getOptions = {
+  return api({
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-  return fetch(db + `/event/${id}`, getOptions);
+    url: `event/${id}`,
+  });
 }
 
 export {
