@@ -1,14 +1,13 @@
 // Local imports
-const model = require('../models/user.model.js');
+const model = require('../models/user.model');
+const asyncErrorHandler = require('../utils/asyncErrorHandler');
 
 async function getUsers (req, res) {
   try {
     const users = await model.find();
-    res.status(200);
-    res.send(users);
+    res.status(200).send(users);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
@@ -22,22 +21,18 @@ async function postUser (req, res) {
       about,
       img
     });
-    res.status(200);
-    res.send(user);
+    res.status(201).send(user);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
 async function getUser (req, res) {
   try {
     const user = await model.findOne({ uid: req.headers.uid });
-    res.status(200);
-    res.send(user);
+    res.status(200).send(user);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
@@ -48,11 +43,9 @@ async function updateUserAllergens (req, res) {
       { allergens: req.body.allergens },
       { new: true }
     );
-    res.status(200);
-    res.send(user);
+    res.status(200).send(user);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 

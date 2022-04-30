@@ -1,5 +1,5 @@
 // Local imports
-const db = require('../db');
+const db = require('../db.json');
 const recipeHasNoAllergens = require('../utils/recipeHasNoAllergens');
 const sample = require('../utils/sampleFromArray');
 
@@ -16,7 +16,7 @@ function getMenu (req, res) {
     menu.push(...sample(recipe, 1));
   });
 
-  res.send(menu);
+  res.status(200).send(menu);
 }
 
 module.exports = { getMenu };

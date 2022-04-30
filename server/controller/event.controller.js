@@ -1,25 +1,22 @@
 // Local imports
 const model = require('../models/event.model.js');
+const asyncErrorHandler = require('../utils/asyncErrorHandler');
 
 async function getEvents (req, res) {
   try {
     const events = await model.find();
-    res.status(200);
-    res.send(events);
+    res.status(200).send(events);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
 async function getEvent (req, res) {
   try {
     const event = await model.findOne({ _id: req.params._id });
-    res.status(200);
-    res.send(event);
+    res.status(200).send(event);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
@@ -33,27 +30,10 @@ async function postEvent (req, res) {
       date,
       menu
     });
-    res.status(200);
-    res.send(event);
+    res.status(201).send(event);
   } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
+    asyncErrorHandler(error, res);
   }
 }
 
-async function addRecipesToEvent (req, res) {
-  try {
-    const event = await model.findOneAndUpdate(
-      { _id: req.body._id },
-      { recipes: req.body.recipes },
-      { new: true }
-    );
-    res.status(200);
-    res.send(event);
-  } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
-  }
-}
-
-module.exports = { getEvent, getEvents, postEvent, addRecipesToEvent };
+module.exports = { getEvent, getEvents, postEvent };
