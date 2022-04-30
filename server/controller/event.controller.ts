@@ -17,7 +17,7 @@ export async function getEvents (_: Request, res: Response) {
 
 export async function getEvent (req: Request, res: Response) {
   try {
-    const event: Event = await model.findOne({ _id: req.params._id });
+    const event: Event | null = await model.findOne({ _id: req.params._id });
     res.status(200).send(event);
   } catch (error) {
     asyncErrorHandler(error, res);

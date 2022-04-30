@@ -33,7 +33,7 @@ export async function postUser (req: Request, res: Response) {
 
 export async function getUser (req: Request, res: Response) {
   try {
-    const user: User = await model.findOne({ uid: req.headers.uid });
+    const user: User | null = await model.findOne({ uid: req.headers.uid });
     res.status(200).send(user);
   } catch (error) {
     asyncErrorHandler(error, res);
@@ -42,7 +42,7 @@ export async function getUser (req: Request, res: Response) {
 
 export async function updateUserAllergens (req: Request, res: Response) {
   try {
-    const user: User = await model.findOneAndUpdate(
+    const user: User | null = await model.findOneAndUpdate(
       { uid: req.body.uid },
       { allergens: req.body.allergens },
       { new: true }
