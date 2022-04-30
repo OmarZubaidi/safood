@@ -21,11 +21,13 @@ exports[`Signup component should match the snapshot 1`] = `
         >
           <label
             class="form-label"
+            for="name-input"
           >
             Name
           </label>
           <input
             class="form-control"
+            id="name-input"
             required=""
             type="text"
           />
@@ -35,11 +37,13 @@ exports[`Signup component should match the snapshot 1`] = `
         >
           <label
             class="form-label"
+            for="email-input"
           >
             E-mail
           </label>
           <input
             class="form-control"
+            id="email-input"
             required=""
             type="email"
           />
@@ -49,11 +53,13 @@ exports[`Signup component should match the snapshot 1`] = `
         >
           <label
             class="form-label"
+            for="password-input"
           >
             Password
           </label>
           <input
             class="form-control"
+            id="password-input"
             required=""
             type="password"
           />
@@ -63,11 +69,13 @@ exports[`Signup component should match the snapshot 1`] = `
         >
           <label
             class="form-label"
+            for="passwordconfirm-input"
           >
             Confirm password
           </label>
           <input
             class="form-control"
+            id="passwordconfirm-input"
             required=""
             type="password"
           />
@@ -77,11 +85,13 @@ exports[`Signup component should match the snapshot 1`] = `
         >
           <label
             class="form-label"
+            for="about-input"
           >
             Tell us something about yourself
           </label>
           <input
             class="form-control"
+            id="about-input"
             type="text"
           />
         </div>
