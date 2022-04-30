@@ -1,7 +1,7 @@
 // Local imports
 import Recipe from "./Recipe.interface"
 
-export default interface Event {
+export default interface IEvent {
   type: string;
   allergens: string[];
   members: string[];

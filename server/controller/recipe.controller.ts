@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 // Local imports
 import db from '../db.json';
-import Recipe from '../interfaces/Recipe.interface';
+import IRecipe from '../interfaces/Recipe.interface';
 import sample from '../utils/sampleFromArray';
 import recipeHasKeywords from '../utils/recipeHasKeywords';
 import recipeHasNoAllergens from '../utils/recipeHasNoAllergens';
@@ -13,7 +13,7 @@ export function getRecipe (req: Request, res: Response) {
   const keywords = string.split(' ');
   const allergens: string[] = JSON.parse(req.headers.allergens as string);
 
-  const recipes: Recipe[] = db.filter(recipe =>
+  const recipes: IRecipe[] = db.filter(recipe =>
     recipeHasKeywords(recipe, keywords)
     && recipeHasNoAllergens(recipe, allergens)
   );

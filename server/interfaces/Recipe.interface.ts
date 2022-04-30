@@ -1,4 +1,4 @@
-export default interface Recipe {
+export default interface IRecipe {
   id: string;
   title: string;
   vegetarian: string;

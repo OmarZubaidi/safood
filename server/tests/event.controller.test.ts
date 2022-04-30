@@ -1,12 +1,16 @@
-const express = require('express');
-const router = require('../router');
-const supertest = require('supertest');
-const Event = require('../models/event.model');
+// Package imports
+import express from 'express';
+import mongoose from 'mongoose';
+import supertest from 'supertest';
 
-const mongoose = require('mongoose');
+// Local imports
+import router from '../router';
+import Event from '../models/event.model';
+import IEvent from '../interfaces/Event.interface';
+
 const databaseName = 'safood-test';
 
-const mockEvent = {
+const mockEvent: Event = {
   type: 'Dinner',
   allergens: ['Dairy', 'Gluten'],
   members: ['nick', 'nack'],

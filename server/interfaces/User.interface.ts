@@ -1,4 +1,4 @@
-export default interface User {
+export default interface IUser {
   name: string;
   allergens: string[];
   events: string[];
