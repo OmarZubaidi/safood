@@ -29,7 +29,7 @@ export default function Login () {
       );
       navigate('/');
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError('Failed to sign in.');
     }
     setLoading(false);
