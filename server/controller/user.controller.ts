@@ -17,7 +17,7 @@ export async function getUsers (_: Request, res: Response) {
 
 export async function postUser (req: Request, res: Response) {
   try {
-    const { name, allergens, uid, about, img } = req.body;
+    const { name, allergens, uid, about, img }: IUser = req.body;
     const user: IUser = await model.create({
       name,
       allergens,

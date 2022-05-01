@@ -1,4 +1,8 @@
+// Package imports
+import { ObjectId } from 'mongoose';
+
 export default interface IRecipe {
+  // Parse these
   id: string;
   title: string;
   vegetarian: string;
@@ -15,4 +19,8 @@ export default interface IRecipe {
   image: string;
   dishTypes: string;
   ingredients: string;
+}
+
+export interface IRecipeDB extends IRecipe {
+  _id: ObjectId;
 }

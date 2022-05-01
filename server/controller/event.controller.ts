@@ -26,8 +26,7 @@ export async function getEvent (req: Request, res: Response) {
 
 export async function postEvent (req: Request, res: Response) {
   try {
-    // Type?
-    const { type, allergens, members, date, menu } = req.body;
+    const { type, allergens, members, date, menu }: IEvent = req.body;
     const event: IEvent = await model.create({
       type,
       allergens,

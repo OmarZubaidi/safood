@@ -1,3 +1,6 @@
+// Package imports
+import { ObjectId } from 'mongoose';
+
 export default interface IUser {
   name: string;
   allergens: string[];
@@ -5,4 +8,8 @@ export default interface IUser {
   uid: string;
   about: string;
   img: string;
+}
+
+export interface IUserDB extends IUser {
+  _id: ObjectId;
 }
