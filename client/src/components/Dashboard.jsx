@@ -24,6 +24,7 @@ export default function Dashboard () {
   );
   const { data: recipes, status: recipeStatus } = useQuery(
     ['random', profile],
+    // I think this is what's re-fetching recipes
     () => recipeRandom(profile.allergens),
     { enabled: !!profile }
   );
