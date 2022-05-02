@@ -1,6 +1,5 @@
 // Local imports
 import { IEvent } from '../interfaces/Events.interface';
-import { IRecipe } from '../interfaces/Recipe.interface';
 import { IUser, IUserIdAndAllergens } from '../interfaces/User.interface';
 import { apiGetter, apiPoster, apiPutter } from './api';
 

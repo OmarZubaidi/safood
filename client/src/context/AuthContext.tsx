@@ -1,11 +1,18 @@
 // Package imports
-import { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect
+} from 'react';
+import firebase from 'firebase/compat';
 
 // Local imports
 import { auth } from '../firebase';
 import { getUsers } from '../services';
+import { IUser } from '../interfaces/User.interface';
 
-const AuthContext = createContext();
+const AuthContext = createContext<any>(null);
 
 export function useAuth () {
   return useContext(AuthContext);
@@ -13,16 +20,16 @@ export function useAuth () {
 
 export function AuthProvider ({ children }) {
   // States
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState<IUser[]>([]);
 
   // Auth functions
-  function signup (email, password) {
+  function signup (email: string, password: string) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
-  function login (email, password) {
+  function login (email: string, password: string) {
     return auth.signInWithEmailAndPassword(email, password);
   }
 
@@ -31,7 +38,7 @@ export function AuthProvider ({ children }) {
   }
 
   // Update profile function
-  function updateProfile (user) {
+  function updateProfile (user: firebase.User) {
     setCurrentUser(user);
   }
 
@@ -60,7 +67,7 @@ export function AuthProvider ({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {!loading && <>{children}</>}
     </AuthContext.Provider>
   );
 }
