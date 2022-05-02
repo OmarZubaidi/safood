@@ -22,7 +22,7 @@ import { IUser } from '../interfaces/User.interface';
 function App () {
   // Refs, states, navigation, and authentication
   const target = useRef(null);
-  const stringRef = useRef<HTMLInputElement | null>(null);
+  const searchStringRef = useRef<HTMLInputElement | null>(null);
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
@@ -39,12 +39,14 @@ function App () {
     e.preventDefault();
     if(!profile) return;
     try {
-      recipeQuery(profile.allergens, stringRef.current!.value)
-        .then((data: React.SetStateAction<IRecipe[]>) => { setRecipes(data); });
+      recipeQuery(profile.allergens, searchStringRef.current!.value)
+        .then((data: React.SetStateAction<IRecipe[]>) => { 
+          setRecipes(data); 
+          navigate('/result');        
+        });
     } catch (error) {
       console.error(error);
     }
-    navigate('/result');
   }
 
   // Loading and error handling
@@ -89,7 +91,7 @@ function App () {
               <Form.Control
                 type='text'
                 placeholder='Search a recipe!'
-                ref={stringRef}
+                ref={searchStringRef}
                 style={{ borderRadius: '15px 0 0 15px' }}
               />
               <Button

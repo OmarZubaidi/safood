@@ -14,7 +14,7 @@ export default function EventDetails () {
   const { id } = useParams();
   const { data: event, status }: IQuery<IEvent> = useQuery(
     'event',
-    () => getEvent(id),
+    () => getEvent(id!),
     { enabled: !!id }
   );
 

@@ -6,7 +6,7 @@ const applicationJson = {
   'Content-Type': 'application/json',
 };
 
-export async function apiGetter ({ url, headers }) {
+export async function apiGetter({ url, headers }) {
   const options = {
     method: 'GET',
     headers: {
@@ -22,7 +22,7 @@ export async function apiGetter ({ url, headers }) {
   }
 }
 
-export async function apiPoster ({ url, headers, body }) {
+export async function apiPoster({ url, headers, body }) {
   const options = {
     method: 'POST',
     headers: {
@@ -35,7 +35,7 @@ export async function apiPoster ({ url, headers, body }) {
   return fetch(`${rootUrl}/${url}`, options);
 }
 
-export async function apiPutter ({ url, headers, body }) {
+export async function apiPutter({ url, headers, body }) {
   const options = {
     method: 'PUT',
     headers: {
