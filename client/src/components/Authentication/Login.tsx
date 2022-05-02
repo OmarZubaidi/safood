@@ -5,14 +5,13 @@ import { Card, Button, Form, Alert } from 'react-bootstrap';
 
 // Local imports
 import { useAuth } from '../../context/AuthContext';
-// import { LoginUser } from '../../interfaces/Authentication/Login.interface';
 
 export default function Login () {
   // Refs, states, and navigation
-  const emailRef = useRef<HTMLInputElement>();
-  const passwordRef = useRef<HTMLInputElement>();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const { login } = useAuth();
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -22,10 +21,13 @@ export default function Login () {
     try {
       setError('');
       setLoading(true);
+      const email = emailRef.current?.value;
+      const password = passwordRef.current?.value;
+      if(!email || !password) return setError('Email and password are required');
 
       await login(
-        emailRef.current.value,
-        passwordRef.current.value
+        email,
+        password
       );
       navigate('/');
     } catch (error) {

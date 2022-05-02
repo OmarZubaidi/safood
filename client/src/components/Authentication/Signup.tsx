@@ -9,11 +9,11 @@ import { postUser } from '../../services';
 
 export default function Signup () {
   // Refs, states, navigation, and authentication
-  const emailRef = useRef<HTMLInputElement>();
-  const passwordRef = useRef<HTMLInputElement>();
-  const passwordConfirmRef = useRef<HTMLInputElement>();
-  const nameRef = useRef<HTMLInputElement>();
-  const aboutRef = useRef<HTMLInputElement>();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordConfirmRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const aboutRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -23,24 +23,34 @@ export default function Signup () {
   async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    if (passwordRef.current?.value !== passwordConfirmRef.current?.value) {
       return setError("Passwords don't match.");
     }
 
     try {
       setError('');
       setLoading(true);
+
+      const name = nameRef.current?.value;
+      const email = emailRef.current?.value;
+      const password = passwordRef.current?.value;
+      const about = aboutRef.current?.value || `Hi, my name is ${name}`;
+      if(!email || !password || !name) {
+        setError('Email, password, name are required!');
+        return setLoading(false);
+      }
+
       const auth = await signup(
-        emailRef.current.value,
-        passwordRef.current.value
+        email,
+        password
       );
+
       await postUser({
-        name: nameRef.current.value,
+        name,
         events: [],
         allergens: [],
         uid: auth.user.uid,
-        about: aboutRef.current.value
-          || `Hi, my name is ${nameRef.current.value}`,
+        about: about,
         img: ''
       });
       navigate('/');
