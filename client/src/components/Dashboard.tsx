@@ -19,15 +19,14 @@ export default function Dashboard () {
     'user',
     () => getUser(currentUser)
   );
-
   // below need to give events a type, not any - need interface for event
   const { data: events, status: eventStatus } = useQuery(
     'events',
     getEvents
   ) as any;
-
   const { data: recipes, status: recipeStatus } = useQuery(
     ['random', profile],
+    // I think this is what's re-fetching recipes
     () => recipeRandom(profile.allergens),
     { enabled: !!profile }
   );
