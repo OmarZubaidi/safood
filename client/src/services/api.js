@@ -1,4 +1,6 @@
-const rootUrl = 'http://127.0.0.1:3001';
+const serverHost = process.env.REACT_APP_SERVER_HOST || '127.0.0.1';
+const serverPort = process.env.REACT_APP_SERVER_PORT || '3001';
+const rootUrl = `http://${serverHost}:${serverPort}`;
 
 const applicationJson = {
   'Content-Type': 'application/json',

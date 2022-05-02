@@ -1,10 +1,11 @@
 // Package imports
-const express = require('express');
-const supertest = require('supertest');
-const mongoose = require('mongoose');
+import express, { request } from 'express';
+import supertest from 'supertest';
+import mongoose from 'mongoose';
 
 // Local imports
-const router = require('../router');
+import router from '../router';
+import IRecipe from '../interfaces/Recipe.interface';
 
 const databaseName = 'safood-test';
 
@@ -16,7 +17,7 @@ describe('Unit Tests - Menu Controller', () => {
 
   // Search string and allergens
   const string = 'curry lime';
-  const allergens = JSON.stringify(['tomato', 'cheese']);
+  const allergens = ['tomato', 'cheese'];
 
   beforeAll(async () => {
     const url = `mongodb://127.0.0.1/${databaseName}`;
@@ -28,14 +29,17 @@ describe('Unit Tests - Menu Controller', () => {
   });
 
   it('should get filtered recipes from the database', async () => {
-    const res = await request.get('/menu')
+    const result = await request.get('/menu')
       .set('string', string)
-      .set('allergens', allergens);
+      .set('allergens', JSON.stringify(allergens));
+    // TODO there has to be a better way to assign a type to result.body
+    const res: IRecipe[] = result.body;
 
     // Assertion
-    res.body.every(({ ingredients }) => {
-      expect(ingredients).not.toContain(...allergens);
+    res.every(({ ingredients }) => {
+      expect(ingredients).not.toContainEqual(allergens);
     });
-    expect(res.body).toHaveLength(3);
+    // Starter, main, side
+    expect(res).toHaveLength(3);
   });
 });

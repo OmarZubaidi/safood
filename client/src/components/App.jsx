@@ -40,7 +40,7 @@ function App () {
       recipeQuery(profile.allergens, stringRef.current.value)
         .then(data => { setRecipes(data); });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     navigate('/result');
   }

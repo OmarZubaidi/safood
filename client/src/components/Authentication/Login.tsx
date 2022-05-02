@@ -1,5 +1,5 @@
 // Package imports
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Alert } from 'react-bootstrap';
 
@@ -8,26 +8,30 @@ import { useAuth } from '../../context/AuthContext';
 
 export default function Login () {
   // Refs, states, and navigation
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const { login } = useAuth();
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // Submit function
-  async function handleSubmit (e) {
+  async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
       setError('');
       setLoading(true);
+      const email = emailRef.current?.value;
+      const password = passwordRef.current?.value;
+      if(!email || !password) return setError('Email and password are required');
+
       await login(
-        emailRef.current.value,
-        passwordRef.current.value
+        email,
+        password
       );
       navigate('/');
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError('Failed to sign in.');
     }
     setLoading(false);

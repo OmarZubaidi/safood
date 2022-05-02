@@ -1,10 +1,12 @@
 // Package imports
+import React from 'react';
 import { Card } from 'react-bootstrap';
 
 // Local imports
 import omar from '../img/omar.jpeg';
+import {IUserProps} from '../interfaces/User.interface'
 
-export default function Users ({ user }) {
+export default function Users({ user }: IUserProps) {
   return (
     <Card
       className='text-center mb-4'

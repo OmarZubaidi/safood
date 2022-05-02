@@ -79,7 +79,7 @@ export default function Profile () {
         allergenRef.current.value = '';
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
