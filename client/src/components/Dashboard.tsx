@@ -12,13 +12,15 @@ import { getEvents, getUser, recipeRandom } from '../services';
 import IQuery from '../interfaces/Query.interface';
 import { IEvent } from '../interfaces/Events.interface';
 import { IRecipe } from '../interfaces/Recipe.interface';
+import { IUser } from '../interfaces/User.interface';
 
 export default function Dashboard () {
+
   // Authentication
   const { users, currentUser } = useAuth();
 
   // Queries
-  const { data: profile, status }: IQuery<any> = useQuery(
+  const { data: profile, status }: IQuery<IUser> = useQuery(
     'user',
     () => getUser(currentUser)
   );
@@ -26,10 +28,11 @@ export default function Dashboard () {
     'events',
     getEvents
   );
+  
   const { data: recipes, status: recipeStatus }: IQuery<IRecipe[]> = useQuery(
     ['random', profile],
     // I think this is what's re-fetching recipes
-    () => recipeRandom(profile.allergens),
+    () => (profile && recipeRandom(profile.allergens)),
     { enabled: !!profile }
   );
 
@@ -51,7 +54,7 @@ export default function Dashboard () {
     <>
       {recipes && <RecipeContainer recipes={recipes} />}
       <hr />
-      {events && <EventsContainer
+      {(events && profile) && <EventsContainer
         user={profile}
         list={events.filter((event: IEvent) => event.members.includes(profile.name))}
         />  
