@@ -1,7 +1,7 @@
 import { IRecipe } from './Recipe.interface';
 
 interface IEvent {
-  _id: string,
+  _id?: string,
   allergens: string[],
   date: string,
   members: string[],
