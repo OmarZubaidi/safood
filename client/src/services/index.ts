@@ -4,32 +4,32 @@ import { IRecipe } from '../interfaces/Recipe.interface';
 import { IUser, IUserIdAndAllergens } from '../interfaces/User.interface';
 import { apiGetter, apiPoster, apiPutter } from './api';
 
-function getUsers(): IUser[] {
+function getUsers(): Promise<any> {
   return apiGetter({ url: 'users' });
 }
 
-function getUser(user: IUser): IUser{
+function getUser(user: IUser): Promise<any> {
   return apiGetter({
     url: 'user',
     headers: { uid: user.uid },
   });
 }
 
-function postUser(user: IUser): IUser {
+function postUser(user: IUser): Promise<any> {
   return apiPoster({
     url: 'user',
     body: JSON.stringify(user),
   });
 }
 
-function updateUserAllergens(user: IUserIdAndAllergens): any {
+function updateUserAllergens(user: IUserIdAndAllergens): Promise<any> {
   return apiPutter({
     url: 'user/allergens',
     body: JSON.stringify(user),
   });
 }
 
-function recipeQuery(allergens: string[], searchString: string): any {
+function recipeQuery(allergens: string[], searchString: string): Promise<any> {
   return apiGetter({
     url: 'recipe',
     headers: {
@@ -40,7 +40,7 @@ function recipeQuery(allergens: string[], searchString: string): any {
   });
 }
 
-function recipeRandom(allergens: string[]): IRecipe[] {
+function recipeRandom(allergens: string[]): Promise<any> {
   return apiGetter({
     url: 'recipe/random',
     headers: {
@@ -50,7 +50,7 @@ function recipeRandom(allergens: string[]): IRecipe[] {
   });
 }
 
-function getMenu(allergens: string[]): IRecipe[] {
+function getMenu(allergens: string[]): Promise<any> {
   return apiGetter({
     url: 'menu',
     headers: {
@@ -66,11 +66,11 @@ function addEvent(event: IEvent): any {
   });
 }
 
-function getEvents(): IEvent[] {
+function getEvents(): Promise<any> {
   return apiGetter({ url: 'events' });
 }
 
-function getEvent(id: string): IEvent{
+function getEvent(id: string): Promise<any> {
   return apiGetter({ url: `event/${id}` });
 }
 
