@@ -8,7 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import EventsContainer from './EventsContainer';
 import RecipeContainer from './RecipeContainer';
 import UsersContainer from './UsersContainer';
-import { getEvents, getUser, recipeRandom } from '../services';
+import { getEvents, getUser, recipeRandom } from '../services/index';
 import IQuery from '../interfaces/Query.interface';
 import { IEvent } from '../interfaces/Events.interface';
 import { IRecipe } from '../interfaces/Recipe.interface';

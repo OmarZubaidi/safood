@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 // Local imports
-import { getEvent } from '../services';
+import { getEvent } from '../services/index';
 import { Container, Spinner } from 'react-bootstrap';
 import RecipeContainer from './RecipeContainer';
 import IQuery from '../interfaces/Query.interface';

@@ -9,7 +9,7 @@ import firebase from 'firebase/compat';
 
 // Local imports
 import { auth } from '../firebase';
-import { getUsers } from '../services';
+import { getUsers } from '../services/index';
 import { IUser } from '../interfaces/User.interface';
 
 const AuthContext = createContext<any>(null);
