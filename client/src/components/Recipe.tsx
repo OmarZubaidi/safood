@@ -3,11 +3,8 @@ import React from 'react';
 import { Card, Badge } from 'react-bootstrap';
 
 export default function Recipe ({ recipe }) {
-
-  // console.log(recipe);
-
   // Clean up ingredients string into unique array
-  const ingredientsArray: Array<string> = [...new Set(recipe.ingredients.split(','))] as Array<string>;
+  const ingredientsArray: string[] = [...new Set(recipe.ingredients.split(','))] as Array<string>;
   const firstOne: string =  ingredientsArray[0];
   ingredientsArray[0] = firstOne[0].toUpperCase() + firstOne.slice(1);
 

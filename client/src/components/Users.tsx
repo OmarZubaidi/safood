@@ -7,7 +7,6 @@ import omar from '../img/omar.jpeg';
 import {IUserProps} from '../interfaces/User.interface'
 
 export default function Users({ user }: IUserProps) {
-  console.log(user);
   return (
     <Card
       className='text-center mb-4'
