@@ -1,10 +1,12 @@
 // Package imports
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Local imports
 import Events from './Events';
+import { IEventsContainerProps } from '../interfaces/Events.interface';
 
-export default function EventsContainer ({ list }) {
+export default function EventsContainer ({ user, list }: IEventsContainerProps) {
   return (
     <Row
       xs={1}

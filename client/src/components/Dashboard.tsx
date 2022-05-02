@@ -14,12 +14,12 @@ export default function Dashboard () {
   // Authentication
   const { users, currentUser } = useAuth();
 
+   //! below need to give a type, not any
   // Queries
   const { data: profile, status } = useQuery(
     'user',
     () => getUser(currentUser)
-  );
-  //! below need to give events a type, not any - need interface for event
+  ) as any;
   const { data: events, status: eventStatus } = useQuery(
     'events',
     getEvents

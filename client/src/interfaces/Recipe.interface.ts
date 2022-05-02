@@ -18,7 +18,7 @@ interface IRecipe {
 }
 
 interface IRecipeContainerProps {
-  recipes: Array<IRecipe>
+  recipes: IRecipe[]
 }
 
 
