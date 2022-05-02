@@ -1,12 +1,13 @@
 // Package imports
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv'
 
 // Local imports
-const router = require('./router');
+import router from './router';
 
+dotenv.config();
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || 3001;
 

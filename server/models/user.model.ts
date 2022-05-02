@@ -1,7 +1,10 @@
 // Package imports
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const Schema = new mongoose.Schema({
+// Local imports
+import User from '../interfaces/User.interface';
+
+const Schema = new mongoose.Schema<User>({
   name: {
     type: String,
     required: true
@@ -16,4 +19,4 @@ const Schema = new mongoose.Schema({
   img: String
 }, { timestamps: false });
 
-module.exports = mongoose.model('users', Schema);
+export default mongoose.model<User>('users', Schema);

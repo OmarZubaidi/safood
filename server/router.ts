@@ -1,25 +1,23 @@
-'use strict';
-
 // Package imports
-const { Router } = require('express');
+import { Router } from 'express';
 
 // Local imports
-const {
+import {
   getUser,
   getUsers,
   postUser,
   updateUserAllergens
-} = require('./controller/user.controller');
-const {
+} from './controller/user.controller';
+import {
   getEvent,
   getEvents,
   postEvent
-} = require('./controller/event.controller');
-const {
+} from './controller/event.controller';
+import {
   getRecipe,
   getRandomRecipe
-} = require('./controller/recipe.controller');
-const { getMenu } = require('./controller/menu.controller');
+} from './controller/recipe.controller';
+import { getMenu } from './controller/menu.controller';
 
 const router = Router();
 
@@ -41,4 +39,4 @@ router.get('/event/:_id', getEvent);
 // Menu
 router.get('/menu', getMenu);
 
-module.exports = router;
+export default router;
