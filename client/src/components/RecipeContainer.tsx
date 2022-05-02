@@ -1,10 +1,12 @@
 // Package imports
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Local imports
 import Recipe from './Recipe';
+import { IRecipeContainerProps } from '../interfaces/Recipe.interface';
 
-export default function RecipeContainer ({ recipes }) {
+export default function RecipeContainer ({ recipes }: IRecipeContainerProps) {
   return (
     <Row
       xs={1}
