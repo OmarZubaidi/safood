@@ -101,8 +101,8 @@ export default function Profile () {
   }
 
   function handleMembers (user: IUser) {
-    if (members.length === 0) {
-      profile && members.push(profile.name);
+    if (members.length === 0 && profile) {
+      members.push(profile.name);
     }
     const newMembers = members;
     if (!members.includes(user.name)) {
