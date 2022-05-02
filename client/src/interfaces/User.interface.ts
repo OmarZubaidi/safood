@@ -1,7 +1,7 @@
 import { IEvent } from './Events.interface'
 
 interface IUser {
-  _id: string,
+  _id?: string,
   name: string,
   allergens: string[],
   events: IEvent[],
@@ -18,8 +18,14 @@ interface IUserProps {
   user: IUser
 }
 
+interface IUserIdAndAllergens {
+  uid: string,
+  allergens: string[]
+}
+
 export {
   IUser,
   IUserContainerProps,
-  IUserProps
+  IUserProps,
+  IUserIdAndAllergens
 }

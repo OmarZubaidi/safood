@@ -22,7 +22,7 @@ import {
   updateUserAllergens
 } from '../services';
 import IQuery from '../interfaces/Query.interface';
-import { IUser } from '../interfaces/User.interface';
+import { IUser, IUserIdAndAllergens } from '../interfaces/User.interface';
 import {IEvent} from '../interfaces/Events.interface';
 
 export default function Profile () {
@@ -54,7 +54,7 @@ export default function Profile () {
   // Mutations
   const eventMutation = useMutation((event: IEvent) => addEvent(event));
   const mutation = useMutation(
-    (params: any) => updateUserAllergens(params),
+    (params: IUserIdAndAllergens) => updateUserAllergens(params),
     { onSuccess: () => queryClient.invalidateQueries('user') }
   );
 
