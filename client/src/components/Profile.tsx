@@ -1,5 +1,5 @@
 // Package imports
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -21,6 +21,9 @@ import {
   getUsers,
   updateUserAllergens
 } from '../services';
+import IQuery from '../interfaces/Query.interface';
+import { IUser } from '../interfaces/User.interface';
+import {IEvent} from '../interfaces/Events.interface';
 
 export default function Profile () {
   // Navigation and authentication
@@ -28,31 +31,31 @@ export default function Profile () {
   const navigate = useNavigate();
 
   // States
-  const [type, setType] = useState();
-  const [error, setError] = useState('');
-  const [members, setMembers] = useState([]);
-  const [allergens, setAllergens] = useState([]);
+  const [type, setType] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [members, setMembers] = useState<string[]>([]);
+  const [allergens, setAllergens] = useState<string[]>([]);
 
   // Refs
-  const allergenRef = useRef();
-  const dateRef = useRef();
+  const allergenRef = useRef<HTMLInputElement | null>(null);
+  const dateRef = useRef<HTMLInputElement | null>(null);
 
   // Queries
   const queryClient = useQueryClient();
-  const { data: profile, status } = useQuery(
+  const { data: profile, status }: IQuery<IUser> = useQuery(
     'user',
     () => getUser(currentUser)
   );
-  const { data: users, status: userStatus } = useQuery(
+  const { data: users, status: userStatus }: IQuery<IUser[]> = useQuery(
     'users',
     getUsers
   );
 
   // Mutations
-  const eventMutation = useMutation(event => addEvent(event));
+  const eventMutation = useMutation((event: IEvent) => addEvent(event));
   const mutation = useMutation(
-    params => updateUserAllergens(params),
-    { onSuccess: () => { queryClient.invalidateQueries('user'); } }
+    (params: any) => updateUserAllergens(params),
+    { onSuccess: () => queryClient.invalidateQueries('user') }
   );
 
   // Handlers
@@ -67,39 +70,39 @@ export default function Profile () {
     }
   }
 
-  async function handleAllergenSubmit (e) {
+  async function handleAllergenSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      const newAllergen = allergenRef.current.value;
-      if (newAllergen.length > 1) {
+      const newAllergen = allergenRef.current!.value;
+      if (newAllergen.length > 1 && profile) {
         if (!profile.allergens.includes(newAllergen)) mutation.mutate({
           uid: profile.uid,
           allergens: [...profile.allergens, newAllergen]
         });
-        allergenRef.current.value = '';
+        allergenRef.current!.value = '';
       }
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function handleEventSubmit (e) {
+  async function handleEventSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const newAllergens = [...new Set([...allergens, ...profile.allergens])];
+    const newAllergens = [...new Set([...allergens, ...profile!.allergens])];
     const menu = await getMenu(newAllergens);
     eventMutation.mutate({
       type,
       allergens: newAllergens,
       members,
-      date: dateRef.current.value,
+      date: dateRef.current!.value,
       menu
     });
     navigate('/');
   }
 
-  function handleMembers (user) {
+  function handleMembers (user: IUser) {
     if (members.length === 0) {
-      members.push(profile.name);
+      profile && members.push(profile.name);
     }
     const newMembers = members;
     if (!members.includes(user.name)) {
@@ -121,6 +124,7 @@ export default function Profile () {
 
   return (
     <>
+      {profile && 
       <Card style={{ marginTop: '150px' }}>
         <Card.Title>
           <h1 className='text-center mb-4'>
@@ -196,7 +200,7 @@ export default function Profile () {
                   {'Users'}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {currentUser && users.map((user) => {
+                  {(currentUser && users) && users.map((user) => {
                     if (user.uid !== currentUser.uid) return (
                       <Dropdown.Item
                         key={user.uid}
@@ -227,6 +231,7 @@ export default function Profile () {
           </Form>
         </Card.Body>
       </Card>
+      }
       <div className='w-100 text-center mt-2'>
         <Button
           variant='link'

@@ -33,7 +33,7 @@ export default function Events({ event }: IEventProps) {
               <div className='fs-5'>
                 Menu:
               </div>
-              {event.menu.map(meal => <div key={meal.title}>
+              {event.menu.map((meal, i) => <div key={meal.title + i}>
                 {meal.title}
               </div>)}
             </div>
