@@ -7,13 +7,12 @@ import supertest from 'supertest';
 import router from '../router';
 import Event from '../models/event.model';
 import { IEventDB } from '../interfaces/Event.interface';
-import { IRecipeDB } from '../interfaces/Recipe.interface';
+import IRecipe from '../interfaces/Recipe.interface';
 
 const databaseName = 'safood-test';
 
-const mockMenu: IRecipeDB[] = [
+const mockMenu: IRecipe[] = [
   {
-    _id: '626cfe1a2bcd34e567890f12' as unknown as ObjectId,
     id: '1',
     title: 'a starter',
     vegetarian: 'False',
@@ -32,7 +31,6 @@ const mockMenu: IRecipeDB[] = [
     ingredients: 'tomato,egg,cheese',
   },
   {
-    _id: '626cfe1a2bcd34e567890f13' as unknown as ObjectId,
     id: '2',
     title: 'a main',
     vegetarian: 'False',
@@ -51,7 +49,6 @@ const mockMenu: IRecipeDB[] = [
     ingredients: 'tomato,egg,cheese',
   },
   {
-    _id: '626cfe1a2bcd34e567890f14' as unknown as ObjectId,
     id: '3',
     title: 'a side',
     vegetarian: 'False',

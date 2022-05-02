@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 
 // Local imports
 import router from '../router';
-import { IRecipeDB } from '../interfaces/Recipe.interface';
+import IRecipe from '../interfaces/Recipe.interface';
 
 const databaseName = 'safood-test';
 
@@ -33,7 +33,7 @@ describe('Unit Tests - Recipe Controller', () => {
       .set('string', string)
       .set('allergens', JSON.stringify(allergens));
     // TODO there has to be a better way to assign a type to result.body
-    const res: IRecipeDB[] = result.body;
+    const res: IRecipe[] = result.body;
 
     // Assertion
     res.every(({ ingredients }) => {
@@ -45,7 +45,7 @@ describe('Unit Tests - Recipe Controller', () => {
     const result = await request.get('/recipe/random')
       .set('string', string)
       .set('allergens', JSON.stringify(allergens));
-    const res: IRecipeDB[] = result.body;
+    const res: IRecipe[] = result.body;
 
     // Assertion
     res.every(({ ingredients }) => {
