@@ -10,7 +10,7 @@ interface IEvent {
 }
 
 interface IEventProps {
-  event?: IEvent,
+  event: IEvent,
 }
 
 interface IEventsContainerProps {
