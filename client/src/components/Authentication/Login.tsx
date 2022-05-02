@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Alert } from 'react-bootstrap';
 
 // Local imports
-import { useAuth } from '../../context/AuthContext';
+import { useAuth} from '../../context/AuthContext';
 
 export default function Login () {
   // Refs, states, and navigation
