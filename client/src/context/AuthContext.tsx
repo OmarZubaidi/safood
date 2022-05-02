@@ -18,7 +18,7 @@ export function useAuth () {
   return useContext(AuthContext);
 }
 
-export function AuthProvider ({ children }) {
+export function AuthProvider ({ children }: { children: any }) {
   // States
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const [loading, setLoading] = useState(true);

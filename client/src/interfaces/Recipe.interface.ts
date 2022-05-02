@@ -15,6 +15,7 @@ interface IRecipe {
   image: string;
   dishTypes: string;
   ingredients: string;
+  [key: string]: string;
 }
 
 interface IRecipeContainerProps {
