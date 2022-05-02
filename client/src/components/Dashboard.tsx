@@ -9,22 +9,24 @@ import EventsContainer from './EventsContainer';
 import RecipeContainer from './RecipeContainer';
 import UsersContainer from './UsersContainer';
 import { getEvents, getUser, recipeRandom } from '../services';
+import IQuery from '../interfaces/Query.interface';
+import { IEvent } from '../interfaces/Events.interface';
+import { IRecipe } from '../interfaces/Recipe.interface';
 
 export default function Dashboard () {
   // Authentication
   const { users, currentUser } = useAuth();
 
-   //! below need to give a type, not any
   // Queries
-  const { data: profile, status } = useQuery(
+  const { data: profile, status }: IQuery<any> = useQuery(
     'user',
     () => getUser(currentUser)
-  ) as any;
-  const { data: events, status: eventStatus } = useQuery(
+  );
+  const { data: events, status: eventStatus }: IQuery<IEvent[]> = useQuery(
     'events',
     getEvents
-  ) as any;
-  const { data: recipes, status: recipeStatus } = useQuery(
+  );
+  const { data: recipes, status: recipeStatus }: IQuery<IRecipe[]> = useQuery(
     ['random', profile],
     // I think this is what's re-fetching recipes
     () => recipeRandom(profile.allergens),
@@ -47,14 +49,16 @@ export default function Dashboard () {
 
   return (
     <>
-      <RecipeContainer recipes={recipes} />
+      {recipes && <RecipeContainer recipes={recipes} />}
       <hr />
-      <EventsContainer
+      {events && <EventsContainer
         user={profile}
-        list={events.filter(event => event.members.includes(profile.name))}
-      />
+        list={events.filter((event: IEvent) => event.members.includes(profile.name))}
+        />  
+      }
       <hr />
-      <UsersContainer users={users} />
+      {users && <UsersContainer users={users} />}
+      
     </>
   );
 }
