@@ -15,7 +15,7 @@ import EventDetails from './EventDetails';
 import PrivateRoute from './PrivateRoute';
 import Profile from './Profile';
 import RecipeContainer from './RecipeContainer';
-import { getUser, recipeQuery } from '../services';
+import { getUser, recipeQuery } from '../services/index';
 import { IRecipe } from '../interfaces/Recipe.interface';
 import { IUser } from '../interfaces/User.interface';
 

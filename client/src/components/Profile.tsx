@@ -20,7 +20,7 @@ import {
   getUser,
   getUsers,
   updateUserAllergens
-} from '../services';
+} from '../services/index';
 import IQuery from '../interfaces/Query.interface';
 import { IUser, IUserIdAndAllergens } from '../interfaces/User.interface';
 import {IEvent} from '../interfaces/Events.interface';
