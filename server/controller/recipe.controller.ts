@@ -9,8 +9,8 @@ import recipeHasKeywords from '../utils/recipeHasKeywords';
 import recipeHasNoAllergens from '../utils/recipeHasNoAllergens';
 
 export function getRecipe (req: Request, res: Response) {
-  const string: string = req.headers.string as string;
-  const keywords = string.split(' ');
+  const keywordsCombined: string = req.headers.string as string;
+  const keywords = keywordsCombined.split(' ');
   const allergens: string[] = JSON.parse(req.headers.allergens as string);
 
   const recipes: IRecipe[] = db.filter(recipe =>
