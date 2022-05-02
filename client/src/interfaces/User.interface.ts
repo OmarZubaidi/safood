@@ -1,15 +1,17 @@
+import { IEvent } from './Events.interface'
+
 interface IUser {
   _id: string,
   name: string,
-  allergens: Array<string>,
-  events: Array<any>,
+  allergens: string[],
+  events: IEvent[],
   uid: string,
   about: string,
   img: string
 }
 
 interface IUserContainerProps {
-  users: Array<IUser>
+  users: IUser[]
 }
 
 interface IUserProps {
