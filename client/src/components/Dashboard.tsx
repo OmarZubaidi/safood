@@ -8,26 +8,31 @@ import { useAuth } from '../context/AuthContext';
 import EventsContainer from './EventsContainer';
 import RecipeContainer from './RecipeContainer';
 import UsersContainer from './UsersContainer';
-import { getEvents, getUser, recipeRandom } from '../services';
+import { getEvents, getUser, recipeRandom } from '../services/index';
+import IQuery from '../interfaces/Query.interface';
+import { IEvent } from '../interfaces/Events.interface';
+import { IRecipe } from '../interfaces/Recipe.interface';
+import { IUser } from '../interfaces/User.interface';
 
 export default function Dashboard () {
+
   // Authentication
   const { users, currentUser } = useAuth();
 
   // Queries
-  const { data: profile, status } = useQuery(
+  const { data: profile, status }: IQuery<IUser> = useQuery(
     'user',
     () => getUser(currentUser)
   );
-  //! below need to give events a type, not any - need interface for event
-  const { data: events, status: eventStatus } = useQuery(
+  const { data: events, status: eventStatus }: IQuery<IEvent[]> = useQuery(
     'events',
     getEvents
-  ) as any;
-  const { data: recipes, status: recipeStatus } = useQuery(
+  );
+  
+  const { data: recipes, status: recipeStatus }: IQuery<IRecipe[]> = useQuery(
     ['random', profile],
     // I think this is what's re-fetching recipes
-    () => recipeRandom(profile.allergens),
+    () => (profile && recipeRandom(profile.allergens)),
     { enabled: !!profile }
   );
 
@@ -47,14 +52,16 @@ export default function Dashboard () {
 
   return (
     <>
-      <RecipeContainer recipes={recipes} />
+      {recipes && <RecipeContainer recipes={recipes} />}
       <hr />
-      <EventsContainer
+      {(events && profile) && <EventsContainer
         user={profile}
-        list={events.filter(event => event.members.includes(profile.name))}
-      />
+        list={events.filter((event: IEvent) => event.members.includes(profile.name))}
+        />  
+      }
       <hr />
-      <UsersContainer users={users} />
+      {users && <UsersContainer users={users} />}
+      
     </>
   );
 }

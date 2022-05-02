@@ -1,8 +1,10 @@
 // Package imports
+import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { IEventProps } from '../interfaces/Events.interface'
 
-export default function Events ({ event }) {
+export default function Events({ event }: IEventProps) {
   return (
     <>
       {event && <Card>
@@ -31,7 +33,7 @@ export default function Events ({ event }) {
               <div className='fs-5'>
                 Menu:
               </div>
-              {event.menu.map(meal => <div key={meal.title}>
+              {event.menu.map((meal, i) => <div key={meal.title + i}>
                 {meal.title}
               </div>)}
             </div>

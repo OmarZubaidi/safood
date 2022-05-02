@@ -1,10 +1,11 @@
 // Package imports
 import React from 'react';
 import { Card, Badge } from 'react-bootstrap';
+import { IRecipeProps } from '../interfaces/Recipe.interface';
 
-export default function Recipe ({ recipe }) {
+export default function Recipe ({ recipe }: IRecipeProps) {
   // Clean up ingredients string into unique array
-  const ingredientsArray: string[] = [...new Set(recipe.ingredients.split(','))] as Array<string>;
+  const ingredientsArray: string[] = [...new Set(recipe.ingredients.split(','))] as string[];
   const firstOne: string =  ingredientsArray[0];
   ingredientsArray[0] = firstOne[0].toUpperCase() + firstOne.slice(1);
 

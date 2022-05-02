@@ -1,43 +1,45 @@
 // Local imports
+import { IEvent } from '../interfaces/Events.interface';
+import { IUser, IUserIdAndAllergens } from '../interfaces/User.interface';
 import { apiGetter, apiPoster, apiPutter } from './api';
 
-function getUsers () {
+function getUsers(): Promise<any> {
   return apiGetter({ url: 'users' });
 }
 
-function getUser (user) {
+function getUser(user: IUser): Promise<any> {
   return apiGetter({
     url: 'user',
     headers: { uid: user.uid },
   });
 }
 
-function postUser (user) {
+function postUser(user: IUser): Promise<any> {
   return apiPoster({
     url: 'user',
     body: JSON.stringify(user),
   });
 }
 
-function updateUserAllergens (user) {
+function updateUserAllergens(user: IUserIdAndAllergens): Promise<any> {
   return apiPutter({
     url: 'user/allergens',
     body: JSON.stringify(user),
   });
 }
 
-function recipeQuery (allergens, string) {
+function recipeQuery(allergens: string[], searchString: string): Promise<any> {
   return apiGetter({
     url: 'recipe',
     headers: {
       'Access-Control-Allow-Origin': '*',
-      string,
-      allergens: JSON.stringify(allergens),
+      string: searchString,
+      allergens: JSON.stringify(allergens)
     },
   });
 }
 
-function recipeRandom (allergens) {
+function recipeRandom(allergens: string[]): Promise<any> {
   return apiGetter({
     url: 'recipe/random',
     headers: {
@@ -47,7 +49,7 @@ function recipeRandom (allergens) {
   });
 }
 
-function getMenu (allergens) {
+function getMenu(allergens: string[]): Promise<any> {
   return apiGetter({
     url: 'menu',
     headers: {
@@ -56,18 +58,18 @@ function getMenu (allergens) {
   });
 }
 
-function addEvent (event) {
+function addEvent(event: IEvent): any {
   return apiPoster({
     url: 'event',
     body: JSON.stringify(event),
   });
 }
 
-function getEvents (name) {
+function getEvents(): Promise<any> {
   return apiGetter({ url: 'events' });
 }
 
-function getEvent (id) {
+function getEvent(id: string): Promise<any> {
   return apiGetter({ url: `event/${id}` });
 }
 
