@@ -3,12 +3,12 @@ import { Request, Response } from 'express';
 
 // Local imports
 import model from '../models/user.model';
-import IUser from '../interfaces/User.interface';
+import IUser, { IUserDB } from '../interfaces/User.interface';
 import asyncErrorHandler from '../utils/asyncErrorHandler';
 
 export async function getUsers (_: Request, res: Response) {
   try {
-    const users: IUser[] = await model.find();
+    const users: IUserDB[] = await model.find();
     res.status(200).send(users);
   } catch (error) {
     asyncErrorHandler(error, res);
@@ -33,8 +33,10 @@ export async function postUser (req: Request, res: Response) {
 
 export async function getUser (req: Request, res: Response) {
   try {
-    const user: IUser | null = await model.findOne({ uid: req.headers.uid });
-    res.status(200).send(user);
+    const { uid } = req.headers;
+    const user: IUserDB | null = await model.findOne({ uid });
+    if (user) res.status(200).send(user);
+    else res.sendStatus(404);
   } catch (error) {
     asyncErrorHandler(error, res);
   }
@@ -42,12 +44,14 @@ export async function getUser (req: Request, res: Response) {
 
 export async function updateUserAllergens (req: Request, res: Response) {
   try {
-    const user: IUser | null = await model.findOneAndUpdate(
-      { uid: req.body.uid },
-      { allergens: req.body.allergens },
+    const { uid, allergens }: IUserDB = req.body;
+    const user: IUserDB | null = await model.findOneAndUpdate(
+      { uid },
+      { allergens },
       { new: true }
     );
-    res.status(200).send(user);
+    if (user) res.status(200).send(user);
+    else res.sendStatus(404);
   } catch (error) {
     asyncErrorHandler(error, res);
   }
