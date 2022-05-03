@@ -82,7 +82,7 @@ export default function Profile () {
         allergenRef.current!.value = '';
       }
     } catch (error) {
-      console.error(error);
+      if(error instanceof Error) console.error(error);
     }
   }
 
@@ -124,7 +124,7 @@ export default function Profile () {
 
   return (
     <>
-      {profile && 
+      {profile &&
       <Card style={{ marginTop: '150px' }}>
         <Card.Title>
           <h1 className='text-center mb-4'>
@@ -158,6 +158,7 @@ export default function Profile () {
               type='text'
               ref={allergenRef}
               required
+              id='new-allergen-input'
               style={{ maxWidth: 'fit-content' }}
               placeholder='new allergen'
             />
@@ -220,11 +221,13 @@ export default function Profile () {
             <Form.Control
               type='datetime-local'
               ref={dateRef}
+              id='date-input'
               style={{ maxWidth: 'fit-content' }}
             />
             <Button
               className='mt-2'
               type='submit'
+              id='create-event'
             >
               Save
             </Button>

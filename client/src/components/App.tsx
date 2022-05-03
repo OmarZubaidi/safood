@@ -40,12 +40,13 @@ function App () {
     if(!profile) return;
     try {
       recipeQuery(profile.allergens, searchStringRef.current!.value)
-        .then((data: React.SetStateAction<IRecipe[]>) => { 
-          setRecipes(data); 
-          navigate('/result');        
+        .then((data: React.SetStateAction<IRecipe[]>) => {
+          setRecipes(data);
+          navigate('/result');
         });
     } catch (error) {
-      console.error(error);
+      if(error instanceof Error) console.error(error);
+      // TODO Error state that displays a message in every console.error.
     }
   }
 
@@ -92,6 +93,7 @@ function App () {
                 type='text'
                 placeholder='Search a recipe!'
                 ref={searchStringRef}
+                id='search-input'
                 style={{ borderRadius: '15px 0 0 15px' }}
               />
               <Button

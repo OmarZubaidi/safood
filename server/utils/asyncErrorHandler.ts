@@ -2,6 +2,6 @@
 import { Response } from 'express';
 
 export default function asyncErrorHandler (error: any, res: Response) {
-  console.error(error.message);
+  console.error(error);
   res.sendStatus(500);
 }

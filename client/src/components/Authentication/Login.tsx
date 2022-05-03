@@ -31,7 +31,7 @@ export default function Login () {
       );
       navigate('/');
     } catch (error) {
-      console.error(error);
+      if(error instanceof Error) console.error(error);
       setError('Failed to sign in.');
     }
     setLoading(false);
@@ -44,25 +44,29 @@ export default function Login () {
           <h2 className='text-center mb-4'>
             Log in
           </h2>
-          {error && <Alert variant='danger'>
+          {error && <Alert id='alert' variant='danger'>
             {error}
           </Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
-              <Form.Label>
+              <Form.Label htmlFor="email">
                 E-mail
               </Form.Label>
               <Form.Control
+                name="email"
+                aria-label="email"
                 type='email'
                 ref={emailRef}
                 required
               />
             </Form.Group>
             <Form.Group id='password'>
-              <Form.Label>
+              <Form.Label htmlFor="password">
                 Password
               </Form.Label>
               <Form.Control
+                name="password"
+                aria-label="password"
                 type='password'
                 ref={passwordRef}
                 required
