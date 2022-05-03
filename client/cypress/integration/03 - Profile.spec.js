@@ -30,6 +30,8 @@ describe('Profile tests', () => {
     });
   });
 
+  // TODO have to manually delete allergens, make a back-end route for deleting
+  // TODO specific allergens.
   it('should be able to add an allergen', () => {
     const currentTime = new Date().getTime();
 
@@ -47,6 +49,7 @@ describe('Profile tests', () => {
       .should('exist');
   });
 
+  // TODO have to manually delete events, make a back-end route for deleting.
   it('should be able to create a new event', () => {
     const currentTime = new Date();
 
