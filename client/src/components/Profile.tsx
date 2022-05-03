@@ -158,6 +158,7 @@ export default function Profile () {
               type='text'
               ref={allergenRef}
               required
+              id='new-allergen-input'
               style={{ maxWidth: 'fit-content' }}
               placeholder='new allergen'
             />

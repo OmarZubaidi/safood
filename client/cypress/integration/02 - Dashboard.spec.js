@@ -1,7 +1,5 @@
 describe('Dashboard tests', () => {
   it('should render 4 recipes', () => {
-    cy.viewport(1000, 2000);
-
     cy.url()
       .should('include', '/main');
 
@@ -12,16 +10,14 @@ describe('Dashboard tests', () => {
   });
 
   it('should render the other user(s)', () => {
-    cy.viewport(1000, 2000);
-
     cy.get('#users-container')
       .children()
       .should('exist');
     cy.get('#users-container > .col > .card > .card-title');
     // Assuming bye@bye.com exists
-    cy.get('#users-container > .col > .card > .card-title')
-      .should('contain', 'About me');
-    cy.get('#users-container > .col > .card > .card-body')
-      .should('contain', 'bye');
+    cy.contains('About me')
+      .should('exist');
+    cy.contains('bye')
+      .should('exist');
   });
 });

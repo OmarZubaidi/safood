@@ -1,6 +1,5 @@
 describe('Log in tests', () => {
   it('should not log in with incorrect details', () => {
-    cy.viewport(1000, 2000);
     cy.visit('http://127.0.0.1:3000/');
 
     cy.get('#email > .form-control')
@@ -19,7 +18,6 @@ describe('Log in tests', () => {
   });
 
   it('should log in', () => {
-    cy.viewport(1000, 2000);
     cy.visit('http://127.0.0.1:3000/');
 
     cy.get('#email > .form-control')
