@@ -39,11 +39,12 @@ function App () {
     e.preventDefault();
     if(!profile) return;
     try {
-      recipeQuery(profile.allergens, searchStringRef.current!.value)
-        .then((data: React.SetStateAction<IRecipe[]>) => {
-          setRecipes(data);
-          navigate('/result');
-        });
+      const data: React.SetStateAction<IRecipe[]> = await recipeQuery(
+        profile.allergens,
+        searchStringRef.current!.value
+      )
+      setRecipes(data);
+      navigate('/result');
     } catch (error) {
       if(error instanceof Error) console.error(error);
       // TODO Error state that displays a message in every console.error.
