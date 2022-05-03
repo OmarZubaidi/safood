@@ -47,7 +47,7 @@ export function AuthProvider ({ children }: { children: any }) {
       const res = await getUsers();
       setUsers(res);
     } catch (error) {
-      if(error instanceof Error) console.error(error);
+      console.error(error);
     }
   }
 

@@ -19,13 +19,11 @@ export default function EventDetails () {
   );
 
   // Loading handling
-  if (status === 'loading') {
-    return <Spinner animation='border' />;
-  }
+  if (status === 'loading') return <Spinner animation='border' />;
 
   return (
     <>
-    {event && 
+    {event &&
       <Container>
         <h1 className='bg-warning rounded'>
           {event.type} With {

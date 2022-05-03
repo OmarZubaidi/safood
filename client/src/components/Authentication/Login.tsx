@@ -30,7 +30,7 @@ export default function Login () {
       );
       navigate('/');
     } catch (error) {
-      if(error instanceof Error) console.error(error);
+      console.error(error);
       setError('Failed to sign in.');
     }
     setLoading(false);

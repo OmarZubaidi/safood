@@ -28,7 +28,7 @@ export default function Dashboard () {
     'events',
     getEvents
   );
-  
+
   const { data: recipes, status: recipeStatus }: IQuery<IRecipe[]> = useQuery(
     ['random', profile],
     // I think this is what's re-fetching recipes
@@ -45,10 +45,7 @@ export default function Dashboard () {
   ) {
     return <Spinner animation='border' />;
   }
-
-  if (status === 'error' || eventStatus === 'error') {
-    return <div>error</div>;
-  }
+  if (status === 'error' || eventStatus === 'error') return <div>error</div>;
 
   return (
     <>
@@ -57,11 +54,11 @@ export default function Dashboard () {
       {(events && profile) && <EventsContainer
         user={profile}
         list={events.filter((event: IEvent) => event.members.includes(profile.name))}
-        />  
+        />
       }
       <hr />
       {users && <UsersContainer users={users} />}
-      
+
     </>
   );
 }

@@ -46,19 +46,14 @@ function App () {
       setRecipes(data);
       navigate('/result');
     } catch (error) {
-      if(error instanceof Error) console.error(error);
+      console.error(error);
       // TODO Error state that displays a message in every console.error.
     }
   }
 
   // Loading and error handling
-  if (status === 'loading') {
-    return <div>loading</div>;
-  }
-
-  if (status === 'error') {
-    return <div>error</div>;
-  }
+  if (status === 'loading') return <div>loading</div>;
+  if (status === 'error') return <div>error</div>;
 
   return (
     <Container
