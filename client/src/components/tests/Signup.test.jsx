@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 // Local imports
 import Signup from '../Authentication/Signup';
 import userEvent from '@testing-library/user-event';
-import { postUser } from '../../services';
+// import { postUser } from '../../services';
 
 // Api to mock
 // import firebase from 'firebase';
@@ -20,18 +20,17 @@ const mockLogin = {
 };
 
 const mockSignup = jest.fn();
-jest.mock('../../context/AuthContext.js', () => ({
+jest.mock('../../context/AuthContext', () => ({
   useAuth: () => {
     return {
       signup: mockSignup
     }
-  } 
   }
+}
 ));
 
 
 describe('Signup component', () => {
-
   test('should match the snapshot', () => {
     const { container } = render(
       <BrowserRouter>
@@ -69,8 +68,8 @@ describe('Signup component', () => {
     const passwordInput = screen.getByLabelText('Password');
     const confirmPasswordInput = screen.getByLabelText('Confirm password');
     const aboutInput = screen.getByLabelText('Tell us something about yourself');
-    const submitButton = screen.getByRole('button', {name: /Sign Up/i});
-    
+    const submitButton = screen.getByRole('button', { name: /Sign Up/i });
+
     //populate the input fields
     userEvent.type(nameInput, mockLogin.name);
     userEvent.type(emailInput, mockLogin.email);
