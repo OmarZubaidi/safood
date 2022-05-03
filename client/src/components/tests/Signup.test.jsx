@@ -18,6 +18,7 @@ const mockLogin = {
   about: 'this is about me :)'
 };
 
+// This is incomplete.
 const mockSignup = jest.fn();
 mockSignup.mockReturnValue({
   user: {
