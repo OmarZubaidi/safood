@@ -49,22 +49,28 @@ export default function Login () {
           </Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
-              <Form.Label>
+              <Form.Label htmlFor="email">
                 E-mail
               </Form.Label>
               <Form.Control
+                name="email"
+                aria-label="email"
                 type='email'
                 ref={emailRef}
+                // defaultValue="email"
                 required
               />
             </Form.Group>
             <Form.Group id='password'>
-              <Form.Label>
+              <Form.Label htmlFor="password">
                 Password
               </Form.Label>
               <Form.Control
+                name="password"
+                aria-label="password"
                 type='password'
                 ref={passwordRef}
+                // defaultValue="password"
                 required
               />
             </Form.Group>
