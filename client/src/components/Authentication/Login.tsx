@@ -57,7 +57,6 @@ export default function Login () {
                 aria-label="email"
                 type='email'
                 ref={emailRef}
-                // defaultValue="email"
                 required
               />
             </Form.Group>
@@ -70,7 +69,6 @@ export default function Login () {
                 aria-label="password"
                 type='password'
                 ref={passwordRef}
-                // defaultValue="password"
                 required
               />
             </Form.Group>
