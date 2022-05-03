@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Local imports
 import { useAuth } from '../context/AuthContext';
-import logo from '../img/Safe_2_-removebg-preview.png';
+import logo from '../img/logo.png';
 import Login from './Authentication/Login';
 import Signup from './Authentication/Signup';
 import Dashboard from './Dashboard';
@@ -72,12 +72,12 @@ function App () {
           ref={target}
         >
           <Container>
-            <div style={{ paddingTop: '40px' }}>
+            <div style={{ padding: 'auto' }}>
               <Link to='/'>
                 <img
                   src={logo}
                   alt=''
-                  style={{ height: '200px' }}
+                  style={{ height: '125px' }}
                 />
               </Link>
             </div>
@@ -90,7 +90,7 @@ function App () {
                 placeholder='Search a recipe!'
                 ref={searchStringRef}
                 id='search-input'
-                style={{ borderRadius: '15px 0 0 15px' }}
+                style={{ borderRadius: '10px 0 0 10px' }}
               />
               <Button
                 type='submit'
