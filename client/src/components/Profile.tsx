@@ -64,7 +64,7 @@ export default function Profile () {
     try {
       await logout();
       updateProfile(null);
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       setError('Failed to logout.');
     }
