@@ -24,7 +24,6 @@ export default function Login () {
       const email = emailRef.current?.value;
       const password = passwordRef.current?.value;
       if(!email || !password) return setError('Email and password are required');
-
       await login(
         email,
         password

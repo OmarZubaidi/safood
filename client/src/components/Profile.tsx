@@ -89,15 +89,19 @@ export default function Profile () {
   async function handleEventSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newAllergens = [...new Set([...allergens, ...profile!.allergens])];
-    const menu = await getMenu(newAllergens);
-    eventMutation.mutate({
-      type,
-      allergens: newAllergens,
-      members,
-      date: dateRef.current!.value,
-      menu
-    });
-    navigate('/');
+    try {
+      const menu = await getMenu(newAllergens);
+      eventMutation.mutate({
+        type,
+        allergens: newAllergens,
+        members,
+        date: dateRef.current!.value,
+        menu
+      });
+      navigate('/');
+    } catch (error) {
+      if(error instanceof Error) console.error(error);
+    }
   }
 
   function handleMembers (user: IUser) {

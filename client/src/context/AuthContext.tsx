@@ -43,8 +43,12 @@ export function AuthProvider ({ children }: { children: any }) {
   }
 
   async function fetchUsers () {
-    const res = await getUsers();
-    setUsers(res);
+    try {
+      const res = await getUsers();
+      setUsers(res);
+    } catch (error) {
+      if(error instanceof Error) console.error(error);
+    }
   }
 
   useEffect(() => {
