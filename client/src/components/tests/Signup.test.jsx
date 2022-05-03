@@ -40,7 +40,6 @@ jest.mock('../../context/AuthContext', () => ({
 
 
 describe('Signup component', () => {
-
   test('should match the snapshot', () => {
     const { container } = render(
       <BrowserRouter>

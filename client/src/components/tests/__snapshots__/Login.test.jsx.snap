@@ -21,11 +21,14 @@ exports[`Login component should match the snapshot 1`] = `
         >
           <label
             class="form-label"
+            for="email"
           >
             E-mail
           </label>
           <input
+            aria-label="email"
             class="form-control"
+            name="email"
             required=""
             type="email"
           />
@@ -35,11 +38,14 @@ exports[`Login component should match the snapshot 1`] = `
         >
           <label
             class="form-label"
+            for="password"
           >
             Password
           </label>
           <input
+            aria-label="password"
             class="form-control"
+            name="password"
             required=""
             type="password"
           />
