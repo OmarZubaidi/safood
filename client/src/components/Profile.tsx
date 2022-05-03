@@ -82,7 +82,7 @@ export default function Profile () {
         allergenRef.current!.value = '';
       }
     } catch (error) {
-      console.error(error);
+      if(error instanceof Error) console.error(error);
     }
   }
 
@@ -124,7 +124,7 @@ export default function Profile () {
 
   return (
     <>
-      {profile && 
+      {profile &&
       <Card style={{ marginTop: '150px' }}>
         <Card.Title>
           <h1 className='text-center mb-4'>

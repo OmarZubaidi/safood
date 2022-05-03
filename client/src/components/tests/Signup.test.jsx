@@ -1,11 +1,10 @@
 // Package imports
-import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 // Local imports
 import Signup from '../Authentication/Signup';
-import userEvent from '@testing-library/user-event';
-import { postUser } from '../../services';
 
 // Api to mock
 // import firebase from 'firebase';

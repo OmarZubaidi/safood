@@ -5,14 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 // Local imports
 import Login from '../Authentication/Login';
 
-jest.mock('../../context/AuthContext.js', () => ({
+jest.mock('../../context/AuthContext', () => ({
   useAuth: () => {
     return {
       login: (mockLogin) => {
         // console.log(mockLogin);
       }
-    }
-  } 
+    };
+  }
 }));
 
 describe('Login component', () => {
