@@ -44,7 +44,7 @@ export default function Login () {
           <h2 className='text-center mb-4'>
             Log in
           </h2>
-          {error && <Alert variant='danger'>
+          {error && <Alert id='alert' variant='danger'>
             {error}
           </Alert>}
           <Form onSubmit={handleSubmit}>
