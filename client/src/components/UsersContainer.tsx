@@ -8,12 +8,13 @@ import Users from './Users';
 import {IUserContainerProps} from '../interfaces/User.interface'
 
 export default function UsersContainer({ users }: IUserContainerProps) {
-  
+
   const { currentUser } = useAuth();
   return (
     <Row
       xs={1}
       md={2}
+      id='users-container'
       className='g-4 mt-auto'
     >
       {users.map(user => (

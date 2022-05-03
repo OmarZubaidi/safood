@@ -93,6 +93,7 @@ function App () {
                 type='text'
                 placeholder='Search a recipe!'
                 ref={searchStringRef}
+                id='search-input'
                 style={{ borderRadius: '15px 0 0 15px' }}
               />
               <Button

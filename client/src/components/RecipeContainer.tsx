@@ -13,8 +13,8 @@ export default function RecipeContainer ({ recipes }: IRecipeContainerProps) {
       md={2}
       className='g-4 mt-auto'
     >
-      {recipes && recipes.map(recipe => (
-        <Col key={recipe.id}>
+      {recipes && recipes.map((recipe, i) => (
+        <Col key={recipe.id} id={`recipe-${i}`}>
           <Recipe recipe={recipe} />
         </Col>
       ))}
