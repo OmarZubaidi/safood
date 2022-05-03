@@ -221,11 +221,13 @@ export default function Profile () {
             <Form.Control
               type='datetime-local'
               ref={dateRef}
+              id='date-input'
               style={{ maxWidth: 'fit-content' }}
             />
             <Button
               className='mt-2'
               type='submit'
+              id='create-event'
             >
               Save
             </Button>

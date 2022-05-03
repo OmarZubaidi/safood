@@ -46,4 +46,29 @@ describe('Profile tests', () => {
     cy.contains(currentTime)
       .should('exist');
   });
+
+  it('should be able to create a new event', () => {
+    const currentTime = new Date();
+
+    cy.get('#dropdown-type')
+      .click();
+
+    cy.contains('Lunch')
+      .click();
+
+    cy.get('#dropdown-users')
+      .click();
+
+    cy.contains('bye')
+      .click();
+
+    cy.get('#date-input')
+      .type('2022-05-04T15:30');
+
+    cy.get('#create-event')
+      .click();
+
+    cy.url()
+      .should('include', '/main');
+  });
 });

@@ -11,6 +11,7 @@ export default function EventsContainer ({ user, list }: IEventsContainerProps) 
     <Row
       xs={1}
       md={2}
+      id='events-container'
       className='g-4 mt-auto'
     >
       {list.map(event => (
