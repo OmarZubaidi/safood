@@ -1,21 +1,21 @@
 import { IRecipe } from './Recipe.interface';
 
 interface IEvent {
-  _id?: string,
-  allergens: string[],
-  date: string,
-  members: string[],
-  type: string,
-  menu: IRecipe[]
+  _id?: string;
+  allergens: string[];
+  date: string;
+  members: string[];
+  type: string;
+  menu: IRecipe[];
 }
 
 interface IEventProps {
-  event: IEvent,
+  event: IEvent;
 }
 
 interface IEventsContainerProps {
-  list: IEvent[],
-  user: any
+  list: IEvent[];
+  user: any;
 }
 
 export {

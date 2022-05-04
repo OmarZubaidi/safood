@@ -6,18 +6,18 @@ import { Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Local imports
-import { useAuth } from '../context/AuthContext';
-import Login from './Authentication/Login';
-import Signup from './Authentication/Signup';
-import Dashboard from './Dashboard';
-import EventDetails from './EventDetails';
-import PrivateRoute from './PrivateRoute';
-import Profile from './Profile';
-import RecipeContainer from './RecipeContainer';
-import { getUser } from '../services/index';
-import { IRecipe } from '../interfaces/Recipe.interface';
-import { IUser } from '../interfaces/User.interface';
-import GenericNavbar from './Navbar';
+import { useAuth } from './context/AuthContext';
+import Login from './components/Authentication/Login';
+import Signup from './components/Authentication/Signup';
+import Dashboard from './components/Dashboard';
+import EventDetails from './components/EventDetails';
+import PrivateRoute from './components/PrivateRoute';
+import Profile from './components/Profile';
+import RecipeContainer from './components/RecipeContainer';
+import { getUser } from './services/index';
+import { IRecipe } from './interfaces/Recipe.interface';
+import { IUser } from './interfaces/User.interface';
+import GenericNavbar from './components//Navbar';
 
 function App () {
   // Refs, states, navigation, and authentication
@@ -45,7 +45,7 @@ function App () {
         style={{ minWidth: '400px' }}
       >
         <GenericNavbar setRecipes={setRecipes} />
-        
+
         <Container style={{ marginTop: '200px' }}>
           <Routes>
             <Route path='/' element={<PrivateRoute />} />
