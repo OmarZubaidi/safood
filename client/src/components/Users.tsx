@@ -3,32 +3,31 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 // Local imports
-// TODO there has to be a better way.
-import omar from '../img/omar.jpg';
-import blueomar from '../img/blueomar.jpg';
-import greenomar from '../img/greenomar.jpg';
-import purpleomar from '../img/purpleomar.jpg';
-import redomar from '../img/redomar.jpg';
-import yellowomar from '../img/yellowomar.jpg';
 import {IUserProps} from '../interfaces/User.interface'
+import omar from '../img/omar.jpg';
+import blueOmar from '../img/blueOmar.jpg';
+import greenOmar from '../img/greenOmar.jpg';
+import purpleOmar from '../img/purpleOmar.jpg';
+import redOmar from '../img/redOmar.jpg';
+import yellowOmar from '../img/yellowOmar.jpg';
 
 export default function Users({ user }: IUserProps) {
   let img;
   switch (user.img) {
     case 'blue':
-      img = blueomar;
+      img = blueOmar;
       break;
     case 'green':
-      img = greenomar;
+      img = greenOmar;
       break;
     case 'purple':
-      img = purpleomar;
+      img = purpleOmar;
       break;
     case 'red':
-      img = redomar;
+      img = redOmar;
       break;
     case 'yellow':
-      img = yellowomar;
+      img = yellowOmar;
       break;
     default:
       img = omar;
@@ -39,7 +38,10 @@ export default function Users({ user }: IUserProps) {
       className='text-center mb-4'
       style={{ width: '18rem' }}
     >
-      <Card.Img src={img} alt='User image' />
+      <Card.Img
+        src={img}
+        alt='User image'
+      />
       <Card.Header className='text-center mb-4 fs-3'>
         {user.name}
       </Card.Header>

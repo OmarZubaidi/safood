@@ -27,7 +27,7 @@ import {IEvent} from '../interfaces/Events.interface';
 
 export default function Profile () {
   // Navigation and authentication
-  const { logout, updateProfile, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   // States
@@ -59,17 +59,6 @@ export default function Profile () {
   );
 
   // Handlers
-  async function handleLogout () {
-    setError('');
-    try {
-      await logout();
-      updateProfile(null);
-      navigate('/');
-    } catch (error) {
-      setError('Failed to logout.');
-    }
-  }
-
   async function handleAllergenSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
@@ -83,6 +72,7 @@ export default function Profile () {
       }
     } catch (error) {
       console.error(error);
+      setError('Could not add allergen.')
     }
   }
 
@@ -101,6 +91,7 @@ export default function Profile () {
       navigate('/');
     } catch (error) {
       console.error(error);
+      setError('Could not create event.')
     }
   }
 
@@ -121,7 +112,7 @@ export default function Profile () {
   }
 
   if (status === 'error' || userStatus === 'error') {
-    return <div>error</div>;
+    return <div>{error}</div>;
   }
 
   return (
@@ -236,7 +227,7 @@ export default function Profile () {
           </Form>
         </Card.Body>
       </Card>
-      }      
+      }
     </>
   );
 }
