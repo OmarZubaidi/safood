@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users component should match the snapshot 1`] = `
+<div>
+  <div
+    class="text-center mb-4 card"
+    style="width: 18rem;"
+  >
+    <img
+      alt="User image"
+      class="card-img"
+      src="omar.jpg"
+    />
+    <div
+      class="text-center mb-4 fs-3 card-header"
+    >
+      blue
+    </div>
+    <div
+      class="text-center card-title h5"
+    >
+      About me
+    </div>
+    <div
+      class="card-body"
+    >
+      I'm blue da ba dee da ba die!
+    </div>
+  </div>
+</div>
+`;
