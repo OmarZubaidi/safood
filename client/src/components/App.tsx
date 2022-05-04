@@ -1,13 +1,12 @@
 // Package imports
-import React, { useState, useRef } from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route} from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { Container, Navbar, Nav, Form, Button } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Local imports
 import { useAuth } from '../context/AuthContext';
-import logo from '../img/logo.png';
 import Login from './Authentication/Login';
 import Signup from './Authentication/Signup';
 import Dashboard from './Dashboard';
@@ -15,41 +14,23 @@ import EventDetails from './EventDetails';
 import PrivateRoute from './PrivateRoute';
 import Profile from './Profile';
 import RecipeContainer from './RecipeContainer';
-import { getUser, recipeQuery } from '../services/index';
+import { getUser } from '../services/index';
 import { IRecipe } from '../interfaces/Recipe.interface';
 import { IUser } from '../interfaces/User.interface';
+import GenericNavbar from './Navbar';
 
 function App () {
   // Refs, states, navigation, and authentication
-  const target = useRef(null);
-  const searchStringRef = useRef<HTMLInputElement | null>(null);
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
-  const navigate = useNavigate();
   const { currentUser } = useAuth();
 
   // Get the user data
-  const { data: profile, status } = useQuery<IUser>(
+  const { status } = useQuery<IUser>(
     'user',
     () => getUser(currentUser),
     { enabled: !!currentUser }
   );
 
-  // Submit function
-  async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if(!profile) return;
-    try {
-      const data: React.SetStateAction<IRecipe[]> = await recipeQuery(
-        profile.allergens,
-        searchStringRef.current!.value
-      )
-      setRecipes(data);
-      navigate('/result');
-    } catch (error) {
-      console.error(error);
-      // TODO Error state that displays a message in every console.error.
-    }
-  }
 
   // Loading and error handling
   if (status === 'loading') return <div>loading</div>;
@@ -63,56 +44,8 @@ function App () {
         className='w-100'
         style={{ minWidth: '400px' }}
       >
-        <Navbar
-          fixed='top'
-          expand='sm'
-          bg='dark'
-          variant='dark'
-          style={{ height: '200px' }}
-          ref={target}
-        >
-          <Container>
-            <div style={{ padding: 'auto' }}>
-              <Link to='/'>
-                <img
-                  src={logo}
-                  alt=''
-                  style={{ height: '125px' }}
-                />
-              </Link>
-            </div>
-            <Form
-              onSubmit={handleSubmit}
-              className='d-flex'
-            >
-              <Form.Control
-                type='text'
-                placeholder='Search a recipe!'
-                ref={searchStringRef}
-                id='search-input'
-                style={{ borderRadius: '10px 0 0 10px' }}
-              />
-              <Button
-                type='submit'
-                style={{ borderRadius: '0 10px 10px 0' }}
-              >
-                Search
-              </Button>
-            </Form>
-            <Nav>
-              <Link
-                to='/profile'
-                style={{
-                  textDecoration: 'none',
-                  color: 'white',
-                  fontSize: '25px'
-                }}
-              >
-                Profile
-              </Link>
-            </Nav>
-          </Container>
-        </Navbar>
+        <GenericNavbar setRecipes={setRecipes} />
+        
         <Container style={{ marginTop: '200px' }}>
           <Routes>
             <Route path='/' element={<PrivateRoute />} />
