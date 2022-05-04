@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import Events from './Events';
 import { IEventsContainerProps } from '../interfaces/Events.interface';
 
-export default function EventsContainer ({ user, list }: IEventsContainerProps) {
+export default function EventsContainer ({ list }: IEventsContainerProps) {
   return (
     <Row
       xs={1}
