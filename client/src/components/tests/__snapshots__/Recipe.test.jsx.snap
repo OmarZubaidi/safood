@@ -6,7 +6,7 @@ exports[`Recipe component should match the snapshot 1`] = `
     class="card"
   >
     <img
-      class="card-img-top"
+      class="card-img"
       src="https://spoonacular.com/recipeImages/1-556x370.jpg"
     />
     <div

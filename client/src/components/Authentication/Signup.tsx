@@ -6,6 +6,7 @@ import { Card, Button, Form, Alert } from 'react-bootstrap';
 // Package imports
 import { useAuth } from '../../context/AuthContext';
 import { postUser } from '../../services/index';
+import sampleFromArray from '../../utils/sampleFromArray';
 
 export default function Signup () {
   // Refs, states, navigation, and authentication
@@ -51,11 +52,18 @@ export default function Signup () {
         allergens: [],
         uid: auth.user.uid,
         about: about,
-        img: ''
+        img: sampleFromArray([
+          'blue',
+          'green',
+          'purple',
+          'red',
+          'yellow',
+          ''
+        ], 1)[0],
       });
       navigate('/');
     } catch (error) {
-      if(error instanceof Error) console.error(error);
+      console.error(error);
       setError('Failed to create an account.');
     }
     setLoading(false);

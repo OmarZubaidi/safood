@@ -20,7 +20,7 @@ export async function apiGetter({ url, headers }: IRequest) {
     const res = await fetch(`${rootUrl}/${url}`, options);
     return await res.json();
   } catch (error) {
-    if(error instanceof Error) console.error(error);
+    console.error(error);
   }
 }
 

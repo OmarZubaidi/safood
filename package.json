@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CosmicZanna/safood.git"
+    "url": "git+https://github.com/OmarZubaidi/safood.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CosmicZanna/safood/issues"
+    "url": "https://github.com/OmarZubaidi/safood/issues"
   },
-  "homepage": "https://github.com/CosmicZanna/safood#readme"
+  "homepage": "https://github.com/OmarZubaidi/safood#readme"
 }

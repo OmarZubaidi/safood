@@ -7,9 +7,9 @@ exports[`Users component should match the snapshot 1`] = `
     style="width: 18rem;"
   >
     <img
-      alt=""
+      alt="User image"
       class="card-img"
-      src="omar.jpeg"
+      src="omar.jpg"
     />
     <div
       class="text-center mb-4 fs-3 card-header"

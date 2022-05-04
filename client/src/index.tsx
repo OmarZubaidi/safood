@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 
 // Local imports
-import App from './components/App';
+import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import './index.css';
 

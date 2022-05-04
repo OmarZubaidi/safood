@@ -10,7 +10,7 @@ export default function Recipe ({ recipe }: IRecipeProps) {
   ingredientsArray[0] = firstOne[0].toUpperCase() + firstOne.slice(1);
 
   return (
-    <Card key={recipe.title}>
+    <Card key={recipe.title} className='fill-height'>
       <Card.Img
         variant='top'
         src={recipe.image}
@@ -35,15 +35,16 @@ export default function Recipe ({ recipe }: IRecipeProps) {
           Prep-time: {recipe.readyInMinutes} minutes
         </small>
         {Object.keys(recipe).map(key => {
-          if (recipe[key] === 'True')
-            return <Badge
+          if (recipe[key] !== 'True') return '';
+          return (
+            <Badge
               key={key}
               bg='success'
               className='mx-1 p-2'
             >
               {key}
-            </Badge>;
-          return '';
+            </Badge>
+          );
         })}
       </Card.Footer>
     </Card>

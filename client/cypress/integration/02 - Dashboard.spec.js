@@ -17,7 +17,7 @@ describe('Dashboard tests', () => {
     // Assuming bye@bye.com exists
     cy.contains('About me')
       .should('exist');
-    cy.contains('bye')
+    cy.contains('Nick')
       .should('exist');
   });
 });

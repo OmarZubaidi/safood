@@ -1,8 +1,6 @@
 describe('Logout tests', () => {
   it('should log out properly', () => {
-    cy.contains('Profile')
-      .click();
-    cy.contains('Log Out')
+    cy.get('#logout-button')
       .click();
 
     cy.url()
