@@ -69,15 +69,14 @@
 
 ## Conversion Statistics
 
-- Longest line length:&emsp;&emsp;188&ensp;-->&ensp;X
-- Longest file length:&emsp;&emsp;177&ensp;-->&ensp;X lines
-- Lines of commented out code:&emsp;&emsp;35&ensp;-->&ensp;X
-- Unused variables/imports:&emsp;&emsp;51&ensp;-->&ensp;X
-- Other ES Lint errors:&emsp;&emsp;4&ensp;-->&ensp;X
-- Unnecessary files:&emsp;&emsp;2&ensp;-->&ensp;X
-- Client JS(X) files:&emsp;&emsp;19&ensp;-->&ensp;X
-- Server JS files:&emsp;&emsp;8&ensp;-->&ensp;X
-- Test coverage:&emsp;&emsp;0%&ensp;-->&ensp;X
+- Test coverage:&emsp;&emsp;0%&ensp;-->&ensp;25%
+- Longest line length:&emsp;&emsp;188&ensp;-->&ensp;94 chars
+- Longest file length:&emsp;&emsp;177&ensp;-->&ensp;162 lines
+- Front-End JS -> TS files:&emsp;&emsp;19&ensp;-->&ensp;28
+- Back-End JS -> TS files:&emsp;&emsp;8&ensp;-->&ensp;15
+- Unused variables/imports:&emsp;&emsp;51&ensp;-->&ensp;0
+- Other ES Lint errors:&emsp;&emsp;4&ensp;-->&ensp;0
+- Commented out code:&emsp;&emsp;35&ensp;-->&ensp;0 lines
 
 ## About the Project
 
