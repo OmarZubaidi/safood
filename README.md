@@ -1,32 +1,187 @@
-# safood
+<div align='center'>
+  <img
+    width='250'
+    src='./client/src/img/logo.png'
+    alt='logo'
+  />
+</div>
 
-## Frontend
+<p align='center'>
+  A recipe application based on allergens, preferences, and meal planning.
+</p>
 
-### Tech stack
-I used React with bootstrap for the UI (still very incomplete)
-### Components
-So far i have multiple components, some don't link together yet, but they will soon.
+<hr>
 
--The App routes you to either the Login/Signup page or to the MainPage depending on if you're logged in
--The MainPage renders a Navbar and the Dashboard OR the RecipeContainer (Search result) depending on if you searched something on the input field
+<details>
+  <summary>Table of Contents</summary>
+  <ul>
+    <li>
+      <a href='#conversion-statistics'>
+        Conversion Statistics
+      </a>
+    </li>
+    <li>
+      <a href='#about-the-project'>
+        About the Project
+      </a>
+      <ul>
+        <li>
+          <a href='#built-with'>
+            Built With
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href='#getting-started'>
+        Getting Started
+      </a>
+      <ul>
+        <li>
+          <a href='#prerequisites'>
+            Prerequisites
+          </a>
+        </li>
+        <li>
+          <a href='#installation'>
+            Installation
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href='#contributing'>
+        Contributing
+      </a>
+    </li>
+    <li>
+      <a href='#contact'>
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href='#acknowledgements'>
+        Acknowledgements
+      </a>
+    </li>
+  </ul>
+</details>
 
--The Navbar allows you to go to the Mainpage, to search for recipes, to go to the Profile page or see Notifications (not-MVP)
--The Profile page shows a recap of the currently logged in user, allows new allergens to be added and a link to the creation of a new Event
--The Event Page is still work in progress, for now it just fills in a form, will store it in the DB later
+## Conversion Statistics
 
--The Dashboard contains (or should) 3 random Recipes based on the current user allergens, the list of users (will become a list of "Friends" only) and the current user Events (currently missing)
+- Longest line length:&emsp;&emsp;188&ensp;-->&ensp;X
+- Longest file length:&emsp;&emsp;177&ensp;-->&ensp;X lines
+- Lines of commented out code:&emsp;&emsp;35&ensp;-->&ensp;X
+- Unused variables/imports:&emsp;&emsp;51&ensp;-->&ensp;X
+- Other ES Lint errors:&emsp;&emsp;4&ensp;-->&ensp;X
+- Unnecessary files:&emsp;&emsp;2&ensp;-->&ensp;X
+- Client JS(X) files:&emsp;&emsp;19&ensp;-->&ensp;X
+- Server JS files:&emsp;&emsp;8&ensp;-->&ensp;X
+- Test coverage:&emsp;&emsp;0%&ensp;-->&ensp;X
 
-### UI barebone design
-https://excalidraw.com/#room=a30b9599b3e8f37c858b,_xT7nL_5DfXZX1vfSZgr4Q
+## About the Project
 
-## Backend
+Users can sign up to **Safood** to save their allergens, allowing it to filter out recipes that don't conform to their dietary needs. They can choose times for events, enabling it to come up with a meal plan based on the group's combined allergies.
 
-### Tech stack
-Express server with Mongoose DB: 
+### Built With
 
-###
+- [React](https://reactjs.org/)
+- [Bootstrap](https://getbootstrap.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [NodeJS](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
 
-Very simple backend, routes for users, recipes and events.
+## Getting Started
 
-The recipe database is a JSON file, because of lack of better resources :(
+To get a local copy up and running, follow these steps.
 
+### Prerequisites
+
+You need to have:
+
+- A [Firebase](https://firebase.google.com/) account
+- Installed Node Version Manager
+- Installed the latest LTS version of Node
+
+```shell
+nvm install npm@latest -g
+```
+
+### Installation
+
+- Clone the repo
+
+```shell
+git clone https://github.com/OmarZubaidi/safood.git
+```
+
+- Install NPM packages
+
+```shell
+cd client
+npm i
+cd ../server
+npm i
+```
+
+- Create your `.env` file in the `server` folder as below.abs
+
+```
+HOST=Your_host_name_if_deployed
+PORT=Your_chosen_port_number
+```
+
+- Similarly for the `.env.local` file in the `client` folder.
+
+```
+REACT_APP_FIREBASE_API_KEY=Your_Firebase_API_Key
+REACT_APP_FIREBASE_AUTH_DOMAIN=Your_Your_Firebase_Authentication_Domain
+REACT_APP_FIREBASE_PROJECT_ID=Your_Firebase_Project_ID
+REACT_APP_FIREBASE_STORAGE_BUCKET=Your_Firebase_Storage_Bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=Your_Firebase_Sender_ID
+REACT_APP_FIREBASE_APP_ID=Your_Firebase_Application_ID
+REACT_APP_SERVER_HOST=As_above
+REACT_APP_SERVER_PORT=As_above
+```
+
+- Run the server in a terminal
+
+```
+cd server
+npm start
+```
+
+- Run the client in another terminal (should automatically open to http://localhost:3000/)
+
+```
+cd client
+npm start
+```
+
+## Contributing
+
+Contributions are welcome!
+
+If you have a suggestion that would make this better:
+
+- [Fork the project](https://github.com/OmarZubaidi/safood/fork).
+- Create a branch using `git checkout -b feature-YOUR_FEATURE_NAME`.
+- Work on it and commit changes using `git commit -m 'YOUR_COMMIT_MESSAGE'`.
+- Push to your branch using `git push origin feature-YOUR_FEATURE_NAME`.
+- [Open a pull request](https://github.com/OmarZubaidi/safood/compare).
+
+## Contact
+
+Original Project Owner: [Gabriele Zannini](https://github.com/CosmicZanna/).
+
+Original Project Link: [on GitHub](https://github.com/CosmicZanna/safood/).
+
+Creators: [Nick Allen](https://github.com/nicallennn/) and [Omar Zubaidi](https://github.com/OmarZubaidi/).
+
+Project Link: [on GitHub](https://github.com/OmarZubaidi/safood/).
+
+## Acknowledgements
+
+- [Spoonacular](https://spoonacular.com/)

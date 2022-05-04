@@ -64,7 +64,7 @@ export default function Profile () {
     try {
       await logout();
       updateProfile(null);
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       setError('Failed to logout.');
     }
@@ -82,28 +82,30 @@ export default function Profile () {
         allergenRef.current!.value = '';
       }
     } catch (error) {
-      if(error instanceof Error) console.error(error);
+      console.error(error);
     }
   }
 
   async function handleEventSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newAllergens = [...new Set([...allergens, ...profile!.allergens])];
-    const menu = await getMenu(newAllergens);
-    eventMutation.mutate({
-      type,
-      allergens: newAllergens,
-      members,
-      date: dateRef.current!.value,
-      menu
-    });
-    navigate('/');
+    try {
+      const menu = await getMenu(newAllergens);
+      eventMutation.mutate({
+        type,
+        allergens: newAllergens,
+        members,
+        date: dateRef.current!.value,
+        menu
+      });
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function handleMembers (user: IUser) {
-    if (members.length === 0 && profile) {
-      members.push(profile.name);
-    }
+    if (members.length === 0 && profile) members.push(profile.name);
     const newMembers = members;
     if (!members.includes(user.name)) {
       newMembers.push(user.name);
@@ -202,7 +204,8 @@ export default function Profile () {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {(currentUser && users) && users.map((user) => {
-                    if (user.uid !== currentUser.uid) return (
+                    if (user.uid === currentUser.uid) return '';
+                    return (
                       <Dropdown.Item
                         key={user.uid}
                         onClick={() => handleMembers(user)}
@@ -210,7 +213,6 @@ export default function Profile () {
                         {user.name}
                       </Dropdown.Item>
                     );
-                    return '';
                   })}
                 </Dropdown.Menu>
               </Dropdown>

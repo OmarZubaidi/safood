@@ -35,15 +35,16 @@ export default function Recipe ({ recipe }: IRecipeProps) {
           Prep-time: {recipe.readyInMinutes} minutes
         </small>
         {Object.keys(recipe).map(key => {
-          if (recipe[key] === 'True')
-            return <Badge
+          if (recipe[key] !== 'True') return '';
+          return (
+            <Badge
               key={key}
               bg='success'
               className='mx-1 p-2'
             >
               {key}
-            </Badge>;
-          return '';
+            </Badge>
+          );
         })}
       </Card.Footer>
     </Card>

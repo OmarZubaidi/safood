@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Local imports
 import { useAuth } from '../context/AuthContext';
-import logo from '../img/Safe_2_-removebg-preview.png';
+import logo from '../img/logo.png';
 import Login from './Authentication/Login';
 import Signup from './Authentication/Signup';
 import Dashboard from './Dashboard';
@@ -39,25 +39,21 @@ function App () {
     e.preventDefault();
     if(!profile) return;
     try {
-      recipeQuery(profile.allergens, searchStringRef.current!.value)
-        .then((data: React.SetStateAction<IRecipe[]>) => {
-          setRecipes(data);
-          navigate('/result');
-        });
+      const data: React.SetStateAction<IRecipe[]> = await recipeQuery(
+        profile.allergens,
+        searchStringRef.current!.value
+      )
+      setRecipes(data);
+      navigate('/result');
     } catch (error) {
-      if(error instanceof Error) console.error(error);
+      console.error(error);
       // TODO Error state that displays a message in every console.error.
     }
   }
 
   // Loading and error handling
-  if (status === 'loading') {
-    return <div>loading</div>;
-  }
-
-  if (status === 'error') {
-    return <div>error</div>;
-  }
+  if (status === 'loading') return <div>loading</div>;
+  if (status === 'error') return <div>error</div>;
 
   return (
     <Container
@@ -76,12 +72,12 @@ function App () {
           ref={target}
         >
           <Container>
-            <div style={{ paddingTop: '40px' }}>
+            <div style={{ padding: 'auto' }}>
               <Link to='/'>
                 <img
                   src={logo}
                   alt=''
-                  style={{ height: '200px' }}
+                  style={{ height: '125px' }}
                 />
               </Link>
             </div>
@@ -94,7 +90,7 @@ function App () {
                 placeholder='Search a recipe!'
                 ref={searchStringRef}
                 id='search-input'
-                style={{ borderRadius: '15px 0 0 15px' }}
+                style={{ borderRadius: '10px 0 0 10px' }}
               />
               <Button
                 type='submit'

@@ -114,12 +114,11 @@ describe('Unit Tests - Unit Controller', () => {
     // Check if the event was added
     const res = await Event.findOne({ _id: event._id });
     // Assertions
-    if (res) {
-      expect(res.type).toBe(mockEvent.type);
-      expect(res.allergens).toStrictEqual(mockEvent.allergens);
-      expect(res.members).toStrictEqual(mockEvent.members);
-      expect(res.date).toBe(mockEvent.date);
-    } else throw new Error('Could not find event.');
+    if (!res) throw new Error('Could not find event.');
+    expect(res.type).toBe(mockEvent.type);
+    expect(res.allergens).toStrictEqual(mockEvent.allergens);
+    expect(res.members).toStrictEqual(mockEvent.members);
+    expect(res.date).toBe(mockEvent.date);
   });
 
   // Get an event

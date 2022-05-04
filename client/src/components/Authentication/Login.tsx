@@ -24,14 +24,13 @@ export default function Login () {
       const email = emailRef.current?.value;
       const password = passwordRef.current?.value;
       if(!email || !password) return setError('Email and password are required');
-
       await login(
         email,
         password
       );
       navigate('/');
     } catch (error) {
-      if(error instanceof Error) console.error(error);
+      console.error(error);
       setError('Failed to sign in.');
     }
     setLoading(false);
