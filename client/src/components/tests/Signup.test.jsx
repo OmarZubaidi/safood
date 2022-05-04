@@ -6,11 +6,6 @@ import userEvent from '@testing-library/user-event';
 // Local imports
 import Signup from '../Authentication/Signup';
 
-// Api to mock
-// import firebase from 'firebase';
-// jest.mock('firebase');
-// const mockedFb = firebase;
-
 const mockLogin = {
   name: 'nick',
   email: 'n@1.com',
@@ -25,20 +20,16 @@ mockSignup.mockReturnValue({
     uid: '1'
   }
 });
+console.log(mockSignup());
 
 jest.mock('../../context/AuthContext', () => ({
   useAuth: () => {
     return {
-      signup: () => {
-        const result = mockSignup();
-        console.log(result);
-        return result;
-      }
+      signup: mockSignup
     };
   }
 }
 ));
-
 
 describe('Signup component', () => {
   test('should match the snapshot', () => {
@@ -88,11 +79,11 @@ describe('Signup component', () => {
     await userEvent.type(aboutInput, mockLogin.about, { delay: 1 });
 
     // Check the input field were populated
-    // expect(nameInput.value).toBe(mockLogin.name);
-    // expect(emailInput.value).toBe(mockLogin.email);
-    // expect(passwordInput.value).toBe(mockLogin.password);
-    // expect(confirmPasswordInput.value).toBe(mockLogin.password);
-    // expect(aboutInput.value).toBe(mockLogin.about);
+    expect(nameInput.value).toBe(mockLogin.name);
+    expect(emailInput.value).toBe(mockLogin.email);
+    expect(passwordInput.value).toBe(mockLogin.password);
+    expect(confirmPasswordInput.value).toBe(mockLogin.password);
+    expect(aboutInput.value).toBe(mockLogin.about);
 
     // Submit the form
     await waitFor(async () => {
@@ -100,6 +91,8 @@ describe('Signup component', () => {
     });
 
     expect(mockSignup).toHaveBeenCalled();
+    expect(mockSignup.mock.calls[0][0]).toBe(mockLogin.email);
+    expect(mockSignup.mock.calls[0][1]).toBe(mockLogin.password);
   });
 
 });

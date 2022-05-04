@@ -19,7 +19,7 @@ export default function RecipeContainer ({ recipes }: IRecipeContainerProps) {
           key={recipe.id}
           id={`recipe-${i}`
         }>
-          <Recipe recipe={recipe} />
+          <Recipe recipe={recipe}/>
         </Col>
       ))}
     </Row>

@@ -5,15 +5,16 @@ import { IRecipeProps } from '../interfaces/Recipe.interface';
 
 export default function Recipe ({ recipe }: IRecipeProps) {
   // Clean up ingredients string into unique array
-  const ingredientsArray: string[] = [
-    ...new Set(recipe.ingredients.split(','))
-  ] as string[];
+  const ingredientsArray: string[] = [...new Set(recipe.ingredients.split(','))] as string[];
   const firstOne: string =  ingredientsArray[0];
   ingredientsArray[0] = firstOne[0].toUpperCase() + firstOne.slice(1);
 
   return (
-    <Card key={recipe.title}>
-      <Card.Img src={recipe.image} />
+    <Card key={recipe.title} className='fill-height'>
+      <Card.Img
+        variant='top'
+        src={recipe.image}
+      />
       <Card.Body>
         <Card.Title>
           {recipe.title}
