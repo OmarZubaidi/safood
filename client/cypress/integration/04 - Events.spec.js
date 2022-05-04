@@ -3,7 +3,7 @@ describe('Event tests', () => {
     cy.url()
       .should('include', '/main');
 
-    cy.contains('Lunch With hi, bye')
+    cy.contains('Lunch With Omar, Nick')
       .should('exist');
     cy.contains('2022-05-04 at 15:30')
       .should('exist');
@@ -23,7 +23,7 @@ describe('Event tests', () => {
   });
 
   it('should contain a relevant menu', () => {
-    cy.contains('Lunch With hi, bye')
+    cy.contains('Lunch With Omar, Nick')
       .should('exist');
     cy.contains('2022-05-04 at 15:30')
       .should('exist');

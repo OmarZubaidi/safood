@@ -10,7 +10,7 @@ describe('Profile tests', () => {
   });
 
   it('should render the user\'s details', () => {
-    cy.contains('hi')
+    cy.contains('Omar')
       .should('exist');
 
     const allergens = [
@@ -62,7 +62,7 @@ describe('Profile tests', () => {
     cy.get('#dropdown-users')
       .click();
 
-    cy.contains('bye')
+    cy.contains('Nick')
       .click();
 
     cy.get('#date-input')
