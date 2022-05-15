@@ -105,7 +105,7 @@ You need to have:
 - Installed the latest LTS version of Node
 
 ```shell
-nvm install npm@latest -g
+nvm install npm@lts -g
 ```
 
 ### Installation
@@ -125,7 +125,7 @@ cd ../server
 npm i
 ```
 
-- Create your `.env` file in the `server` folder as below.abs
+- Create your `.env` file in the `server` folder as below.
 
 ```
 HOST=Your_host_name_if_deployed
